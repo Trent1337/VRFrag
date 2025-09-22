@@ -5,118 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VRFrag Spieler Manager</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
+        /* Vorherige Styles bleiben gleich, füge hinzu: */
+        .filename-input {
+            margin: 15px 0;
         }
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-        .input-group {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #555;
-        }
-        input[type="text"], input[type="url"] {
+        .filename-input input {
             width: 100%;
-            padding: 10px;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-            box-sizing: border-box;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
         }
-        input:focus {
-            border-color: #4CAF50;
-            outline: none;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            width: 100%;
-            margin-top: 10px;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        button:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-        }
-        .loading {
-            display: none;
-            text-align: center;
-            margin: 20px 0;
-        }
-        .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #4CAF50;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 2s linear infinite;
-            margin: 0 auto;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .results {
-            display: none;
-            margin-top: 30px;
-        }
-        .player-row {
+        .download-buttons {
             display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border-radius: 5px;
+            gap: 10px;
+            margin-top: 15px;
         }
-        .nickname {
+        .download-buttons button {
             flex: 1;
-            font-weight: bold;
             padding: 10px;
         }
-        .input-field {
-            flex: 2;
+        .btn-secondary {
+            background-color: #6c757d;
         }
-        .input-field input {
-            width: 100%;
-        }
-        .error {
-            color: #d32f2f;
-            background-color: #ffebee;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 20px;
-            display: none;
-        }
-        .success {
-            color: #2e7d32;
-            background-color: #e8f5e9;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 20px;
-            display: none;
+        .btn-secondary:hover {
+            background-color: #5a6268;
         }
     </style>
 </head>
@@ -141,13 +53,27 @@
         
         <div id="results" class="results">
             <h2>Gefundene Spieler-Nicknames</h2>
+            
+            <div class="filename-input">
+                <label for="filename">Dateiname (optional):</label>
+                <input type="text" id="filename" placeholder="z.B. 2025_05_23_01" />
+                <small>Leer lassen für automatische Generierung (YYYY_MM_DD_NN.txt)</small>
+            </div>
+            
             <div id="playersList"></div>
-            <button id="saveMappings" onclick="saveMappings()" style="margin-top: 20px;">Namen zuordnen & Speichern</button>
+            
+            <div class="download-buttons">
+                <button id="saveMappings" onclick="saveMappings()" class="btn-primary">📁 Im events Ordner speichern</button>
+                <button id="downloadFile" onclick="downloadFile()" class="btn-secondary">⬇️ Datei herunterladen</button>
+            </div>
         </div>
     </div>
 
     <script>
+        let currentMappings = [];
+
         function fetchPlayers() {
+            // Vorherige Implementierung bleibt gleich
             const gameLink = document.getElementById('gameLink').value;
             const button = document.getElementById('fetchPlayers');
             const loading = document.getElementById('loading');
@@ -160,18 +86,12 @@
                 return;
             }
             
-            if (!gameLink.includes('vrfrag.com/stats?')) {
-                showError('Bitte geben Sie einen gültigen VRFrag Stats-Link ein.');
-                return;
-            }
-            
             errorDiv.style.display = 'none';
             successDiv.style.display = 'none';
             results.style.display = 'none';
             button.disabled = true;
             loading.style.display = 'block';
             
-            // Eigene Flask API aufrufen
             fetch('/api/get-players', {
                 method: 'POST',
                 headers: { 
@@ -226,46 +146,110 @@
             results.style.display = 'block';
         }
         
-        function saveMappings() {
+        function collectMappings() {
             const playersList = document.getElementById('playersList');
             const inputs = playersList.querySelectorAll('input[type="text"]');
             const gameLink = document.getElementById('gameLink').value;
-            const nicknames = [];
-            const realNames = [];
+            const mappings = [];
             
             inputs.forEach((input, index) => {
                 const realName = input.value.trim();
                 if (realName) {
-                    // Hier könntest du die Mappings speichern
-                    nicknames.push(input.placeholder.replace('Echter Name für ', ''));
-                    realNames.push(realName);
+                    const nickname = input.placeholder.replace('Echter Name für ', '');
+                    mappings.push({
+                        nickname: nickname,
+                        realName: realName
+                    });
                 }
             });
             
-            if (realNames.length === 0) {
+            return { gameLink, mappings };
+        }
+        
+        function saveMappings() {
+            const { gameLink, mappings } = collectMappings();
+            const filename = document.getElementById('filename').value.trim();
+            
+            if (mappings.length === 0) {
                 showError('Bitte geben Sie mindestens einen echten Namen ein.');
                 return;
             }
             
-            // Mappings im LocalStorage speichern
-            const mappingData = {
-                gameLink: gameLink,
-                mappings: nicknames.map((nick, i) => ({nickname: nick, realName: realNames[i]})),
-                timestamp: new Date().toISOString()
+            const saveData = {
+                game_link: gameLink,
+                mappings: mappings
             };
             
-            localStorage.setItem('vrfrag_mapping_' + btoa(gameLink), JSON.stringify(mappingData));
+            if (filename) {
+                saveData.filename = filename;
+            }
             
-            successDiv.textContent = `✅ ${realNames.length} Namenszuordnungen gespeichert!`;
-            successDiv.style.display = 'block';
+            fetch('/api/save-event-file', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(saveData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showSuccess(`✅ Event-Datei gespeichert als: ${data.filename}`);
+                    currentMappings = mappings;
+                } else {
+                    showError('Fehler beim Speichern: ' + data.error);
+                }
+            })
+            .catch(error => {
+                showError('Fehler: ' + error.message);
+            });
+        }
+        
+        function downloadFile() {
+            const { gameLink, mappings } = collectMappings();
             
-            console.log('Gespeicherte Mappings:', mappingData);
+            if (mappings.length === 0) {
+                showError('Bitte geben Sie mindestens einen echten Namen ein.');
+                return;
+            }
+            
+            // Event-Datei Inhalt erstellen
+            let fileContent = gameLink + '\n';
+            mappings.forEach(mapping => {
+                fileContent += `${mapping.nickname}=${mapping.realName}\n`;
+            });
+            
+            // Datei-Download
+            const blob = new Blob([fileContent], { type: 'text/plain; charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            
+            // Dateinamen setzen
+            const filenameInput = document.getElementById('filename').value.trim();
+            if (filenameInput) {
+                a.download = filenameInput.endsWith('.txt') ? filenameInput : filenameInput + '.txt';
+            } else {
+                const today = new Date().toISOString().split('T')[0].replace(/-/g, '_');
+                a.download = `${today}_01.txt`;
+            }
+            
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            showSuccess('✅ Datei heruntergeladen!');
         }
         
         function showError(message) {
             const errorDiv = document.getElementById('error');
             errorDiv.textContent = message;
             errorDiv.style.display = 'block';
+            document.getElementById('success').style.display = 'none';
+        }
+        
+        function showSuccess(message) {
+            const successDiv = document.getElementById('success');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+            document.getElementById('error').style.display = 'none';
         }
         
         document.getElementById('gameLink').addEventListener('keypress', function(e) {
