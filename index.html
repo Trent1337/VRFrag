@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spieler Eingabe</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .player-input { margin-bottom: 10px; }
+    button { padding: 10px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+    button:hover { background-color: #45a049; }
+  </style>
+</head>
+<body>
+  <h1>Spieler Eingabe</h1>
+  <form id="playerForm">
+    <div class="player-input">
+      <label>Spieler 1: <input type="text" name="player1"></label>
+    </div>
+    <div class="player-input">
+      <label>Spieler 2: <input type="text" name="player2"></label>
+    </div>
+    <div class="player-input">
+      <label>Spieler 3: <input type="text" name="player3"></label>
+    </div>
+    <div class="player-input">
+      <label>Spieler 4: <input type="text" name="player4"></label>
+    </div>
+    <div class="player-input">
+      <label>Spieler 5: <input type="text" name="player5"></label>
+    </div>
+    <div class="player-input">
+      <label>Spieler 6: <input type="text" name="player6"></label>
+    </div>
+    <div class="player-input">
+      <label>Spieler 7: <input type="text" name="player7"></label>
+    </div>
+    <div class="player-input">
+      <label>Spieler 8: <input type="text" name="player8"></label>
+    </div>
+    <div class="player-input">
+      <label>Spieler 9: <input type="text" name="player9"></label>
+    </div>
+    <div class="player-input">
+      <label>Spieler 10: <input type="text" name="player10"></label>
+    </div>
+
+    <button type="submit">Python Script ausführen</button>
+  </form>
+
+  <script>
+    document.getElementById('playerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const response = await fetch('/run', {
+        method: 'POST',
+        body: formData
+      });
+      const result = await response.text();
+      alert(result);
+    });
+  </script>
+</body>
+</html>
