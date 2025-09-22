@@ -5,119 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VRFrag Spieler Manager</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-        .input-group {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #555;
-        }
-        input[type="text"], input[type="url"] {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-            box-sizing: border-box;
-        }
-        input[type="text"]:focus, input[type="url"]:focus {
-            border-color: #4CAF50;
-            outline: none;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            width: 100%;
-            margin-top: 10px;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        button:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-        }
-        .loading {
-            display: none;
-            text-align: center;
-            margin: 20px 0;
-        }
-        .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #4CAF50;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 2s linear infinite;
-            margin: 0 auto;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .results {
-            display: none;
-            margin-top: 30px;
-        }
-        .player-row {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-        }
-        .nickname {
-            flex: 1;
-            font-weight: bold;
-            padding: 10px;
-        }
-        .input-field {
-            flex: 2;
-        }
-        .input-field input {
-            width: 100%;
-        }
-        .error {
-            color: #d32f2f;
-            background-color: #ffebee;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 20px;
-            display: none;
-        }
-        .success {
-            color: #2e7d32;
-            background-color: #e8f5e9;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 20px;
-            display: none;
-        }
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f5f5f5; }
+        .container { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #333; text-align: center; }
+        .input-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; }
+        input[type="text"], input[type="url"] { width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 5px; font-size: 16px; box-sizing: border-box; }
+        input:focus { border-color: #4CAF50; outline: none; }
+        button { background-color: #4CAF50; color: white; padding: 12px 30px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; width: 100%; margin-top: 10px; }
+        button:hover { background-color: #45a049; }
+        button:disabled { background-color: #cccccc; cursor: not-allowed; }
+        .loading { display: none; text-align: center; margin: 20px 0; }
+        .spinner { border: 4px solid #f3f3f3; border-top: 4px solid #4CAF50; border-radius: 50%; width: 40px; height: 40px; animation: spin 2s linear infinite; margin: 0 auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .results { display: none; margin-top: 30px; }
+        .player-row { display: flex; align-items: center; margin-bottom: 15px; padding: 10px; background-color: #f9f9f9; border-radius: 5px; }
+        .nickname { flex: 1; font-weight: bold; padding: 10px; }
+        .input-field { flex: 2; }
+        .input-field input { width: 100%; }
+        .error { color: #d32f2f; background-color: #ffebee; padding: 15px; border-radius: 5px; margin-top: 20px; display: none; }
+        .success { color: #2e7d32; background-color: #e8f5e9; padding: 15px; border-radius: 5px; margin-top: 20px; display: none; }
     </style>
 </head>
 <body>
@@ -155,25 +62,21 @@
             const successDiv = document.getElementById('success');
             const results = document.getElementById('results');
             
-            // Validierung
             if (!gameLink) {
                 showError('Bitte geben Sie einen gültigen Spiel-Link ein.');
                 return;
             }
             
-            // UI zurücksetzen
             errorDiv.style.display = 'none';
             successDiv.style.display = 'none';
             results.style.display = 'none';
             button.disabled = true;
             loading.style.display = 'block';
             
-            // Python-Skript aufrufen
-            fetch('/cgi-bin/get_players.py', {
+            // Flask API aufrufen
+            fetch('/api/get-players', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ game_link: gameLink })
             })
             .then(response => response.json())
@@ -205,14 +108,12 @@
             players.forEach(player => {
                 const playerRow = document.createElement('div');
                 playerRow.className = 'player-row';
-                
                 playerRow.innerHTML = `
                     <div class="nickname">${player}</div>
                     <div class="input-field">
                         <input type="text" id="input_${player}" placeholder="Echter Name für ${player}" />
                     </div>
                 `;
-                
                 playersList.appendChild(playerRow);
             });
             
@@ -237,25 +138,16 @@
                 return;
             }
             
-            // Mappings speichern (könnte an Server gesendet werden)
             const gameLink = document.getElementById('gameLink').value;
-            const data = {
-                game_link: gameLink,
-                mappings: mappings,
-                timestamp: new Date().toISOString()
-            };
+            const data = { game_link: gameLink, mappings: mappings, timestamp: new Date().toISOString() };
             
-            // Hier könnte man die Daten an den Server senden
-            console.log('Zu speichernde Mappings:', data);
-            
-            // Für Demo-Zwecke: Lokal im LocalStorage speichern
+            // Lokal speichern
             const savedMappings = JSON.parse(localStorage.getItem('vrfrag_mappings') || '{}');
             savedMappings[gameLink] = mappings;
             localStorage.setItem('vrfrag_mappings', JSON.stringify(savedMappings));
             
-            document.getElementById('success').textContent = 
-                `Erfolgreich ${Object.keys(mappings).length} Mappings gespeichert!`;
-            document.getElementById('success').style.display = 'block';
+            successDiv.textContent = `Erfolgreich ${Object.keys(mappings).length} Mappings gespeichert!`;
+            successDiv.style.display = 'block';
         }
         
         function showError(message) {
@@ -264,17 +156,8 @@
             errorDiv.style.display = 'block';
         }
         
-        // Enter-Taste unterstützen
         document.getElementById('gameLink').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                fetchPlayers();
-            }
-        });
-        
-        // Gespeicherte Mappings laden wenn Seite geladen wird
-        window.addEventListener('load', function() {
-            const savedMappings = JSON.parse(localStorage.getItem('vrfrag_mappings') || '{}');
-            // Könnte verwendet werden um vorherige Eingaben wiederherzustellen
+            if (e.key === 'Enter') fetchPlayers();
         });
     </script>
 </body>
