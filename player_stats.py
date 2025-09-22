@@ -15,6 +15,10 @@ EVENTS_FOLDER = os.path.join(BASE_DIR, 'events')
 os.makedirs(FILES_FOLDER, exist_ok=True)
 os.makedirs(EVENTS_FOLDER, exist_ok=True)
 
+# Feste Dateinamen
+PLAYERS_FILE = os.path.join(FILES_FOLDER, 'vrfrag_players.csv')
+MATCHES_FILE = os.path.join(FILES_FOLDER, 'vrfrag_matches.csv')
+
 def parse_event_file(filepath):
     """
     Read an event .txt file.
@@ -87,10 +91,8 @@ def fetch_stats_dataframe(url):
         range_match = re.search(r"const\s+globalBookingStartEndTime\s*=\s*['\"](.*?)['\"]", target_script)
         booking_time_range = range_match.group(1) if range_match else "Unknown Time"
 
-        # Build DataFrames - handle the nested list structure
-        # Flatten the nested list structure if needed
+        # Build DataFrames
         if match_results and isinstance(match_results[0], list):
-            print("Flattening nested list structure...")
             flat_matches = []
             for sublist in match_results:
                 if isinstance(sublist, list):
@@ -101,13 +103,12 @@ def fetch_stats_dataframe(url):
         
         print(f"Processing {len(match_results)} matches")
         
-        # Build match_stats_df with winner and MVP information
+        # Build match_stats_df
         match_data_for_df = []
         for match in match_results:
             if not isinstance(match, dict):
                 continue
                 
-            # Determine winner
             team_a_points = match.get('teamAPoints', 0)
             team_b_points = match.get('teamBPoints', 0)
             
@@ -137,7 +138,7 @@ def fetch_stats_dataframe(url):
         
         match_stats_df = pd.DataFrame(match_data_for_df)
 
-        # Build player_stats_df with MVP information
+        # Build player_stats_df
         player_stats = []
         for match in match_results:
             if not isinstance(match, dict):
@@ -146,7 +147,6 @@ def fetch_stats_dataframe(url):
             match_number = match.get('matchNr', 0)
             mvp_player = match.get('mvp', '')
             
-            # Determine winner for player records
             team_a_points = match.get('teamAPoints', 0)
             team_b_points = match.get('teamBPoints', 0)
             winner = 'A' if team_a_points > team_b_points else 'B' if team_b_points > team_a_points else 'Draw'
@@ -219,14 +219,46 @@ def normalize_names(df, mappings):
     df['Player'] = df['nickname'].replace(mappings)
     return df
 
+def load_existing_data():
+    """
+    Lädt vorhandene Daten aus den CSV-Dateien
+    """
+    players_df = pd.DataFrame()
+    matches_df = pd.DataFrame()
+    
+    if os.path.exists(PLAYERS_FILE):
+        players_df = pd.read_csv(PLAYERS_FILE)
+        print(f"Loaded existing players data: {len(players_df)} entries")
+    
+    if os.path.exists(MATCHES_FILE):
+        matches_df = pd.read_csv(MATCHES_FILE)
+        print(f"Loaded existing matches data: {len(matches_df)} entries")
+    
+    return players_df, matches_df
+
+def save_combined_data(players_df, matches_df):
+    """
+    Speichert die kombinierten Daten in die festen Dateien
+    """
+    try:
+        players_df.to_csv(PLAYERS_FILE, index=False, encoding='utf-8')
+        matches_df.to_csv(MATCHES_FILE, index=False, encoding='utf-8')
+        
+        print(f"✓ Saved players data to: {PLAYERS_FILE} ({len(players_df)} entries)")
+        print(f"✓ Saved matches data to: {MATCHES_FILE} ({len(matches_df)} entries)")
+        
+        return True
+    except Exception as e:
+        print(f"Error saving data: {e}")
+        return False
+
 def merge_events(events_folder=EVENTS_FOLDER):
     """
-    Merge all events in folder.
-    Returns two DataFrames: merged_players, merged_matches.
+    Merge all events in folder and combine with existing data.
     """
-    player_dfs = []
-    match_dfs = []
-
+    # Vorhandene Daten laden
+    existing_players, existing_matches = load_existing_data()
+    
     if not os.path.exists(events_folder):
         raise FileNotFoundError(f"Events folder not found: {events_folder}")
 
@@ -238,12 +270,32 @@ def merge_events(events_folder=EVENTS_FOLDER):
     for fname in files:
         print(f"  - {fname}")
 
+    player_dfs = [existing_players] if not existing_players.empty else []
+    match_dfs = [existing_matches] if not existing_matches.empty else []
+
     successful_files = 0
+    processed_events = set()
+    
+    # Bereits verarbeitete Events aus vorhandenen Daten identifizieren
+    if not existing_players.empty:
+        processed_events = set(existing_players['EventDate'].unique())
+        print(f"Already processed events: {len(processed_events)}")
+
     for fname in files:
         try:
             print(f"\nProcessing {fname}...")
             filepath = os.path.join(events_folder, fname)
             url, mappings = parse_event_file(filepath)
+
+            # Prüfen ob dieses Event bereits verarbeitet wurde
+            with open(filepath, 'r', encoding='utf-8') as f:
+                first_line = f.readline().strip()
+            
+            # Event-Datum aus der URL oder Dateinamen extrahieren
+            event_date = extract_event_date(fname, first_line)
+            if event_date in processed_events:
+                print(f"✓ Event already processed, skipping: {fname}")
+                continue
 
             players, matches, date, time_range = fetch_stats_dataframe(url)
             
@@ -254,6 +306,8 @@ def merge_events(events_folder=EVENTS_FOLDER):
                 matches['EventDate'] = date
                 matches['EventTimeRange'] = time_range
                 match_dfs.append(matches)
+                
+                processed_events.add(date)
                 successful_files += 1
                 print(f"✓ Successfully processed {fname}")
             else:
@@ -263,43 +317,31 @@ def merge_events(events_folder=EVENTS_FOLDER):
             print(f"✗ Error processing {fname}: {e}")
             continue
 
-    if not player_dfs or not match_dfs:
-        raise ValueError("No valid data could be processed from any event file.")
+    if not player_dfs or (len(player_dfs) == 1 and player_dfs[0].empty):
+        return existing_players, existing_matches, 0
 
     # Concatenate
-    merged_players = pd.concat(player_dfs, ignore_index=True)
-    merged_matches = pd.concat(match_dfs, ignore_index=True)
+    merged_players = pd.concat(player_dfs, ignore_index=True).drop_duplicates()
+    merged_matches = pd.concat(match_dfs, ignore_index=True).drop_duplicates()
 
-    print(f"\n✓ Successfully merged data from {successful_files} event files")
+    print(f"\n✓ Successfully merged data from {successful_files} new event files")
     print(f"  - Total players entries: {len(merged_players)}")
     print(f"  - Total matches entries: {len(merged_matches)}")
+    print(f"  - New entries added: {successful_files}")
     
-    return merged_players, merged_matches
+    return merged_players, merged_matches, successful_files
 
-def save_to_files_folder(dfs, base_name="vrfrag_stats"):
+def extract_event_date(filename, first_line):
     """
-    Save DataFrame or tuple of DataFrames to CSV file(s) in the files folder.
+    Extrahiert Event-Datum aus Dateinamen oder URL
     """
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    # Versuche Datum aus Dateinamen zu extrahieren (YYYY_MM_DD)
+    date_match = re.search(r'(\d{4}_\d{2}_\d{2})', filename)
+    if date_match:
+        return date_match.group(1)
     
-    if isinstance(dfs, tuple):
-        players_df, matches_df = dfs
-        
-        players_file = os.path.join(FILES_FOLDER, f"{base_name}_players_{timestamp}.csv")
-        matches_file = os.path.join(FILES_FOLDER, f"{base_name}_matches_{timestamp}.csv")
-        
-        players_df.to_csv(players_file, index=False, encoding='utf-8')
-        matches_df.to_csv(matches_file, index=False, encoding='utf-8')
-        
-        print(f"✓ Saved players data to: {players_file}")
-        print(f"✓ Saved matches data to: {matches_file}")
-        
-        return players_file, matches_file
-    else:
-        file_path = os.path.join(FILES_FOLDER, f"{base_name}_{timestamp}.csv")
-        dfs.to_csv(file_path, index=False, encoding='utf-8')
-        print(f"✓ Saved data to: {file_path}")
-        return file_path
+    # Fallback: Verwende ersten Teil der URL
+    return filename.split('_')[0] if '_' in filename else filename
 
 def generate_statistics():
     """
@@ -310,68 +352,33 @@ def generate_statistics():
         print(f"Events folder: {EVENTS_FOLDER}")
         print(f"Files folder: {FILES_FOLDER}")
         
-        # Events mergen
-        merged_players, merged_matches = merge_events()
+        # Events mergen (kombiniert mit vorhandenen Daten)
+        merged_players, merged_matches, new_files = merge_events()
         
-        # Statistiken speichern
-        players_file, matches_file = save_to_files_folder((merged_players, merged_matches))
+        if new_files == 0 and not merged_players.empty:
+            print("✓ No new events to process, using existing data")
         
-        # Zusätzliche Statistiken generieren
-        generate_advanced_stats(merged_players, merged_matches)
+        # Daten speichern (überschreibt vorhandene Dateien)
+        save_success = save_combined_data(merged_players, merged_matches)
+        
+        if not save_success:
+            return {'success': False, 'error': 'Failed to save data files'}
         
         return {
             'success': True,
-            'players_file': players_file,
-            'matches_file': matches_file,
+            'players_file': os.path.basename(PLAYERS_FILE),
+            'matches_file': os.path.basename(MATCHES_FILE),
             'player_count': len(merged_players),
             'match_count': len(merged_matches),
             'unique_players': merged_players['Player'].nunique(),
-            'message': f'Successfully generated statistics for {len(merged_players)} player entries and {len(merged_matches)} matches'
+            'new_files_processed': new_files,
+            'message': f'Successfully updated statistics. Total: {len(merged_players)} players, {len(merged_matches)} matches. New events: {new_files}'
         }
         
     except Exception as e:
         error_msg = f"Error generating statistics: {str(e)}"
         print(error_msg)
         return {'success': False, 'error': error_msg}
-
-def generate_advanced_stats(players_df, matches_df):
-    """
-    Generiert erweiterte Statistiken und speichert sie als CSV
-    """
-    try:
-        # Spieler-Statistiken
-        player_stats = players_df.groupby('Player').agg({
-            'kills': ['sum', 'mean', 'max'],
-            'deaths': ['sum', 'mean', 'min'],
-            'assists': 'sum',
-            'score': ['sum', 'mean', 'max'],
-            'isMVP': 'sum',
-            'playerWon': 'mean'
-        }).round(2)
-        
-        player_stats.columns = ['_'.join(col).strip() for col in player_stats.columns.values]
-        player_stats = player_stats.reset_index()
-        player_stats = player_stats.rename(columns={'playerWon_mean': 'win_rate'})
-        
-        # Match-Statistiken
-        match_stats = matches_df.groupby('EventDate').agg({
-            'matchNr': 'count',
-            'teamAPoints': 'sum',
-            'teamBPoints': 'sum'
-        }).reset_index()
-        
-        # Dateien speichern
-        player_stats_file = os.path.join(FILES_FOLDER, f"player_advanced_stats_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv")
-        match_stats_file = os.path.join(FILES_FOLDER, f"match_advanced_stats_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv")
-        
-        player_stats.to_csv(player_stats_file, index=False, encoding='utf-8')
-        match_stats.to_csv(match_stats_file, index=False, encoding='utf-8')
-        
-        print(f"✓ Advanced player statistics saved to: {player_stats_file}")
-        print(f"✓ Advanced match statistics saved to: {match_stats_file}")
-        
-    except Exception as e:
-        print(f"Warning: Could not generate advanced statistics: {e}")
 
 if __name__ == '__main__':
     # Lokale Ausführung
@@ -381,6 +388,7 @@ if __name__ == '__main__':
         print(f"📊 Player entries: {result['player_count']}")
         print(f"📊 Match entries: {result['match_count']}")
         print(f"👥 Unique players: {result['unique_players']}")
+        print(f"🆕 New events processed: {result['new_files_processed']}")
     else:
         print("❌ Statistics generation failed!")
         print(f"Error: {result['error']}")
