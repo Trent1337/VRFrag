@@ -5,26 +5,119 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VRFrag Spieler Manager</title>
     <style>
-        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f5f5f5; }
-        .container { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        h1 { color: #333; text-align: center; }
-        .input-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; }
-        input[type="text"], input[type="url"] { width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 5px; font-size: 16px; box-sizing: border-box; }
-        input:focus { border-color: #4CAF50; outline: none; }
-        button { background-color: #4CAF50; color: white; padding: 12px 30px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; width: 100%; margin-top: 10px; }
-        button:hover { background-color: #45a049; }
-        button:disabled { background-color: #cccccc; cursor: not-allowed; }
-        .loading { display: none; text-align: center; margin: 20px 0; }
-        .spinner { border: 4px solid #f3f3f3; border-top: 4px solid #4CAF50; border-radius: 50%; width: 40px; height: 40px; animation: spin 2s linear infinite; margin: 0 auto; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .results { display: none; margin-top: 30px; }
-        .player-row { display: flex; align-items: center; margin-bottom: 15px; padding: 10px; background-color: #f9f9f9; border-radius: 5px; }
-        .nickname { flex: 1; font-weight: bold; padding: 10px; }
-        .input-field { flex: 2; }
-        .input-field input { width: 100%; }
-        .error { color: #d32f2f; background-color: #ffebee; padding: 15px; border-radius: 5px; margin-top: 20px; display: none; }
-        .success { color: #2e7d32; background-color: #e8f5e9; padding: 15px; border-radius: 5px; margin-top: 20px; display: none; }
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"], input[type="url"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        input:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4CAF50;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 2s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .results {
+            display: none;
+            margin-top: 30px;
+        }
+        .player-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        .nickname {
+            flex: 1;
+            font-weight: bold;
+            padding: 10px;
+        }
+        .input-field {
+            flex: 2;
+        }
+        .input-field input {
+            width: 100%;
+        }
+        .error {
+            color: #d32f2f;
+            background-color: #ffebee;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: none;
+        }
+        .success {
+            color: #2e7d32;
+            background-color: #e8f5e9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -32,24 +125,24 @@
         <h1>VRFrag Spieler Manager</h1>
         
         <div class="input-group">
-            <label for="gameLink">Spiel-Link:</label>
+            <label for="gameLink">VRFrag Spiel-Link:</label>
             <input type="url" id="gameLink" placeholder="https://www.vrfrag.com/stats?abc123" />
         </div>
         
-        <button id="fetchPlayers" onclick="fetchPlayers()">Spieler abrufen</button>
+        <button id="fetchPlayers" onclick="fetchPlayers()">Spieler automatisch abrufen</button>
         
         <div id="loading" class="loading">
             <div class="spinner"></div>
-            <p>Spieler werden abgerufen...</p>
+            <p>Spieler werden von VRFrag abgerufen...</p>
         </div>
         
         <div id="error" class="error"></div>
         <div id="success" class="success"></div>
         
         <div id="results" class="results">
-            <h2>Spieler-Nicknames</h2>
+            <h2>Gefundene Spieler-Nicknames</h2>
             <div id="playersList"></div>
-            <button id="saveMappings" onclick="saveMappings()" style="margin-top: 20px;">Mapping speichern</button>
+            <button id="saveMappings" onclick="saveMappings()" style="margin-top: 20px;">Namen zuordnen & Speichern</button>
         </div>
     </div>
 
@@ -63,7 +156,12 @@
             const results = document.getElementById('results');
             
             if (!gameLink) {
-                showError('Bitte geben Sie einen gültigen Spiel-Link ein.');
+                showError('Bitte geben Sie einen gültigen VRFrag Link ein.');
+                return;
+            }
+            
+            if (!gameLink.includes('vrfrag.com/stats?')) {
+                showError('Bitte geben Sie einen gültigen VRFrag Stats-Link ein.');
                 return;
             }
             
@@ -73,20 +171,28 @@
             button.disabled = true;
             loading.style.display = 'block';
             
-            // Flask API aufrufen
+            // Eigene Flask API aufrufen
             fetch('/api/get-players', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
                 body: JSON.stringify({ game_link: gameLink })
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP Error: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => {
                 loading.style.display = 'none';
                 button.disabled = false;
                 
                 if (data.success) {
                     displayPlayers(data.players);
-                    successDiv.textContent = `Erfolgreich ${data.players.length} Spieler gefunden!`;
+                    successDiv.textContent = `✅ Erfolgreich ${data.players.length} Spieler gefunden!`;
                     successDiv.style.display = 'block';
                 } else {
                     showError(data.error || 'Ein Fehler ist aufgetreten.');
@@ -105,13 +211,13 @@
             
             playersList.innerHTML = '';
             
-            players.forEach(player => {
+            players.forEach((player, index) => {
                 const playerRow = document.createElement('div');
                 playerRow.className = 'player-row';
                 playerRow.innerHTML = `
                     <div class="nickname">${player}</div>
                     <div class="input-field">
-                        <input type="text" id="input_${player}" placeholder="Echter Name für ${player}" />
+                        <input type="text" id="input_${index}" placeholder="Echter Name für ${player}" />
                     </div>
                 `;
                 playersList.appendChild(playerRow);
@@ -123,31 +229,37 @@
         function saveMappings() {
             const playersList = document.getElementById('playersList');
             const inputs = playersList.querySelectorAll('input[type="text"]');
-            const mappings = {};
+            const gameLink = document.getElementById('gameLink').value;
+            const nicknames = [];
+            const realNames = [];
             
-            inputs.forEach(input => {
-                const nickname = input.id.replace('input_', '');
+            inputs.forEach((input, index) => {
                 const realName = input.value.trim();
                 if (realName) {
-                    mappings[nickname] = realName;
+                    // Hier könntest du die Mappings speichern
+                    nicknames.push(input.placeholder.replace('Echter Name für ', ''));
+                    realNames.push(realName);
                 }
             });
             
-            if (Object.keys(mappings).length === 0) {
+            if (realNames.length === 0) {
                 showError('Bitte geben Sie mindestens einen echten Namen ein.');
                 return;
             }
             
-            const gameLink = document.getElementById('gameLink').value;
-            const data = { game_link: gameLink, mappings: mappings, timestamp: new Date().toISOString() };
+            // Mappings im LocalStorage speichern
+            const mappingData = {
+                gameLink: gameLink,
+                mappings: nicknames.map((nick, i) => ({nickname: nick, realName: realNames[i]})),
+                timestamp: new Date().toISOString()
+            };
             
-            // Lokal speichern
-            const savedMappings = JSON.parse(localStorage.getItem('vrfrag_mappings') || '{}');
-            savedMappings[gameLink] = mappings;
-            localStorage.setItem('vrfrag_mappings', JSON.stringify(savedMappings));
+            localStorage.setItem('vrfrag_mapping_' + btoa(gameLink), JSON.stringify(mappingData));
             
-            successDiv.textContent = `Erfolgreich ${Object.keys(mappings).length} Mappings gespeichert!`;
+            successDiv.textContent = `✅ ${realNames.length} Namenszuordnungen gespeichert!`;
             successDiv.style.display = 'block';
+            
+            console.log('Gespeicherte Mappings:', mappingData);
         }
         
         function showError(message) {
@@ -157,7 +269,9 @@
         }
         
         document.getElementById('gameLink').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') fetchPlayers();
+            if (e.key === 'Enter') {
+                fetchPlayers();
+            }
         });
     </script>
 </body>
