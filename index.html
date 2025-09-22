@@ -58,6 +58,15 @@
             border-left: 4px solid #3498db;
         }
 
+        .section-title {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
         .form-group {
             margin-bottom: 25px;
         }
@@ -139,6 +148,17 @@
             box-shadow: 0 10px 20px rgba(39, 174, 96, 0.3);
         }
 
+        .btn-purple {
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+            color: white;
+            width: 100%;
+        }
+
+        .btn-purple:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(155, 89, 182, 0.3);
+        }
+
         .loading {
             text-align: center;
             padding: 30px;
@@ -166,17 +186,6 @@
             border-radius: 15px;
             padding: 30px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .section-title {
-            font-size: 1.5rem;
-            color: #2c3e50;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #ecf0f1;
-            display: flex;
-            justify-content: between;
-            align-items: center;
         }
 
         .filename-input {
@@ -302,6 +311,36 @@
             text-decoration: underline;
         }
 
+        .stats-results {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .file-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .file-links a {
+            padding: 8px 15px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .file-links a:hover {
+            background: #2980b9;
+        }
+
         @media (max-width: 768px) {
             .content {
                 padding: 20px;
@@ -319,6 +358,10 @@
             .input-section {
                 padding: 20px;
             }
+            
+            .file-links {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -330,8 +373,11 @@
         </div>
 
         <div class="content">
-            <!-- Eingabebereich -->
+            <!-- Event Erfassung -->
             <div class="input-section">
+                <div class="section-title">
+                    <i class="fas fa-plus-circle"></i> Neue Event Erfassung
+                </div>
                 <div class="form-group">
                     <label for="gameLink"><i class="fas fa-link"></i> VRFrag Spiel-Link</label>
                     <div class="input-with-icon">
@@ -357,7 +403,7 @@
             <!-- Ergebnissebereich -->
             <div id="results" class="results-section">
                 <div class="section-title">
-                    <span><i class="fas fa-list-check"></i> Gefundene Spieler</span>
+                    <i class="fas fa-list-check"></i> Gefundene Spieler
                 </div>
 
                 <!-- Dateinamen Eingabe -->
@@ -375,6 +421,30 @@
                     <button id="saveToGitHub" class="btn btn-success" onclick="saveToGitHub()">
                         <i class="fab fa-github"></i> Auf GitHub speichern
                     </button>
+                </div>
+            </div>
+
+            <!-- Statistiken Bereich -->
+            <div class="input-section">
+                <div class="section-title">
+                    <i class="fas fa-chart-bar"></i> Statistiken Management
+                </div>
+                <p style="margin-bottom: 20px; color: #666;">
+                    Generiere umfassende Statistiken aus allen gespeicherten Events.
+                </p>
+                <button id="updateStats" class="btn btn-purple" onclick="updateStatistics()">
+                    <i class="fas fa-sync-alt"></i> Statistiken aktualisieren
+                </button>
+                
+                <div id="statsLoading" class="loading" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Statistiken werden generiert... Dies kann einige Minuten dauern.</p>
+                </div>
+                
+                <div id="statsResults" class="stats-results">
+                    <h4><i class="fas fa-check-circle" style="color: #27ae60;"></i> Statistiken erfolgreich generiert!</h4>
+                    <div id="statsDetails"></div>
+                    <div id="fileLinks" class="file-links"></div>
                 </div>
             </div>
         </div>
@@ -566,6 +636,67 @@
                 saveButton.disabled = false;
                 showError('Netzwerkfehler: ' + error.message);
             });
+        }
+        
+        function updateStatistics() {
+            const button = document.getElementById('updateStats');
+            const loading = document.getElementById('statsLoading');
+            const results = document.getElementById('statsResults');
+            const errorDiv = document.getElementById('error');
+            const successDiv = document.getElementById('success');
+            
+            // UI zurücksetzen
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+            results.style.display = 'none';
+            button.disabled = true;
+            loading.style.display = 'block';
+            
+            fetch('/api/update-statistics', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(response => response.json())
+            .then(data => {
+                loading.style.display = 'none';
+                button.disabled = false;
+                
+                if (data.success) {
+                    showStatsResults(data);
+                } else {
+                    showError('Statistiken Fehler: ' + data.error);
+                }
+            })
+            .catch(error => {
+                loading.style.display = 'none';
+                button.disabled = false;
+                showError('Netzwerkfehler: ' + error.message);
+            });
+        }
+        
+        function showStatsResults(data) {
+            const results = document.getElementById('statsResults');
+            const details = document.getElementById('statsDetails');
+            const fileLinks = document.getElementById('fileLinks');
+            
+            details.innerHTML = `
+                <p><strong>📊 Spieler Einträge:</strong> ${data.player_count}</p>
+                <p><strong>🎯 Match Einträge:</strong> ${data.match_count}</p>
+                <p><strong>👥 Einzigartige Spieler:</strong> ${data.unique_players}</p>
+                <p><strong>⏰ Generiert am:</strong> ${new Date().toLocaleString('de-DE')}</p>
+            `;
+            
+            fileLinks.innerHTML = `
+                <a href="/files/${data.players_file}" class="btn">
+                    <i class="fas fa-download"></i> Spieler-Statistiken
+                </a>
+                <a href="/files/${data.matches_file}" class="btn">
+                    <i class="fas fa-download"></i> Match-Statistiken
+                </a>
+            `;
+            
+            results.style.display = 'block';
+            showSuccess('✅ Statistiken erfolgreich aktualisiert!');
         }
         
         function showError(message) {
