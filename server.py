@@ -87,4 +87,11 @@ def api_list_files():
             'error': f'Error listing files: {str(e)}'
         }), 500
 
-# ... (rest deiner server.py) ...
+
+# Statische Dateien
+@app.route('/<path:path>')
+def static_files(path):
+    return send_from_directory('.', path)
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
