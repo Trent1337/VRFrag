@@ -1,13 +1,13 @@
-from flask import Flask, request, send_from_directory, jsonify
+from flask import Flask, request, send_from_directory, jsonify, render_template
 import subprocess
 import os
 import requests
 import base64
 from datetime import datetime
 from get_players import get_players_from_url
-from player_stats import generate_statistics  # Import für Statistiken
+from player_stats import generate_statistics
 
-app = Flask(__name__, static_folder='.')
+app = Flask(__name__)
 
 CSV_PATH = os.path.join(os.path.dirname(__file__), 'data.csv')
 FILES_FOLDER = os.path.join(os.path.dirname(__file__), 'files')
@@ -108,44 +108,7 @@ def generate_filename(custom_name=None):
 
 @app.route('/')
 def index():
-    # HTML direkt zurückgeben (nicht als Datei senden)
-    return """
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VRFrag Event Manager</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- Dein gesamter CSS-Code hier -->
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
-        /* ... Rest deines CSS ... */
-    </style>
-</head>
-<body>
-    <div class="container">
-        <!-- Dein gesamter HTML-Code hier -->
-        <div class="header">
-            <h1><i class="fas fa-gamepad"></i> VRFrag Event Manager</h1>
-            <p>Automatische Spielererfassung und GitHub Integration</p>
-        </div>
-        <!-- ... Rest deines HTML ... -->
-    </div>
-
-    <script>
-        // Dein gesamter JavaScript-Code hier
-        let currentPlayers = [];
-        
-        function fetchPlayers() {
-            // ... deine JavaScript-Funktionen ...
-        }
-        // ... Rest deines JavaScript ...
-    </script>
-</body>
-</html>
-"""
+    return render_template('index.html')
 
 @app.route('/run', methods=['POST'])
 def run_script():
