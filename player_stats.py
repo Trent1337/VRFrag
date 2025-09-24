@@ -252,6 +252,21 @@ def save_combined_data(players_df, matches_df):
         print(f"Error saving data: {e}")
         return False
 
+# Korrigiere die extract_event_date Funktion am Ende der Datei:
+
+def extract_event_date(filename, first_line):
+    """
+    Extrahiert Event-Datum aus Dateinamen oder URL
+    """
+    # Versuche Datum aus Dateinamen zu extrahieren (YYYY_MM_DD)
+    date_match = re.search(r'(\d{4}_\d{2}_\d{2})', filename)
+    if date_match:
+        return date_match.group(1)
+    
+    # Fallback: Verwende ersten Teil der URL
+    return filename.split('_')[0] if '_' in filename else filename
+
+# UND KORRIGIERE die merge_events Funktion:
 def merge_events(events_folder=EVENTS_FOLDER):
     """
     Merge all events in folder and combine with existing data.
@@ -287,19 +302,14 @@ def merge_events(events_folder=EVENTS_FOLDER):
             filepath = os.path.join(events_folder, fname)
             url, mappings = parse_event_file(filepath)
 
-            # Prüfen ob dieses Event bereits verarbeitet wurde
-            with open(filepath, 'r', encoding='utf-8') as f:
-                first_line = f.readline().strip()
-            
-            # Event-Datum aus der URL oder Dateinamen extrahieren
-            event_date = extract_event_date(fname, first_line)
-            if event_date in processed_events:
-                print(f"✓ Event already processed, skipping: {fname}")
-                continue
-
             players, matches, date, time_range = fetch_stats_dataframe(url)
             
             if players is not None and matches is not None:
+                # KORREKTUR: Event-Datum aus den geparsten Daten verwenden
+                if date in processed_events:
+                    print(f"✓ Event already processed, skipping: {fname}")
+                    continue
+
                 players = normalize_names(players, mappings)
                 player_dfs.append(players)
 
@@ -330,22 +340,6 @@ def merge_events(events_folder=EVENTS_FOLDER):
     print(f"  - New entries added: {successful_files}")
     
     return merged_players, merged_matches, successful_files
-
-def extract_event_date(filename, first_line):
-    """
-    Extrahiert Event-Datum aus Dateinamen oder URL
-    """
-    # Versuche Datum aus Dateinamen zu extrahieren (YYYY_MM_DD)
-# In merge_events() - nach fetch_stats_dataframe():
-    if players is not None and matches is not None:
-        event_date = date  # Verwende das tatsächliche Datum aus den Daten
-        if event_date in processed_events:
-            print(f"✓ Event already processed, skipping: {fname}")
-            continue
-    
-    # Fallback: Verwende ersten Teil der URL
-    return filename.split('_')[0] if '_' in filename else filename
-
 def generate_statistics():
     """
     Hauptfunktion zum Generieren der Statistiken
