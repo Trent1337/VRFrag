@@ -336,9 +336,12 @@ def extract_event_date(filename, first_line):
     Extrahiert Event-Datum aus Dateinamen oder URL
     """
     # Versuche Datum aus Dateinamen zu extrahieren (YYYY_MM_DD)
-    date_match = re.search(r'(\d{4}_\d{2}_\d{2})', filename)
-    if date_match:
-        return date_match.group(1)
+# In merge_events() - nach fetch_stats_dataframe():
+    if players is not None and matches is not None:
+        event_date = date  # Verwende das tatsächliche Datum aus den Daten
+        if event_date in processed_events:
+            print(f"✓ Event already processed, skipping: {fname}")
+            continue
     
     # Fallback: Verwende ersten Teil der URL
     return filename.split('_')[0] if '_' in filename else filename
