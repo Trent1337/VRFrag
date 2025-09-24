@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VR-FRAG Team Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .player-list { max-height: 200px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; }
+        .player-item { margin: 5px 0; }
+        .team-result { background: #f5f5f5; padding: 15px; margin: 10px 0; border-radius: 5px; }
+        .team-a { border-left: 4px solid #007bff; }
+        .team-b { border-left: 4px solid #dc3545; }
+        .probability { font-size: 1.2em; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 VR-FRAG Fair Team Generator</h1>
+        
+        <div id="loading" style="display: none;">Lade Daten...</div>
+        
+        <div id="team-generator">
+            <h3>Spieler auswählen (mindestens 4):</h3>
+            <div id="player-list" class="player-list"></div>
+            
+            <h3>Map auswählen (optional):</h3>
+            <select id="map-select">
+                <option value="">Alle Maps</option>
+            </select>
+            
+            <br><br>
+            <button onclick="generateTeams()">Teams generieren</button>
+            <button onclick="selectRandomPlayers()">Zufällige Spieler</button>
+            
+            <div id="results"></div>
+        </div>
+    </div>
+
+    <script>
+        let allPlayers = [];
+        let availableMaps = [];
+
+        // Daten laden
+        async function loadData() {
+            try {
+                // Spieler laden
+                const playersResponse = await fetch('/api/get-all-players');
+                const playersData = await playersResponse.json();
+                
+                if (playersData.success) {
+                    allPlayers = playersData.players;
+                    renderPlayerList();
+                }
+                
+                // Maps laden
+                const mapsResponse = await fetch('/api/get-available-maps');
+                const mapsData = await mapsResponse.json();
+                
+                if (mapsData.success) {
+                    availableMaps = mapsData.maps;
+                    renderMapSelect();
+                }
+            } catch (error) {
+                console.error('Fehler beim Laden der Daten:', error);
+            }
+        }
+
+        function renderPlayerList() {
+            const container = document.getElementById('player-list');
+            container.innerHTML = '';
+            
+            allPlayers.forEach(player => {
+                const div = document.createElement('div');
+                div.className = 'player-item';
+                div.innerHTML = `
+                    <label>
+                        <input type="checkbox" value="${player.name}">
+                        ${player.name} ⭐ ${player.avg_score} 📊 ${player.games_played} Spiele
+                    </label>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function renderMapSelect() {
+            const select = document.getElementById('map-select');
+            select.innerHTML = '<option value="">Alle Maps</option>';
+            
+            availableMaps.forEach(map => {
+                const option = document.createElement('option');
+                option.value = map;
+                option.textContent = map;
+                select.appendChild(option);
+            });
+        }
+
+        async function generateTeams() {
+            const selectedPlayers = getSelectedPlayers();
+            const selectedMap = document.getElementById('map-select').value;
+            
+            if (selectedPlayers.length < 4) {
+                alert('Bitte mindestens 4 Spieler auswählen!');
+                return;
+            }
+            
+            if (selectedPlayers.length % 2 !== 0) {
+                alert('Gerade Anzahl an Spielern benötigt!');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/generate-teams', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        players: selectedPlayers,
+                        map: selectedMap || null
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    displayResults(result.teams);
+                } else {
+                    alert('Fehler: ' + result.error);
+                }
+            } catch (error) {
+                alert('Fehler beim Generieren der Teams: ' + error.message);
+            }
+        }
+
+        function getSelectedPlayers() {
+            const checkboxes = document.querySelectorAll('#player-list input:checked');
+            return Array.from(checkboxes).map(cb => cb.value);
+        }
+
+        function displayResults(teams) {
+            const resultsDiv = document.getElementById('results');
+            
+            resultsDiv.innerHTML = `
+                <div class="team-result">
+                    <h3>🏆 Team-Zusammenstellung</h3>
+                    <div class="probability">
+                        Gewinnwahrscheinlichkeit: 
+                        Team A: ${(teams.win_probability.team_a * 100).toFixed(1)}% | 
+                        Team B: ${(teams.win_probability.team_b * 100).toFixed(1)}%
+                    </div>
+                    <p>⚖️ Fairness: ${(teams.fairness * 100).toFixed(1)}% Unterschied</p>
+                    <p>🗺️ Map: ${teams.map_used}</p>
+                    
+                    <div class="team-a">
+                        <h4>Team A (⭐ ${teams.team_a.average_score})</h4>
+                        <ul>
+                            ${teams.team_a.players.map(player => `<li>${player}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="team-b">
+                        <h4>Team B (⭐ ${teams.team_b.average_score})</h4>
+                        <ul>
+                            ${teams.team_b.players.map(player => `<li>${player}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `;
+        }
+
+        function selectRandomPlayers() {
+            const count = Math.min(8, allPlayers.length); // Max 8 Spieler
+            const randomPlayers = [...allPlayers]
+                .sort(() => 0.5 - Math.random())
+                .slice(0, count)
+                .map(p => p.name);
+            
+            // Checkboxes setzen
+            document.querySelectorAll('#player-list input').forEach(checkbox => {
+                checkbox.checked = randomPlayers.includes(checkbox.value);
+            });
+        }
+
+        // Beim Laden der Seite Daten laden
+        document.addEventListener('DOMContentLoaded', loadData);
+    </script>
+</body>
+</html>
