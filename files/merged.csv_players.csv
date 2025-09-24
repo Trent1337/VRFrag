@@ -1,0 +1,685 @@
+matchNr,nickname,kills,assists,deaths,score,team,isMVP,matchWinner,playerWon,EventDate,EventTimeRange,mvpPlayer,Player
+1,Stefan,3,0,5,9,A,False,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Test I
+1,Elli91,4,3,7,11,A,False,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Test F
+1,Kasti,6,1,5,16,A,False,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Test C
+1,Aris,8,0,6,18,A,False,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Kloebhofer Johannes
+1,R_Ka,7,0,3,20,A,False,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Test D
+1,Gery,1,0,7,2,B,False,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Gery
+1,Tomsl,4,0,7,9,B,False,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Test E
+1,KillerKitty,9,2,7,21,B,False,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Steinkellner Martina
+1,GRIS,10,2,8,24,B,True,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Paschenegger Christian
+2,Gery,2,1,4,8,A,False,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Gery
+2,Tomsl,5,0,4,13,A,False,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Test E
+2,KillerKitty,7,2,3,22,A,False,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Steinkellner Martina
+2,GRIS,17,3,5,43,A,True,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Paschenegger Christian
+2,Kasti,2,0,7,4,B,False,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Test C
+2,Elli91,2,0,6,4,B,False,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Test F
+2,R_Ka,3,0,7,5,B,False,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Test D
+2,Stefan,2,1,6,6,B,False,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Test I
+2,Aris,7,1,6,17,B,False,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Kloebhofer Johannes
+3,Tomsl,1,0,5,5,A,False,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Test E
+3,KillerKitty,1,2,5,7,A,False,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Steinkellner Martina
+3,Gery,4,0,5,11,A,False,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Gery
+3,GRIS,20,1,3,50,A,True,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Paschenegger Christian
+3,Stefan,0,0,6,0,B,False,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Test I
+3,Elli91,2,0,6,4,B,False,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Test F
+3,Kasti,3,3,5,10,B,False,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Test C
+3,R_Ka,5,0,6,11,B,False,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Test D
+3,Aris,8,0,5,20,B,False,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Kloebhofer Johannes
+4,Stefan,0,1,6,1,A,False,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,Aris,Test I
+4,Kasti,5,1,6,12,A,False,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,Aris,Test C
+4,R_Ka,5,1,4,15,A,False,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,Aris,Test D
+4,Elli91,7,0,2,19,A,False,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,Aris,Test F
+4,Aris,9,2,5,27,A,True,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,Aris,Kloebhofer Johannes
+4,Gery,0,0,8,0,B,False,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,Aris,Gery
+4,KillerKitty,2,0,6,6,B,False,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,Aris,Steinkellner Martina
+4,Tomsl,6,0,6,14,B,False,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,Aris,Test E
+4,GRIS,11,1,7,25,B,False,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,Aris,Paschenegger Christian
+5,Elli91,4,1,9,9,A,False,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Test F
+5,Aris,5,1,8,13,A,False,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Kloebhofer Johannes
+5,R_Ka,6,4,8,18,A,False,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Test D
+5,Kasti,8,1,8,19,A,False,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Test C
+5,Stefan,9,0,7,20,A,False,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Test I
+5,Tomsl,3,2,10,8,B,False,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Test E
+5,Gery,7,3,8,18,B,False,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Gery
+5,KillerKitty,9,0,7,21,B,False,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Steinkellner Martina
+5,GRIS,19,2,8,42,B,True,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Paschenegger Christian
+6,Stefan,2,0,3,9,A,False,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,R_Ka,Test I
+6,Elli91,6,1,6,14,A,False,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,R_Ka,Test F
+6,Aris,5,1,4,15,A,False,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,R_Ka,Kloebhofer Johannes
+6,Kasti,7,2,4,20,A,False,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,R_Ka,Test C
+6,R_Ka,8,0,3,21,A,True,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,R_Ka,Test D
+6,KillerKitty,2,0,6,6,B,False,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,R_Ka,Steinkellner Martina
+6,Gery,4,0,8,8,B,False,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,R_Ka,Gery
+6,Tomsl,6,0,7,13,B,False,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,R_Ka,Test E
+6,GRIS,7,1,7,16,B,False,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,R_Ka,Paschenegger Christian
+7,KillerKitty,1,2,4,4,A,False,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Steinkellner Martina
+7,Gery,2,0,2,6,A,False,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Gery
+7,Tomsl,5,0,2,12,A,False,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Test E
+7,GRIS,7,0,1,23,A,True,A,True,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Paschenegger Christian
+7,Stefan,0,0,3,1,B,False,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Test I
+7,R_Ka,1,0,4,2,B,False,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Test D
+7,Elli91,1,0,3,2,B,False,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Test F
+7,Aris,2,0,3,5,B,False,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Kloebhofer Johannes
+7,Kasti,5,1,3,12,B,False,A,False,"Freitag, 18. Juli 2025",16:30 - 18:30,GRIS,Test C
+1,89ZtbnhÖ_,4,0,8,9,A,False,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,XXX
+1,DaMaxx,4,4,6,15,A,False,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,XXX
+1,Commodus,6,2,6,17,A,False,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,Goebl Stefan
+1,RamboXXL,8,0,6,19,A,False,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,XXX
+1,Calimeroooo,4,0,4,13,B,False,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,XXX
+1,DrSnuggles,6,0,5,16,B,False,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,XXX
+1,Ganschii,9,0,7,19,B,False,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,XXX
+1,Homunkulus,7,4,7,20,B,True,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,XXX
+2,89ZtbnhÖ_,2,2,8,8,A,False,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,XXX
+2,DaMaxx,6,1,7,16,A,False,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,XXX
+2,Ganschii,8,0,8,18,A,False,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,XXX
+2,RamboXXL,10,2,6,26,A,False,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,XXX
+2,Calimeroooo,2,0,7,7,B,False,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,XXX
+2,Commodus,3,2,7,10,B,False,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,Goebl Stefan
+2,DrSnuggles,7,1,7,18,B,False,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,XXX
+2,Homunkulus,17,1,6,38,B,True,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,XXX
+3,DrSnuggles,2,1,7,6,A,False,A,True,"Freitag, 23. Mai 2025",18:30 - 20:30,Commodus,XXX
+3,89ZtbnhÖ_,7,2,6,17,A,False,A,True,"Freitag, 23. Mai 2025",18:30 - 20:30,Commodus,XXX
+3,Ganschii,8,2,7,19,A,False,A,True,"Freitag, 23. Mai 2025",18:30 - 20:30,Commodus,XXX
+3,RamboXXL,9,1,3,24,A,False,A,True,"Freitag, 23. Mai 2025",18:30 - 20:30,Commodus,XXX
+3,Calimeroooo,1,1,6,5,B,False,A,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Commodus,XXX
+3,Homunkulus,3,1,7,8,B,False,A,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Commodus,XXX
+3,DaMaxx,6,2,8,14,B,False,A,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Commodus,XXX
+3,Commodus,12,0,6,25,B,True,A,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Commodus,Goebl Stefan
+4,RamboXXL,5,1,6,14,A,False,A,True,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,XXX
+4,89ZtbnhÖ_,8,0,6,20,A,False,A,True,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,XXX
+4,Commodus,8,0,5,21,A,False,A,True,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,Goebl Stefan
+4,Ganschii,11,1,8,25,A,False,A,True,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,XXX
+4,Calimeroooo,0,0,8,2,B,False,A,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,XXX
+4,DaMaxx,2,2,10,6,B,False,A,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,XXX
+4,DrSnuggles,10,0,8,22,B,False,A,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,XXX
+4,Homunkulus,12,1,6,29,B,True,A,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,XXX
+5,RamboXXL,2,0,2,6,A,False,A,True,"Freitag, 23. Mai 2025",18:30 - 20:30,DrSnuggles,XXX
+5,Commodus,2,1,1,8,A,False,A,True,"Freitag, 23. Mai 2025",18:30 - 20:30,DrSnuggles,Goebl Stefan
+5,DaMaxx,4,1,3,10,A,False,A,True,"Freitag, 23. Mai 2025",18:30 - 20:30,DrSnuggles,XXX
+5,DrSnuggles,6,0,0,16,A,True,A,True,"Freitag, 23. Mai 2025",18:30 - 20:30,DrSnuggles,XXX
+5,Calimeroooo,0,1,4,0,B,False,A,False,"Freitag, 23. Mai 2025",18:30 - 20:30,DrSnuggles,XXX
+5,89ZtbnhÖ_,1,0,4,2,B,False,A,False,"Freitag, 23. Mai 2025",18:30 - 20:30,DrSnuggles,XXX
+5,Ganschii,3,0,4,5,B,False,A,False,"Freitag, 23. Mai 2025",18:30 - 20:30,DrSnuggles,XXX
+5,Homunkulus,2,2,4,6,B,False,A,False,"Freitag, 23. Mai 2025",18:30 - 20:30,DrSnuggles,XXX
+1,Chris_P_Bacon,3,0,4,8,A,False,A,True,"Montag, 2. Juni 2025",16:30 - 18:30,GRIS,Nagler Christian
+1,Commodus,3,3,2,13,A,False,A,True,"Montag, 2. Juni 2025",16:30 - 18:30,GRIS,Goebl Stefan
+1,skankhunt42,4,1,1,13,A,False,A,True,"Montag, 2. Juni 2025",16:30 - 18:30,GRIS,XXX
+1,Sulzner,6,1,4,15,A,False,A,True,"Montag, 2. Juni 2025",16:30 - 18:30,GRIS,XXX
+1,GRIS,8,2,3,21,A,True,A,True,"Montag, 2. Juni 2025",16:30 - 18:30,GRIS,Paschenegger Christian
+1,Jonas,2,0,5,2,B,False,A,False,"Montag, 2. Juni 2025",16:30 - 18:30,GRIS,Trentmann Jonas
+1,Hauns,2,1,6,5,B,False,A,False,"Montag, 2. Juni 2025",16:30 - 18:30,GRIS,Goebl Marlene
+1,Jenny_tailia,2,1,6,5,B,False,A,False,"Montag, 2. Juni 2025",16:30 - 18:30,GRIS,Jenny_tailia
+1,Wüdsau,3,1,5,6,B,False,A,False,"Montag, 2. Juni 2025",16:30 - 18:30,GRIS,XXX
+1,Leo_Danzer,4,0,6,7,B,False,A,False,"Montag, 2. Juni 2025",16:30 - 18:30,GRIS,Danzer Leopold
+2,Sulzner,7,3,9,17,A,False,A,True,"Montag, 2. Juni 2025",16:30 - 18:30,GRIS,XXX
+2,skankhunt42,7,0,5,17,A,False,A,True,"Montag, 2. Juni 2025",16:30 - 18:30,GRIS,XXX
+2,Jonas,7,1,7,18,A,False,A,True,"Montag, 2. Juni 2025",16:30 - 18:30,GRIS,Trentmann Jonas
+2,Jenny_tailia,8,1,7,19,A,False,A,True,"Montag, 2. Juni 2025",16:30 - 18:30,GRIS,Jenny_tailia
+2,Chris_P_Bacon,9,2,6,22,A,False,A,True,"Montag, 2. Juni 2025",16:30 - 18:30,GRIS,Nagler Christian
+2,Hauns,1,1,6,7,B,False,A,False,"Montag, 2. Juni 2025",16:30 - 18:30,GRIS,Goebl Marlene
+2,Leo_Danzer,3,1,8,8,B,False,A,False,"Montag, 2. Juni 2025",16:30 - 18:30,GRIS,Danzer Leopold
+2,Wüdsau,9,1,9,20,B,False,A,False,"Montag, 2. Juni 2025",16:30 - 18:30,GRIS,XXX
+2,Commodus,9,0,7,21,B,False,A,False,"Montag, 2. Juni 2025",16:30 - 18:30,GRIS,Goebl Stefan
+2,GRIS,9,6,9,27,B,True,A,False,"Montag, 2. Juni 2025",16:30 - 18:30,GRIS,Paschenegger Christian
+3,Jenny_tailia,4,0,6,10,A,False,A,True,"Montag, 2. Juni 2025",16:30 - 18:30,Commodus,Jenny_tailia
+3,Wüdsau,4,1,4,13,A,False,A,True,"Montag, 2. Juni 2025",16:30 - 18:30,Commodus,XXX
+3,GRIS,5,2,5,15,A,False,A,True,"Montag, 2. Juni 2025",16:30 - 18:30,Commodus,Paschenegger Christian
+3,Chris_P_Bacon,7,2,6,17,A,False,A,True,"Montag, 2. Juni 2025",16:30 - 18:30,Commodus,Nagler Christian
+3,Commodus,12,1,4,31,A,True,A,True,"Montag, 2. Juni 2025",16:30 - 18:30,Commodus,Goebl Stefan
+3,Sulzner,3,2,8,7,B,False,A,False,"Montag, 2. Juni 2025",16:30 - 18:30,Commodus,XXX
+3,Hauns,3,1,7,8,B,False,A,False,"Montag, 2. Juni 2025",16:30 - 18:30,Commodus,Goebl Marlene
+3,skankhunt42,4,2,6,11,B,False,A,False,"Montag, 2. Juni 2025",16:30 - 18:30,Commodus,XXX
+3,Jonas,5,1,6,13,B,False,A,False,"Montag, 2. Juni 2025",16:30 - 18:30,Commodus,Trentmann Jonas
+3,Leo_Danzer,9,4,7,23,B,False,A,False,"Montag, 2. Juni 2025",16:30 - 18:30,Commodus,Danzer Leopold
+4,Chris_P_Bacon,2,2,4,11,A,False,A,True,"Montag, 2. Juni 2025",16:30 - 18:30,Leo_Danzer,Nagler Christian
+4,Sulzner,3,2,2,13,A,False,A,True,"Montag, 2. Juni 2025",16:30 - 18:30,Leo_Danzer,XXX
+4,GRIS,3,3,5,17,A,False,A,True,"Montag, 2. Juni 2025",16:30 - 18:30,Leo_Danzer,Paschenegger Christian
+4,Jenny_tailia,9,0,4,20,A,False,A,True,"Montag, 2. Juni 2025",16:30 - 18:30,Leo_Danzer,Jenny_tailia
+4,Leo_Danzer,10,1,1,26,A,True,A,True,"Montag, 2. Juni 2025",16:30 - 18:30,Leo_Danzer,Danzer Leopold
+4,Hauns,1,0,6,2,B,False,A,False,"Montag, 2. Juni 2025",16:30 - 18:30,Leo_Danzer,Goebl Marlene
+4,skankhunt42,1,1,7,3,B,False,A,False,"Montag, 2. Juni 2025",16:30 - 18:30,Leo_Danzer,XXX
+4,Wüdsau,3,0,6,9,B,False,A,False,"Montag, 2. Juni 2025",16:30 - 18:30,Leo_Danzer,XXX
+4,Commodus,5,1,4,12,B,False,A,False,"Montag, 2. Juni 2025",16:30 - 18:30,Leo_Danzer,Goebl Stefan
+4,Jonas,6,1,5,13,B,False,A,False,"Montag, 2. Juni 2025",16:30 - 18:30,Leo_Danzer,Trentmann Jonas
+5,Leo_Danzer,4,2,7,13,A,False,A,True,"Montag, 2. Juni 2025",16:30 - 18:30,Chris_P_Bacon,Danzer Leopold
+5,skankhunt42,5,0,6,14,A,False,A,True,"Montag, 2. Juni 2025",16:30 - 18:30,Chris_P_Bacon,XXX
+5,Sulzner,10,0,7,21,A,False,A,True,"Montag, 2. Juni 2025",16:30 - 18:30,Chris_P_Bacon,XXX
+5,Jenny_tailia,8,5,8,23,A,False,A,True,"Montag, 2. Juni 2025",16:30 - 18:30,Chris_P_Bacon,Jenny_tailia
+5,Chris_P_Bacon,14,3,4,37,A,True,A,True,"Montag, 2. Juni 2025",16:30 - 18:30,Chris_P_Bacon,Nagler Christian
+5,Jonas,3,1,9,8,B,False,A,False,"Montag, 2. Juni 2025",16:30 - 18:30,Chris_P_Bacon,Trentmann Jonas
+5,Hauns,3,1,7,10,B,False,A,False,"Montag, 2. Juni 2025",16:30 - 18:30,Chris_P_Bacon,Goebl Marlene
+5,Wüdsau,5,0,8,12,B,False,A,False,"Montag, 2. Juni 2025",16:30 - 18:30,Chris_P_Bacon,XXX
+5,GRIS,6,3,9,16,B,False,A,False,"Montag, 2. Juni 2025",16:30 - 18:30,Chris_P_Bacon,Paschenegger Christian
+5,Commodus,13,0,8,28,B,False,A,False,"Montag, 2. Juni 2025",16:30 - 18:30,Chris_P_Bacon,Goebl Stefan
+6,Jenny_tailia,2,3,7,8,A,False,A,True,"Montag, 2. Juni 2025",16:30 - 18:30,Commodus,Jenny_tailia
+6,skankhunt42,3,1,6,9,A,False,A,True,"Montag, 2. Juni 2025",16:30 - 18:30,Commodus,XXX
+6,Leo_Danzer,7,1,6,17,A,False,A,True,"Montag, 2. Juni 2025",16:30 - 18:30,Commodus,Danzer Leopold
+6,Sulzner,8,1,4,22,A,False,A,True,"Montag, 2. Juni 2025",16:30 - 18:30,Commodus,XXX
+6,Chris_P_Bacon,12,0,6,27,A,False,A,True,"Montag, 2. Juni 2025",16:30 - 18:30,Commodus,Nagler Christian
+6,Hauns,2,1,8,6,B,False,A,False,"Montag, 2. Juni 2025",16:30 - 18:30,Commodus,Goebl Marlene
+6,Jonas,2,4,8,9,B,False,A,False,"Montag, 2. Juni 2025",16:30 - 18:30,Commodus,Trentmann Jonas
+6,GRIS,5,2,6,14,B,False,A,False,"Montag, 2. Juni 2025",16:30 - 18:30,Commodus,Paschenegger Christian
+6,Wüdsau,7,1,7,15,B,False,A,False,"Montag, 2. Juni 2025",16:30 - 18:30,Commodus,XXX
+6,Commodus,12,1,6,30,B,True,A,False,"Montag, 2. Juni 2025",16:30 - 18:30,Commodus,Goebl Stefan
+1,Matl,2,0,3,12,A,False,A,True,"Samstag, 7. Juni 2025",18:30 - 20:30,Homunkulus,XXX
+1,IchStahlIhnGrad,5,1,6,14,A,False,A,True,"Samstag, 7. Juni 2025",18:30 - 20:30,Homunkulus,XXX
+1,GGRIS,8,0,6,23,A,False,A,True,"Samstag, 7. Juni 2025",18:30 - 20:30,Homunkulus,GGRIS
+1,LingLing,10,0,7,23,A,False,A,True,"Samstag, 7. Juni 2025",18:30 - 20:30,Homunkulus,XXX
+1,Reini,1,0,8,3,B,False,A,False,"Samstag, 7. Juni 2025",18:30 - 20:30,Homunkulus,XXX
+1,Caliiimero,2,0,6,7,B,False,A,False,"Samstag, 7. Juni 2025",18:30 - 20:30,Homunkulus,Schenkermayer Carina
+1,Hiaslnator,7,2,6,19,B,False,A,False,"Samstag, 7. Juni 2025",18:30 - 20:30,Homunkulus,XXX
+1,Homunkulus,10,1,7,26,B,True,A,False,"Samstag, 7. Juni 2025",18:30 - 20:30,Homunkulus,XXX
+2,Hiaslnator,5,1,8,11,A,False,A,True,"Samstag, 7. Juni 2025",18:30 - 20:30,Homunkulus,XXX
+2,GGRIS,6,2,7,16,A,False,A,True,"Samstag, 7. Juni 2025",18:30 - 20:30,Homunkulus,GGRIS
+2,Caliiimero,7,0,4,19,A,False,A,True,"Samstag, 7. Juni 2025",18:30 - 20:30,Homunkulus,Schenkermayer Carina
+2,Homunkulus,10,2,4,27,A,True,A,True,"Samstag, 7. Juni 2025",18:30 - 20:30,Homunkulus,XXX
+2,Reini,0,0,7,2,B,False,A,False,"Samstag, 7. Juni 2025",18:30 - 20:30,Homunkulus,XXX
+2,Matl,0,2,6,5,B,False,A,False,"Samstag, 7. Juni 2025",18:30 - 20:30,Homunkulus,XXX
+2,IchStahlIhnGrad,10,1,7,23,B,False,A,False,"Samstag, 7. Juni 2025",18:30 - 20:30,Homunkulus,XXX
+2,LingLing,12,1,8,26,B,False,A,False,"Samstag, 7. Juni 2025",18:30 - 20:30,Homunkulus,XXX
+3,Reini,2,1,3,8,A,False,A,True,"Samstag, 7. Juni 2025",18:30 - 20:30,Homunkulus,XXX
+3,LingLing,4,2,3,13,A,False,A,True,"Samstag, 7. Juni 2025",18:30 - 20:30,Homunkulus,XXX
+3,GGRIS,5,2,4,16,A,False,A,True,"Samstag, 7. Juni 2025",18:30 - 20:30,Homunkulus,GGRIS
+3,Homunkulus,8,1,4,19,A,True,A,True,"Samstag, 7. Juni 2025",18:30 - 20:30,Homunkulus,XXX
+3,Caliiimero,1,0,5,2,B,False,A,False,"Samstag, 7. Juni 2025",18:30 - 20:30,Homunkulus,Schenkermayer Carina
+3,Matl,2,1,5,5,B,False,A,False,"Samstag, 7. Juni 2025",18:30 - 20:30,Homunkulus,XXX
+3,Hiaslnator,4,1,5,9,B,False,A,False,"Samstag, 7. Juni 2025",18:30 - 20:30,Homunkulus,XXX
+3,IchStahlIhnGrad,7,0,5,13,B,False,A,False,"Samstag, 7. Juni 2025",18:30 - 20:30,Homunkulus,XXX
+4,Caliiimero,4,2,6,13,A,False,Draw,False,"Samstag, 7. Juni 2025",18:30 - 20:30,GGRIS,Schenkermayer Carina
+4,LingLing,6,4,7,19,A,False,Draw,False,"Samstag, 7. Juni 2025",18:30 - 20:30,GGRIS,XXX
+4,Matl,8,1,5,20,A,False,Draw,False,"Samstag, 7. Juni 2025",18:30 - 20:30,GGRIS,XXX
+4,GGRIS,11,3,8,29,A,True,Draw,False,"Samstag, 7. Juni 2025",18:30 - 20:30,GGRIS,GGRIS
+4,Reini,1,1,9,5,B,False,Draw,False,"Samstag, 7. Juni 2025",18:30 - 20:30,GGRIS,XXX
+4,Hiaslnator,5,3,7,15,B,False,Draw,False,"Samstag, 7. Juni 2025",18:30 - 20:30,GGRIS,XXX
+4,IchStahlIhnGrad,8,0,7,21,B,False,Draw,False,"Samstag, 7. Juni 2025",18:30 - 20:30,GGRIS,XXX
+4,Homunkulus,11,0,9,22,B,False,Draw,False,"Samstag, 7. Juni 2025",18:30 - 20:30,GGRIS,XXX
+5,Reini,2,2,8,7,A,False,A,True,"Samstag, 7. Juni 2025",18:30 - 20:30,IchStahlIhnGrad,XXX
+5,Homunkulus,7,2,6,18,A,False,A,True,"Samstag, 7. Juni 2025",18:30 - 20:30,IchStahlIhnGrad,XXX
+5,Hiaslnator,8,2,7,20,A,False,A,True,"Samstag, 7. Juni 2025",18:30 - 20:30,IchStahlIhnGrad,XXX
+5,IchStahlIhnGrad,12,0,6,27,A,True,A,True,"Samstag, 7. Juni 2025",18:30 - 20:30,IchStahlIhnGrad,XXX
+5,Matl,2,2,8,7,B,False,A,False,"Samstag, 7. Juni 2025",18:30 - 20:30,IchStahlIhnGrad,XXX
+5,Caliiimero,6,0,7,14,B,False,A,False,"Samstag, 7. Juni 2025",18:30 - 20:30,IchStahlIhnGrad,Schenkermayer Carina
+5,GGRIS,9,0,7,19,B,False,A,False,"Samstag, 7. Juni 2025",18:30 - 20:30,IchStahlIhnGrad,GGRIS
+5,LingLing,9,2,8,21,B,False,A,False,"Samstag, 7. Juni 2025",18:30 - 20:30,IchStahlIhnGrad,XXX
+6,Matl,0,1,3,4,A,False,A,True,"Samstag, 7. Juni 2025",18:30 - 20:30,GGRIS,XXX
+6,Caliiimero,5,0,4,12,A,False,A,True,"Samstag, 7. Juni 2025",18:30 - 20:30,GGRIS,Schenkermayer Carina
+6,Homunkulus,6,0,3,17,A,False,A,True,"Samstag, 7. Juni 2025",18:30 - 20:30,GGRIS,XXX
+6,GGRIS,3,2,4,18,A,True,A,True,"Samstag, 7. Juni 2025",18:30 - 20:30,GGRIS,GGRIS
+6,IchStahlIhnGrad,1,1,4,7,B,False,A,False,"Samstag, 7. Juni 2025",18:30 - 20:30,GGRIS,XXX
+6,Reini,2,0,2,8,B,False,A,False,"Samstag, 7. Juni 2025",18:30 - 20:30,GGRIS,XXX
+6,Hiaslnator,4,1,4,11,B,False,A,False,"Samstag, 7. Juni 2025",18:30 - 20:30,GGRIS,XXX
+6,LingLing,7,0,4,16,B,False,A,False,"Samstag, 7. Juni 2025",18:30 - 20:30,GGRIS,XXX
+1,Kasti,1,0,2,6,A,False,A,True,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+1,Laura,1,0,2,6,A,False,A,True,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+1,How-Mäni,2,1,2,8,A,False,A,True,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+1,EhDea,3,0,4,10,A,False,A,True,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+1,GRIS,14,1,2,33,A,True,A,True,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,GRIS
+1,Petra,0,0,6,-1,B,False,A,False,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+1,Viktor,2,1,5,5,B,False,A,False,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+1,Michael,3,0,6,6,B,False,A,False,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+1,Matl,6,0,5,12,B,False,A,False,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+2,Petra,2,1,7,6,A,False,A,True,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+2,Matl,3,1,8,8,A,False,A,True,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+2,How-Mäni,5,3,6,12,A,False,A,True,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+2,Kasti,6,0,5,14,A,False,A,True,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+2,EhDea,5,2,5,25,A,False,A,True,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+2,Michael,2,1,8,5,B,False,A,False,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+2,Laura,5,1,5,11,B,False,A,False,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+2,Viktor,4,2,5,11,B,False,A,False,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+2,GRIS,15,3,5,42,B,True,A,False,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,GRIS
+3,Petra,0,0,6,4,A,False,Draw,False,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+3,Kasti,8,1,6,18,A,False,Draw,False,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+3,EhDea,7,0,6,24,A,False,Draw,False,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+3,How-Mäni,12,3,5,33,A,False,Draw,False,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+3,Laura,2,1,9,3,B,False,Draw,False,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+3,Michael,1,0,7,4,B,False,Draw,False,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+3,Viktor,2,1,7,8,B,False,Draw,False,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+3,Matl,5,1,6,12,B,False,Draw,False,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+3,GRIS,11,4,6,36,B,True,Draw,False,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,GRIS
+4,Viktor,1,2,4,7,A,False,A,True,"Sonntag, 15. Juni 2025",12:30 - 14:30,EhDea,XXX
+4,Michael,3,1,4,11,A,False,A,True,"Sonntag, 15. Juni 2025",12:30 - 14:30,EhDea,XXX
+4,GRIS,11,1,6,27,A,False,A,True,"Sonntag, 15. Juni 2025",12:30 - 14:30,EhDea,GRIS
+4,EhDea,13,1,4,32,A,True,A,True,"Sonntag, 15. Juni 2025",12:30 - 14:30,EhDea,XXX
+4,Petra,1,1,7,2,B,False,A,False,"Sonntag, 15. Juni 2025",12:30 - 14:30,EhDea,XXX
+4,Matl,1,0,6,3,B,False,A,False,"Sonntag, 15. Juni 2025",12:30 - 14:30,EhDea,XXX
+4,Laura,4,0,6,9,B,False,A,False,"Sonntag, 15. Juni 2025",12:30 - 14:30,EhDea,XXX
+4,Kasti,5,0,6,10,B,False,A,False,"Sonntag, 15. Juni 2025",12:30 - 14:30,EhDea,XXX
+4,How-Mäni,5,1,7,12,B,False,A,False,"Sonntag, 15. Juni 2025",12:30 - 14:30,EhDea,XXX
+5,Viktor,0,0,5,4,A,False,A,True,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+5,Petra,1,0,5,6,A,False,A,True,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+5,Laura,1,1,4,8,A,False,A,True,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+5,Michael,7,3,5,21,A,False,A,True,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+5,GRIS,22,2,4,51,A,True,A,True,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,GRIS
+5,How-Mäni,5,0,9,10,B,False,A,False,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+5,Matl,5,0,8,11,B,False,A,False,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+5,Kasti,3,3,7,11,B,False,A,False,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+5,EhDea,10,3,7,25,B,False,A,False,"Sonntag, 15. Juni 2025",12:30 - 14:30,GRIS,XXX
+6,Petra,0,0,6,1,A,False,A,True,"Sonntag, 15. Juni 2025",12:30 - 14:30,EhDea,XXX
+6,Laura,2,0,4,7,A,False,A,True,"Sonntag, 15. Juni 2025",12:30 - 14:30,EhDea,XXX
+6,Michael,3,1,7,9,A,False,A,True,"Sonntag, 15. Juni 2025",12:30 - 14:30,EhDea,XXX
+6,GRIS,7,4,7,20,A,False,A,True,"Sonntag, 15. Juni 2025",12:30 - 14:30,EhDea,GRIS
+6,EhDea,12,1,4,36,A,True,A,True,"Sonntag, 15. Juni 2025",12:30 - 14:30,EhDea,XXX
+6,Viktor,2,2,7,5,B,False,A,False,"Sonntag, 15. Juni 2025",12:30 - 14:30,EhDea,XXX
+6,How-Mäni,8,0,7,16,B,False,A,False,"Sonntag, 15. Juni 2025",12:30 - 14:30,EhDea,XXX
+6,Matl,6,0,8,19,B,False,A,False,"Sonntag, 15. Juni 2025",12:30 - 14:30,EhDea,XXX
+6,Kasti,11,1,3,25,B,False,A,False,"Sonntag, 15. Juni 2025",12:30 - 14:30,EhDea,XXX
+1,Herbast,2,2,3,12,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,TuTuGas,Mayer Lisa
+1,GRIS,8,0,6,16,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,TuTuGas,GRIS
+1,HaUns,7,2,3,19,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,TuTuGas,Goebl Marlene
+1,Commodus,7,2,4,19,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,TuTuGas,Goebl Stefan
+1,TuTuGas,7,1,2,20,A,True,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,TuTuGas,Holzer Thomas
+1,Easykill,1,0,6,3,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,TuTuGas,XXX Isolde
+1,KillerKitty,2,1,6,5,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,TuTuGas,Steinkellner Martina
+1,Caliiimero,3,2,5,9,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,TuTuGas,Schenkermayer Carina
+1,Homunkulus,4,2,7,10,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,TuTuGas,Mayer Manuel
+1,Consuela,6,2,7,14,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,TuTuGas,Mayer Alexander
+2,Herbast,0,1,2,6,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,Homunkulus,Mayer Lisa
+2,Caliiimero,1,0,3,6,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,Homunkulus,Schenkermayer Carina
+2,Commodus,6,0,2,16,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,Homunkulus,Goebl Stefan
+2,TuTuGas,10,0,1,27,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,Homunkulus,Holzer Thomas
+2,Homunkulus,14,2,1,40,A,True,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,Homunkulus,Mayer Manuel
+2,Easykill,1,0,7,2,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,Homunkulus,XXX Isolde
+2,KillerKitty,1,0,5,2,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,Homunkulus,Steinkellner Martina
+2,HaUns,2,0,7,4,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,Homunkulus,Goebl Marlene
+2,Consuela,1,0,6,7,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,Homunkulus,Mayer Alexander
+2,GRIS,4,0,7,8,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,Homunkulus,GRIS
+3,Herbast,3,0,1,11,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,Homunkulus,Mayer Lisa
+3,TuTuGas,5,1,2,15,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,Homunkulus,Holzer Thomas
+3,GRIS,7,1,5,16,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,Homunkulus,GRIS
+3,Consuela,7,1,0,21,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,Homunkulus,Mayer Alexander
+3,Homunkulus,8,1,2,21,A,True,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,Homunkulus,Mayer Manuel
+3,HaUns,0,0,6,0,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,Homunkulus,Goebl Marlene
+3,Caliiimero,1,1,6,3,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,Homunkulus,Schenkermayer Carina
+3,KillerKitty,2,0,6,4,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,Homunkulus,Steinkellner Martina
+3,Easykill,3,0,6,6,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,Homunkulus,XXX Isolde
+3,Commodus,4,1,6,9,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,Homunkulus,Goebl Stefan
+4,Herbast,2,1,7,8,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,GRIS,Mayer Lisa
+4,Easykill,2,1,5,10,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,GRIS,XXX Isolde
+4,Commodus,9,1,7,21,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,GRIS,Goebl Stefan
+4,Consuela,11,2,7,27,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,GRIS,Mayer Alexander
+4,GRIS,12,4,8,30,A,True,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,GRIS,GRIS
+4,HaUns,4,0,8,9,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,GRIS,Goebl Marlene
+4,KillerKitty,4,1,9,10,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,GRIS,Steinkellner Martina
+4,Caliiimero,6,3,8,16,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,GRIS,Schenkermayer Carina
+4,TuTuGas,6,2,7,17,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,GRIS,Holzer Thomas
+4,Homunkulus,13,1,7,29,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,GRIS,Mayer Manuel
+5,Herbast,0,0,1,5,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,Consuela,Mayer Lisa
+5,TuTuGas,1,0,2,8,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,Consuela,Holzer Thomas
+5,Caliiimero,7,0,4,16,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,Consuela,Schenkermayer Carina
+5,Homunkulus,10,3,3,26,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,Consuela,Mayer Manuel
+5,Consuela,9,1,0,27,A,True,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,Consuela,Mayer Alexander
+5,KillerKitty,0,0,6,0,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,Consuela,Steinkellner Martina
+5,GRIS,1,0,6,2,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,Consuela,GRIS
+5,Easykill,1,0,6,2,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,Consuela,XXX Isolde
+5,HaUns,2,0,5,4,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,Consuela,Goebl Marlene
+5,Commodus,6,0,5,13,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,Consuela,Goebl Stefan
+6,Easykill,1,1,5,7,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,GRIS,XXX Isolde
+6,HaUns,4,0,3,14,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,GRIS,Goebl Marlene
+6,Consuela,9,0,5,18,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,GRIS,Mayer Alexander
+6,GRIS,10,1,8,21,A,True,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,GRIS,GRIS
+6,Commodus,8,0,4,21,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,GRIS,Goebl Stefan
+6,KillerKitty,1,0,6,5,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,GRIS,Steinkellner Martina
+6,Caliiimero,3,2,7,10,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,GRIS,Schenkermayer Carina
+6,TuTuGas,4,2,7,12,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,GRIS,Holzer Thomas
+6,Herbast,4,3,6,14,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,GRIS,Mayer Lisa
+6,Homunkulus,8,0,6,19,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,GRIS,Mayer Manuel
+7,Caliiimero,3,2,7,11,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,Consuela,Schenkermayer Carina
+7,Commodus,7,0,5,19,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,Consuela,Goebl Stefan
+7,HaUns,9,2,4,26,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,Consuela,Goebl Marlene
+7,GRIS,8,4,6,28,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,Consuela,GRIS
+7,Consuela,12,1,6,28,A,True,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,Consuela,Mayer Alexander
+7,Herbast,2,3,10,7,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,Consuela,Mayer Lisa
+7,KillerKitty,4,1,7,11,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,Consuela,Steinkellner Martina
+7,Easykill,6,1,9,14,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,Consuela,XXX Isolde
+7,Homunkulus,7,3,7,22,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,Consuela,Mayer Manuel
+7,TuTuGas,9,1,6,23,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,Consuela,Holzer Thomas
+8,Caliiimero,2,1,3,10,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,Homunkulus,Schenkermayer Carina
+8,KillerKitty,4,1,4,13,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,Homunkulus,Steinkellner Martina
+8,HaUns,6,1,2,19,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,Homunkulus,Goebl Marlene
+8,Consuela,10,1,5,24,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,Homunkulus,Mayer Alexander
+8,Homunkulus,14,1,5,32,A,True,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,Homunkulus,Mayer Manuel
+8,Easykill,0,1,8,1,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,Homunkulus,XXX Isolde
+8,Herbast,3,0,7,7,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,Homunkulus,Mayer Lisa
+8,TuTuGas,2,2,7,7,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,Homunkulus,Holzer Thomas
+8,GRIS,7,0,7,15,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,Homunkulus,GRIS
+8,Commodus,7,0,7,15,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,Homunkulus,Goebl Stefan
+9,Herbast,1,0,4,7,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,KillerKitty,Mayer Lisa
+9,HaUns,7,2,6,17,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,KillerKitty,Goebl Marlene
+9,TuTuGas,6,2,4,19,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,KillerKitty,Holzer Thomas
+9,Commodus,8,1,4,20,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,KillerKitty,Goebl Stefan
+9,GRIS,8,2,6,21,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,KillerKitty,GRIS
+9,Easykill,1,0,5,3,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,KillerKitty,XXX Isolde
+9,Caliiimero,3,1,6,8,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,KillerKitty,Schenkermayer Carina
+9,Consuela,5,2,6,13,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,KillerKitty,Mayer Alexander
+9,Homunkulus,7,2,7,16,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,KillerKitty,Mayer Manuel
+9,KillerKitty,8,2,6,25,B,True,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,KillerKitty,Steinkellner Martina
+10,Easykill,2,6,8,12,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,HaUns,XXX Isolde
+10,Consuela,7,1,8,16,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,HaUns,Mayer Alexander
+10,KillerKitty,5,1,5,16,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,HaUns,Steinkellner Martina
+10,TuTuGas,9,1,7,21,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,HaUns,Holzer Thomas
+10,HaUns,11,2,6,28,A,True,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,HaUns,Goebl Marlene
+10,Caliiimero,0,1,6,4,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,HaUns,Schenkermayer Carina
+10,Herbast,2,1,7,8,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,HaUns,Mayer Lisa
+10,GRIS,8,2,8,20,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,HaUns,GRIS
+10,Commodus,11,1,7,26,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,HaUns,Goebl Stefan
+10,Homunkulus,11,2,7,27,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,HaUns,Mayer Manuel
+11,HaUns,6,0,7,15,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,Commodus,Goebl Marlene
+11,KillerKitty,5,2,7,15,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,Commodus,Steinkellner Martina
+11,Consuela,8,5,7,23,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,Commodus,Mayer Alexander
+11,Homunkulus,8,6,7,25,A,False,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,Commodus,Mayer Manuel
+11,Commodus,12,1,5,30,A,True,A,True,"Samstag, 12. Juli 2025",14:30 - 16:30,Commodus,Goebl Stefan
+11,Caliiimero,1,1,9,4,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,Commodus,Schenkermayer Carina
+11,Herbast,5,0,9,11,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,Commodus,Mayer Lisa
+11,Easykill,6,2,8,15,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,Commodus,XXX Isolde
+11,GRIS,9,2,9,21,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,Commodus,GRIS
+11,TuTuGas,11,1,6,26,B,False,A,False,"Samstag, 12. Juli 2025",14:30 - 16:30,Commodus,Holzer Thomas
+12,Consuela,0,0,2,0,A,False,Draw,False,"Samstag, 12. Juli 2025",14:30 - 16:30,GRIS,Mayer Alexander
+12,HaUns,1,0,2,2,A,False,Draw,False,"Samstag, 12. Juli 2025",14:30 - 16:30,GRIS,Goebl Marlene
+12,Commodus,1,0,1,2,A,False,Draw,False,"Samstag, 12. Juli 2025",14:30 - 16:30,GRIS,Goebl Stefan
+12,KillerKitty,1,1,2,3,A,False,Draw,False,"Samstag, 12. Juli 2025",14:30 - 16:30,GRIS,Steinkellner Martina
+12,Homunkulus,3,0,1,7,A,False,Draw,False,"Samstag, 12. Juli 2025",14:30 - 16:30,GRIS,Mayer Manuel
+12,Caliiimero,1,0,2,2,B,False,Draw,False,"Samstag, 12. Juli 2025",14:30 - 16:30,GRIS,Schenkermayer Carina
+12,Herbast,1,0,1,3,B,False,Draw,False,"Samstag, 12. Juli 2025",14:30 - 16:30,GRIS,Mayer Lisa
+12,TuTuGas,1,0,1,3,B,False,Draw,False,"Samstag, 12. Juli 2025",14:30 - 16:30,GRIS,Holzer Thomas
+12,Easykill,1,0,1,3,B,False,Draw,False,"Samstag, 12. Juli 2025",14:30 - 16:30,GRIS,XXX Isolde
+12,GRIS,3,1,1,8,B,True,Draw,False,"Samstag, 12. Juli 2025",14:30 - 16:30,GRIS,GRIS
+1,Herbast,2,2,3,12,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,TuTuGas,Mayer Lisa
+1,GRIS,8,0,6,16,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,TuTuGas,GRIS
+1,HaUns,7,2,3,19,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,TuTuGas,Goebl Marlene
+1,Commodus,7,2,4,19,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,TuTuGas,Goebl Stefan
+1,TuTuGas,7,1,2,20,A,True,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,TuTuGas,Holzer Thomas
+1,Easykill,1,0,6,3,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,TuTuGas,XXX Isolde
+1,KillerKitty,2,1,6,5,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,TuTuGas,Steinkellner Martina
+1,Caliiimero,3,2,5,9,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,TuTuGas,Schenkermayer Carina
+1,Homunkulus,4,2,7,10,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,TuTuGas,Mayer Manuel
+1,Consuela,6,2,7,14,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,TuTuGas,Mayer Alexander
+2,Herbast,0,1,2,6,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,Homunkulus,Mayer Lisa
+2,Caliiimero,1,0,3,6,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,Homunkulus,Schenkermayer Carina
+2,Commodus,6,0,2,16,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,Homunkulus,Goebl Stefan
+2,TuTuGas,10,0,1,27,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,Homunkulus,Holzer Thomas
+2,Homunkulus,14,2,1,40,A,True,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,Homunkulus,Mayer Manuel
+2,Easykill,1,0,7,2,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,Homunkulus,XXX Isolde
+2,KillerKitty,1,0,5,2,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,Homunkulus,Steinkellner Martina
+2,HaUns,2,0,7,4,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,Homunkulus,Goebl Marlene
+2,Consuela,1,0,6,7,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,Homunkulus,Mayer Alexander
+2,GRIS,4,0,7,8,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,Homunkulus,GRIS
+3,Herbast,3,0,1,11,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,Homunkulus,Mayer Lisa
+3,TuTuGas,5,1,2,15,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,Homunkulus,Holzer Thomas
+3,GRIS,7,1,5,16,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,Homunkulus,GRIS
+3,Consuela,7,1,0,21,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,Homunkulus,Mayer Alexander
+3,Homunkulus,8,1,2,21,A,True,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,Homunkulus,Mayer Manuel
+3,HaUns,0,0,6,0,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,Homunkulus,Goebl Marlene
+3,Caliiimero,1,1,6,3,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,Homunkulus,Schenkermayer Carina
+3,KillerKitty,2,0,6,4,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,Homunkulus,Steinkellner Martina
+3,Easykill,3,0,6,6,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,Homunkulus,XXX Isolde
+3,Commodus,4,1,6,9,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,Homunkulus,Goebl Stefan
+4,Herbast,2,1,7,8,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,GRIS,Mayer Lisa
+4,Easykill,2,1,5,10,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,GRIS,XXX Isolde
+4,Commodus,9,1,7,21,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,GRIS,Goebl Stefan
+4,Consuela,11,2,7,27,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,GRIS,Mayer Alexander
+4,GRIS,12,4,8,30,A,True,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,GRIS,GRIS
+4,HaUns,4,0,8,9,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,GRIS,Goebl Marlene
+4,KillerKitty,4,1,9,10,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,GRIS,Steinkellner Martina
+4,Caliiimero,6,3,8,16,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,GRIS,Schenkermayer Carina
+4,TuTuGas,6,2,7,17,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,GRIS,Holzer Thomas
+4,Homunkulus,13,1,7,29,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,GRIS,Mayer Manuel
+5,Herbast,0,0,1,5,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,Consuela,Mayer Lisa
+5,TuTuGas,1,0,2,8,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,Consuela,Holzer Thomas
+5,Caliiimero,7,0,4,16,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,Consuela,Schenkermayer Carina
+5,Homunkulus,10,3,3,26,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,Consuela,Mayer Manuel
+5,Consuela,9,1,0,27,A,True,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,Consuela,Mayer Alexander
+5,KillerKitty,0,0,6,0,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,Consuela,Steinkellner Martina
+5,GRIS,1,0,6,2,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,Consuela,GRIS
+5,Easykill,1,0,6,2,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,Consuela,XXX Isolde
+5,HaUns,2,0,5,4,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,Consuela,Goebl Marlene
+5,Commodus,6,0,5,13,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,Consuela,Goebl Stefan
+6,Easykill,1,1,5,7,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,GRIS,XXX Isolde
+6,HaUns,4,0,3,14,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,GRIS,Goebl Marlene
+6,Consuela,9,0,5,18,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,GRIS,Mayer Alexander
+6,GRIS,10,1,8,21,A,True,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,GRIS,GRIS
+6,Commodus,8,0,4,21,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,GRIS,Goebl Stefan
+6,KillerKitty,1,0,6,5,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,GRIS,Steinkellner Martina
+6,Caliiimero,3,2,7,10,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,GRIS,Schenkermayer Carina
+6,TuTuGas,4,2,7,12,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,GRIS,Holzer Thomas
+6,Herbast,4,3,6,14,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,GRIS,Mayer Lisa
+6,Homunkulus,8,0,6,19,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,GRIS,Mayer Manuel
+7,Caliiimero,3,2,7,11,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,Consuela,Schenkermayer Carina
+7,Commodus,7,0,5,19,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,Consuela,Goebl Stefan
+7,HaUns,9,2,4,26,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,Consuela,Goebl Marlene
+7,GRIS,8,4,6,28,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,Consuela,GRIS
+7,Consuela,12,1,6,28,A,True,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,Consuela,Mayer Alexander
+7,Herbast,2,3,10,7,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,Consuela,Mayer Lisa
+7,KillerKitty,4,1,7,11,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,Consuela,Steinkellner Martina
+7,Easykill,6,1,9,14,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,Consuela,XXX Isolde
+7,Homunkulus,7,3,7,22,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,Consuela,Mayer Manuel
+7,TuTuGas,9,1,6,23,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,Consuela,Holzer Thomas
+8,Caliiimero,2,1,3,10,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,Homunkulus,Schenkermayer Carina
+8,KillerKitty,4,1,4,13,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,Homunkulus,Steinkellner Martina
+8,HaUns,6,1,2,19,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,Homunkulus,Goebl Marlene
+8,Consuela,10,1,5,24,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,Homunkulus,Mayer Alexander
+8,Homunkulus,14,1,5,32,A,True,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,Homunkulus,Mayer Manuel
+8,Easykill,0,1,8,1,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,Homunkulus,XXX Isolde
+8,Herbast,3,0,7,7,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,Homunkulus,Mayer Lisa
+8,TuTuGas,2,2,7,7,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,Homunkulus,Holzer Thomas
+8,GRIS,7,0,7,15,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,Homunkulus,GRIS
+8,Commodus,7,0,7,15,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,Homunkulus,Goebl Stefan
+9,Herbast,1,0,4,7,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,KillerKitty,Mayer Lisa
+9,HaUns,7,2,6,17,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,KillerKitty,Goebl Marlene
+9,TuTuGas,6,2,4,19,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,KillerKitty,Holzer Thomas
+9,Commodus,8,1,4,20,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,KillerKitty,Goebl Stefan
+9,GRIS,8,2,6,21,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,KillerKitty,GRIS
+9,Easykill,1,0,5,3,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,KillerKitty,XXX Isolde
+9,Caliiimero,3,1,6,8,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,KillerKitty,Schenkermayer Carina
+9,Consuela,5,2,6,13,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,KillerKitty,Mayer Alexander
+9,Homunkulus,7,2,7,16,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,KillerKitty,Mayer Manuel
+9,KillerKitty,8,2,6,25,B,True,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,KillerKitty,Steinkellner Martina
+10,Easykill,2,6,8,12,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,HaUns,XXX Isolde
+10,Consuela,7,1,8,16,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,HaUns,Mayer Alexander
+10,KillerKitty,5,1,5,16,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,HaUns,Steinkellner Martina
+10,TuTuGas,9,1,7,21,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,HaUns,Holzer Thomas
+10,HaUns,11,2,6,28,A,True,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,HaUns,Goebl Marlene
+10,Caliiimero,0,1,6,4,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,HaUns,Schenkermayer Carina
+10,Herbast,2,1,7,8,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,HaUns,Mayer Lisa
+10,GRIS,8,2,8,20,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,HaUns,GRIS
+10,Commodus,11,1,7,26,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,HaUns,Goebl Stefan
+10,Homunkulus,11,2,7,27,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,HaUns,Mayer Manuel
+11,HaUns,6,0,7,15,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,Commodus,Goebl Marlene
+11,KillerKitty,5,2,7,15,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,Commodus,Steinkellner Martina
+11,Consuela,8,5,7,23,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,Commodus,Mayer Alexander
+11,Homunkulus,8,6,7,25,A,False,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,Commodus,Mayer Manuel
+11,Commodus,12,1,5,30,A,True,A,True,"Samstag, 12. Juli 2025",12:30 - 14:30,Commodus,Goebl Stefan
+11,Caliiimero,1,1,9,4,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,Commodus,Schenkermayer Carina
+11,Herbast,5,0,9,11,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,Commodus,Mayer Lisa
+11,Easykill,6,2,8,15,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,Commodus,XXX Isolde
+11,GRIS,9,2,9,21,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,Commodus,GRIS
+11,TuTuGas,11,1,6,26,B,False,A,False,"Samstag, 12. Juli 2025",12:30 - 14:30,Commodus,Holzer Thomas
+12,Consuela,0,0,2,0,A,False,Draw,False,"Samstag, 12. Juli 2025",12:30 - 14:30,GRIS,Mayer Alexander
+12,HaUns,1,0,2,2,A,False,Draw,False,"Samstag, 12. Juli 2025",12:30 - 14:30,GRIS,Goebl Marlene
+12,Commodus,1,0,1,2,A,False,Draw,False,"Samstag, 12. Juli 2025",12:30 - 14:30,GRIS,Goebl Stefan
+12,KillerKitty,1,1,2,3,A,False,Draw,False,"Samstag, 12. Juli 2025",12:30 - 14:30,GRIS,Steinkellner Martina
+12,Homunkulus,3,0,1,7,A,False,Draw,False,"Samstag, 12. Juli 2025",12:30 - 14:30,GRIS,Mayer Manuel
+12,Caliiimero,1,0,2,2,B,False,Draw,False,"Samstag, 12. Juli 2025",12:30 - 14:30,GRIS,Schenkermayer Carina
+12,Herbast,1,0,1,3,B,False,Draw,False,"Samstag, 12. Juli 2025",12:30 - 14:30,GRIS,Mayer Lisa
+12,TuTuGas,1,0,1,3,B,False,Draw,False,"Samstag, 12. Juli 2025",12:30 - 14:30,GRIS,Holzer Thomas
+12,Easykill,1,0,1,3,B,False,Draw,False,"Samstag, 12. Juli 2025",12:30 - 14:30,GRIS,XXX Isolde
+12,GRIS,3,1,1,8,B,True,Draw,False,"Samstag, 12. Juli 2025",12:30 - 14:30,GRIS,GRIS
+1,KillerKitty,1,0,5,4,A,False,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,Consuela,Steinkellner Martina
+1,Mario,2,1,5,9,A,False,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,Consuela,Poneder Mario
+1,Pa-aufs-maul,9,2,4,22,A,False,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,Consuela,Pa-aufs-maul
+1,HIV-Negativ,10,4,5,26,A,False,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,Consuela,XXX
+1,Consuela,10,2,2,29,A,True,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,Consuela,Mayer Alexander
+1,GRIS,2,0,7,4,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,Consuela,GRIS
+1,Commodus,2,1,7,5,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,Consuela,Goebl Stefan
+1,Herbast,4,0,7,8,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,Consuela,Mayer Lisa
+1,Hauns,6,1,6,14,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,Consuela,Goebl Marlene
+1,Chriis1,6,2,7,14,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,Consuela,XXX
+2,Hauns,2,2,4,10,A,False,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,Chriis1,Goebl Marlene
+2,Commodus,4,1,5,11,A,False,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,Chriis1,Goebl Stefan
+2,Herbast,4,1,5,14,A,False,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,Chriis1,Mayer Lisa
+2,GRIS,12,1,3,31,A,False,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,Chriis1,GRIS
+2,Chriis1,15,1,7,37,A,True,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,Chriis1,XXX
+2,KillerKitty,1,1,8,5,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,Chriis1,Steinkellner Martina
+2,Mario,3,0,7,8,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,Chriis1,Poneder Mario
+2,Pa-aufs-maul,2,1,8,9,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,Chriis1,Pa-aufs-maul
+2,Consuela,7,1,7,20,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,Chriis1,Mayer Alexander
+2,HIV-Negativ,8,0,8,21,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,Chriis1,XXX
+3,KillerKitty,2,0,4,7,A,False,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,Chriis1,Steinkellner Martina
+3,Mario,4,0,1,17,A,False,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,Chriis1,Poneder Mario
+3,Consuela,6,2,5,17,A,False,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,Chriis1,Mayer Alexander
+3,GRIS,7,1,4,20,A,False,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,Chriis1,GRIS
+3,Chriis1,15,2,3,36,A,True,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,Chriis1,XXX
+3,Hauns,0,1,7,1,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,Chriis1,Goebl Marlene
+3,Herbast,3,0,7,7,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,Chriis1,Mayer Lisa
+3,Commodus,2,0,7,7,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,Chriis1,Goebl Stefan
+3,Pa-aufs-maul,2,1,7,8,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,Chriis1,Pa-aufs-maul
+3,HIV-Negativ,7,2,7,19,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,Chriis1,XXX
+4,Hauns,2,3,5,10,A,False,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,HIV-Negativ,Goebl Marlene
+4,Commodus,4,1,4,13,A,False,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,HIV-Negativ,Goebl Stefan
+4,GRIS,7,1,4,21,A,False,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,HIV-Negativ,GRIS
+4,Pa-aufs-maul,7,5,6,21,A,False,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,HIV-Negativ,Pa-aufs-maul
+4,HIV-Negativ,12,2,4,38,A,True,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,HIV-Negativ,XXX
+4,Mario,2,0,7,4,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,HIV-Negativ,Poneder Mario
+4,KillerKitty,1,1,6,7,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,HIV-Negativ,Steinkellner Martina
+4,Consuela,5,0,6,12,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,HIV-Negativ,Mayer Alexander
+4,Herbast,6,0,7,15,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,HIV-Negativ,Mayer Lisa
+4,Chriis1,9,1,7,20,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,HIV-Negativ,XXX
+5,Herbast,1,3,6,7,A,False,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,HIV-Negativ,Mayer Lisa
+5,GRIS,2,6,8,10,A,False,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,HIV-Negativ,GRIS
+5,Commodus,9,1,5,21,A,False,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,HIV-Negativ,Goebl Stefan
+5,Pa-aufs-maul,7,1,4,23,A,False,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,HIV-Negativ,Pa-aufs-maul
+5,HIV-Negativ,12,3,5,32,A,True,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,HIV-Negativ,XXX
+5,Mario,1,1,5,5,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,HIV-Negativ,Poneder Mario
+5,KillerKitty,1,0,7,5,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,HIV-Negativ,Steinkellner Martina
+5,Hauns,6,0,6,14,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,HIV-Negativ,Goebl Marlene
+5,Consuela,7,3,6,22,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,HIV-Negativ,Mayer Alexander
+5,Chriis1,12,0,7,25,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,HIV-Negativ,XXX
+6,Hauns,3,1,6,7,A,False,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,Chriis1,Goebl Marlene
+6,Mario,2,0,4,7,A,False,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,Chriis1,Poneder Mario
+6,KillerKitty,2,0,4,9,A,False,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,Chriis1,Steinkellner Martina
+6,HIV-Negativ,9,3,3,30,A,False,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,Chriis1,XXX
+6,Chriis1,14,1,5,31,A,True,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,Chriis1,XXX
+6,Consuela,0,2,6,7,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,Chriis1,Mayer Alexander
+6,Herbast,4,1,5,10,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,Chriis1,Mayer Lisa
+6,Commodus,5,0,6,11,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,Chriis1,Goebl Stefan
+6,Pa-aufs-maul,3,2,7,12,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,Chriis1,Pa-aufs-maul
+6,GRIS,8,2,6,19,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,Chriis1,GRIS
+7,KillerKitty,0,0,2,-1,A,False,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,Consuela,Steinkellner Martina
+7,Pa-aufs-maul,1,0,2,2,A,False,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,Consuela,Pa-aufs-maul
+7,Commodus,1,1,2,3,A,False,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,Consuela,Goebl Stefan
+7,Hauns,2,0,1,5,A,False,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,Consuela,Goebl Marlene
+7,Consuela,4,0,1,9,A,True,A,True,"Montag, 14. Juli 2025",16:30 - 18:30,Consuela,Mayer Alexander
+7,Mario,0,1,2,1,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,Consuela,Poneder Mario
+7,Herbast,1,0,2,2,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,Consuela,Mayer Lisa
+7,HIV-Negativ,3,0,2,6,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,Consuela,XXX
+7,GRIS,3,1,2,7,B,False,A,False,"Montag, 14. Juli 2025",16:30 - 18:30,Consuela,GRIS
+1,Dimitri,5,1,7,13,A,False,Draw,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Commodus,Prantner Philip
+1,Vidibus,5,2,6,15,A,False,Draw,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Commodus,Prenninger David
+1,Jenny_Talia,6,2,5,18,A,False,Draw,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Commodus,Johanek Thomas
+1,Zack_meicock,10,1,8,22,A,False,Draw,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Commodus,Mayer Stefan
+1,Chris_P_Bacon,11,2,6,28,A,False,Draw,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Commodus,Nagler Christian
+1,Aris,1,1,9,3,B,False,Draw,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Commodus,Kloebhofer Johannes
+1,Chris,4,0,7,11,B,False,Draw,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Commodus,Lurger Christian
+1,Rudi,6,0,9,13,B,False,Draw,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Commodus,Wichtl Rudolf
+1,Jonas,6,1,8,14,B,False,Draw,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Commodus,Trentmann Jonas
+1,Commodus,13,2,6,32,B,True,Draw,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Commodus,Goebl Stefan
+2,Jonas,5,1,5,15,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Trentmann Jonas
+2,Jenny_Talia,6,1,7,16,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Johanek Thomas
+2,Dimitri,8,1,7,18,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Prantner Philip
+2,Vidibus,6,2,5,19,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Prenninger David
+2,Chris_P_Bacon,12,1,4,32,A,True,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Nagler Christian
+2,Aris,4,1,8,10,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Kloebhofer Johannes
+2,Rudi,4,1,8,10,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Wichtl Rudolf
+2,Zack_meicock,5,0,7,14,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Mayer Stefan
+2,Chris,5,2,6,16,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Lurger Christian
+2,Commodus,8,1,8,22,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Goebl Stefan
+3,Aris,2,0,7,3,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Kloebhofer Johannes
+3,Commodus,5,1,6,14,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Goebl Stefan
+3,Jenny_Talia,4,2,5,15,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Johanek Thomas
+3,Dimitri,6,0,4,16,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Prantner Philip
+3,Vidibus,11,3,4,31,A,True,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Prenninger David
+3,Zack_meicock,1,2,7,5,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Mayer Stefan
+3,Chris,3,1,6,8,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Lurger Christian
+3,Rudi,5,1,6,12,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Wichtl Rudolf
+3,Jonas,6,0,6,13,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Trentmann Jonas
+3,Chris_P_Bacon,6,4,7,16,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Nagler Christian
+4,Rudi,3,1,2,11,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Wichtl Rudolf
+4,Dimitri,4,2,5,14,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Prantner Philip
+4,Commodus,5,2,3,18,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Goebl Stefan
+4,Vidibus,7,0,2,21,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Prenninger David
+4,Chris_P_Bacon,9,1,3,27,A,True,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Nagler Christian
+4,Aris,2,0,6,4,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Kloebhofer Johannes
+4,Chris,1,2,7,4,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Lurger Christian
+4,Jonas,2,2,6,8,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Trentmann Jonas
+4,Jenny_Talia,4,1,5,9,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Johanek Thomas
+4,Zack_meicock,5,1,5,12,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Mayer Stefan
+5,Jonas,3,0,5,8,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Trentmann Jonas
+5,Rudi,3,2,4,11,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Wichtl Rudolf
+5,Commodus,9,2,2,24,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Goebl Stefan
+5,Vidibus,9,1,1,25,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Prenninger David
+5,Chris_P_Bacon,8,5,1,27,A,True,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Nagler Christian
+5,Zack_meicock,1,0,7,1,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Mayer Stefan
+5,Aris,1,0,6,3,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Kloebhofer Johannes
+5,Jenny_Talia,2,0,7,4,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Johanek Thomas
+5,Chris,3,0,6,7,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Lurger Christian
+5,Dimitri,5,0,7,10,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Prantner Philip
+6,Jonas,1,0,6,3,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Trentmann Jonas
+6,Aris,5,1,3,14,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Kloebhofer Johannes
+6,Chris_P_Bacon,6,1,5,15,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Nagler Christian
+6,Commodus,6,3,2,22,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Goebl Stefan
+6,Vidibus,12,2,2,31,A,True,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Prenninger David
+6,Chris,3,1,7,7,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Lurger Christian
+6,Dimitri,3,1,6,7,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Prantner Philip
+6,Jenny_Talia,3,1,7,7,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Johanek Thomas
+6,Rudi,3,1,6,8,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Wichtl Rudolf
+6,Zack_meicock,5,1,6,11,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Mayer Stefan
+7,Rudi,2,0,2,8,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Wichtl Rudolf
+7,Chris,2,2,4,9,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Lurger Christian
+7,Dimitri,5,2,4,18,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Prantner Philip
+7,Jenny_Talia,10,0,2,26,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Johanek Thomas
+7,Chris_P_Bacon,8,2,4,27,A,True,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Nagler Christian
+7,Aris,1,0,6,5,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Kloebhofer Johannes
+7,Vidibus,2,1,6,7,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Prenninger David
+7,Commodus,4,0,5,9,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Goebl Stefan
+7,Zack_meicock,4,1,5,10,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Mayer Stefan
+7,Jonas,4,2,5,13,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Trentmann Jonas
+8,Dimitri,5,0,7,12,A,False,Draw,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Prantner Philip
+8,Jonas,3,4,7,13,A,False,Draw,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Trentmann Jonas
+8,Zack_meicock,6,0,7,13,A,False,Draw,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Mayer Stefan
+8,Rudi,12,0,7,26,A,False,Draw,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Wichtl Rudolf
+8,Jenny_Talia,10,3,8,27,A,False,Draw,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Johanek Thomas
+8,Aris,1,2,9,5,B,False,Draw,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Kloebhofer Johannes
+8,Chris,2,2,8,8,B,False,Draw,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Lurger Christian
+8,Commodus,6,2,7,17,B,False,Draw,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Goebl Stefan
+8,Chris_P_Bacon,12,1,7,28,B,False,Draw,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Nagler Christian
+8,Vidibus,11,1,6,29,B,True,Draw,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Prenninger David
+9,Chris,2,2,7,9,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Lurger Christian
+9,Jenny_Talia,5,2,9,12,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Johanek Thomas
+9,Jonas,5,3,8,13,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Trentmann Jonas
+9,Dimitri,6,0,9,13,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Prantner Philip
+9,Vidibus,12,2,5,33,A,True,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Prenninger David
+9,Aris,2,1,8,6,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Kloebhofer Johannes
+9,Zack_meicock,1,3,7,7,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Mayer Stefan
+9,Rudi,8,0,7,16,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Wichtl Rudolf
+9,Chris_P_Bacon,10,2,8,23,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Nagler Christian
+9,Commodus,14,2,5,31,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Goebl Stefan
+10,Chris,3,0,6,7,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Lurger Christian
+10,Rudi,6,1,4,16,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Wichtl Rudolf
+10,Jonas,6,2,6,16,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Trentmann Jonas
+10,Jenny_Talia,8,0,3,23,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Johanek Thomas
+10,Chris_P_Bacon,8,0,3,26,A,True,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Nagler Christian
+10,Commodus,1,0,7,2,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Goebl Stefan
+10,Aris,4,0,7,7,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Kloebhofer Johannes
+10,Vidibus,3,2,6,9,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Prenninger David
+10,Dimitri,8,1,6,18,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Prantner Philip
+10,Zack_meicock,5,1,6,20,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Chris_P_Bacon,Mayer Stefan
+11,Dimitri,1,0,2,1,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Prantner Philip
+11,Chris_P_Bacon,0,1,1,2,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Nagler Christian
+11,Chris,2,0,0,6,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Lurger Christian
+11,Jenny_Talia,2,1,1,6,A,False,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Johanek Thomas
+11,Vidibus,4,0,1,9,A,True,A,True,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Prenninger David
+11,Aris,0,0,2,0,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Kloebhofer Johannes
+11,Zack_meicock,0,0,2,0,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Mayer Stefan
+11,Commodus,0,2,2,1,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Goebl Stefan
+11,Jonas,1,0,2,2,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Trentmann Jonas
+11,Rudi,3,0,2,6,B,False,A,False,"Mittwoch, 16. Juli 2025",16:30 - 20:30,Vidibus,Wichtl Rudolf

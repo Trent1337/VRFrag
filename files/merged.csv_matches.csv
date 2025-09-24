@@ -1,0 +1,73 @@
+courtsMask,matchNr,maptitle,teamA,teamB,teamAPoints,teamBPoints,teamAPointsHalfTime,teamBPointsHalfTime,matchCompleted,mvp,winner,EventDate,EventTimeRange
+1,1,Warehouse 1 (klein),,,6,2,3,2,1,GRIS,A,"Freitag, 18. Juli 2025",16:30 - 18:30
+1,2,Chinatown,,,6,1,4,1,1,GRIS,A,"Freitag, 18. Juli 2025",16:30 - 18:30
+1,3,Metro,,,6,2,4,1,1,GRIS,A,"Freitag, 18. Juli 2025",16:30 - 18:30
+1,4,Warehouse 2 (groß),,,6,2,3,2,1,Aris,A,"Freitag, 18. Juli 2025",16:30 - 18:30
+1,5,Poolday,,,6,4,3,2,1,GRIS,A,"Freitag, 18. Juli 2025",16:30 - 18:30
+1,6,Warehouse 1 (klein),,,6,2,4,1,1,R_Ka,A,"Freitag, 18. Juli 2025",16:30 - 18:30
+1,7,Metro,,,3,1,3,1,0,GRIS,A,"Freitag, 18. Juli 2025",16:30 - 18:30
+2,1,Warehouse 2 (groß),,,5,5,1,4,1,Homunkulus,Draw,"Freitag, 23. Mai 2025",18:30 - 20:30
+2,2,Chinatown,,,5,5,2,3,1,Homunkulus,Draw,"Freitag, 23. Mai 2025",18:30 - 20:30
+2,3,Metro,,,6,2,5,0,1,Commodus,A,"Freitag, 23. Mai 2025",18:30 - 20:30
+2,4,Poolday,,,6,4,4,1,1,Homunkulus,A,"Freitag, 23. Mai 2025",18:30 - 20:30
+2,5,Warehouse 1 (klein),,,4,0,4,0,0,DrSnuggles,A,"Freitag, 23. Mai 2025",18:30 - 20:30
+2,1,Warehouse 1 (klein),,,6,0,5,0,1,GRIS,A,"Montag, 2. Juni 2025",16:30 - 18:30
+2,2,Metro,,,6,4,3,2,1,GRIS,A,"Montag, 2. Juni 2025",16:30 - 18:30
+2,3,Chinatown,,,6,2,4,1,1,Commodus,A,"Montag, 2. Juni 2025",16:30 - 18:30
+2,4,Warehouse 2 (groß),,,6,1,5,0,1,Leo_Danzer,A,"Montag, 2. Juni 2025",16:30 - 18:30
+2,5,Poolday,,,6,4,3,2,1,Chris_P_Bacon,A,"Montag, 2. Juni 2025",16:30 - 18:30
+2,6,Metro,,,5,4,3,2,0,Commodus,A,"Montag, 2. Juni 2025",16:30 - 18:30
+2,1,Warehouse 2 (groß),,,6,4,2,3,1,Homunkulus,A,"Samstag, 7. Juni 2025",18:30 - 20:30
+2,2,Chinatown,,,6,3,5,0,1,Homunkulus,A,"Samstag, 7. Juni 2025",18:30 - 20:30
+2,3,Metro,,,6,0,5,0,1,Homunkulus,A,"Samstag, 7. Juni 2025",18:30 - 20:30
+2,4,Warehouse 1 (klein),,,5,5,1,4,1,GGRIS,Draw,"Samstag, 7. Juni 2025",18:30 - 20:30
+2,5,Poolday,,,6,3,4,1,1,IchStahlIhnGrad,A,"Samstag, 7. Juni 2025",18:30 - 20:30
+2,6,Warehouse 2 (groß),,,4,2,3,2,0,GGRIS,A,"Samstag, 7. Juni 2025",18:30 - 20:30
+1,1,Warehouse 2 (groß),,,6,0,5,0,1,GRIS,A,"Sonntag, 15. Juni 2025",12:30 - 14:30
+1,2,Metro,,,6,3,4,1,1,GRIS,A,"Sonntag, 15. Juni 2025",12:30 - 14:30
+1,3,Chinatown,,,5,5,2,3,1,GRIS,Draw,"Sonntag, 15. Juni 2025",12:30 - 14:30
+1,4,Warehouse 1 (klein),,,6,2,4,1,1,EhDea,A,"Sonntag, 15. Juni 2025",12:30 - 14:30
+1,5,Poolday,,,6,3,2,3,1,GRIS,A,"Sonntag, 15. Juni 2025",12:30 - 14:30
+1,6,Metro,,,6,3,2,3,1,EhDea,A,"Sonntag, 15. Juni 2025",12:30 - 14:30
+1,1,Metro,,,6,1,4,1,1,TuTuGas,A,"Samstag, 12. Juli 2025",14:30 - 16:30
+1,2,Chinatown,,,6,1,4,1,1,Homunkulus,A,"Samstag, 12. Juli 2025",14:30 - 16:30
+1,3,Warehouse 1 (klein),,,6,0,5,0,1,Homunkulus,A,"Samstag, 12. Juli 2025",14:30 - 16:30
+1,4,Poolday,,,6,4,3,2,1,GRIS,A,"Samstag, 12. Juli 2025",14:30 - 16:30
+1,5,Warehouse 2 (groß),,,6,0,5,0,1,Consuela,A,"Samstag, 12. Juli 2025",14:30 - 16:30
+1,6,Poolday,,,6,3,3,2,1,GRIS,A,"Samstag, 12. Juli 2025",14:30 - 16:30
+1,7,Chinatown,,,6,4,4,1,1,Consuela,A,"Samstag, 12. Juli 2025",14:30 - 16:30
+1,8,Metro,,,6,2,4,1,1,Homunkulus,A,"Samstag, 12. Juli 2025",14:30 - 16:30
+1,9,Warehouse 2 (groß),,,6,1,4,1,1,KillerKitty,A,"Samstag, 12. Juli 2025",14:30 - 16:30
+1,10,Poolday,,,6,4,2,3,1,HaUns,A,"Samstag, 12. Juli 2025",14:30 - 16:30
+1,11,Metro,,,6,4,4,1,1,Commodus,A,"Samstag, 12. Juli 2025",14:30 - 16:30
+1,12,Poolday,,,1,1,1,1,0,GRIS,Draw,"Samstag, 12. Juli 2025",14:30 - 16:30
+1,1,Metro,,,6,1,4,1,1,TuTuGas,A,"Samstag, 12. Juli 2025",12:30 - 14:30
+1,2,Chinatown,,,6,1,4,1,1,Homunkulus,A,"Samstag, 12. Juli 2025",12:30 - 14:30
+1,3,Warehouse 1 (klein),,,6,0,5,0,1,Homunkulus,A,"Samstag, 12. Juli 2025",12:30 - 14:30
+1,4,Poolday,,,6,4,3,2,1,GRIS,A,"Samstag, 12. Juli 2025",12:30 - 14:30
+1,5,Warehouse 2 (groß),,,6,0,5,0,1,Consuela,A,"Samstag, 12. Juli 2025",12:30 - 14:30
+1,6,Poolday,,,6,3,3,2,1,GRIS,A,"Samstag, 12. Juli 2025",12:30 - 14:30
+1,7,Chinatown,,,6,4,4,1,1,Consuela,A,"Samstag, 12. Juli 2025",12:30 - 14:30
+1,8,Metro,,,6,2,4,1,1,Homunkulus,A,"Samstag, 12. Juli 2025",12:30 - 14:30
+1,9,Warehouse 2 (groß),,,6,1,4,1,1,KillerKitty,A,"Samstag, 12. Juli 2025",12:30 - 14:30
+1,10,Poolday,,,6,4,2,3,1,HaUns,A,"Samstag, 12. Juli 2025",12:30 - 14:30
+1,11,Metro,,,6,4,4,1,1,Commodus,A,"Samstag, 12. Juli 2025",12:30 - 14:30
+1,12,Poolday,,,1,1,1,1,0,GRIS,Draw,"Samstag, 12. Juli 2025",12:30 - 14:30
+2,1,Warehouse 2 (groß),,,6,1,4,1,1,Consuela,A,"Montag, 14. Juli 2025",16:30 - 18:30
+2,2,Metro,,,6,4,3,2,1,Chriis1,A,"Montag, 14. Juli 2025",16:30 - 18:30
+2,3,Chinatown,,,6,2,3,2,1,Chriis1,A,"Montag, 14. Juli 2025",16:30 - 18:30
+2,4,Warehouse 2 (groß),,,6,2,4,1,1,HIV-Negativ,A,"Montag, 14. Juli 2025",16:30 - 18:30
+2,5,Metro,,,6,2,4,1,1,HIV-Negativ,A,"Montag, 14. Juli 2025",16:30 - 18:30
+2,6,Chinatown,,,6,1,4,1,1,Chriis1,A,"Montag, 14. Juli 2025",16:30 - 18:30
+2,7,Poolday,,,2,0,2,0,0,Consuela,A,"Montag, 14. Juli 2025",16:30 - 18:30
+1,1,Warehouse 1 (klein),,,5,5,1,4,1,Commodus,Draw,"Mittwoch, 16. Juli 2025",16:30 - 20:30
+1,2,Metro,,,6,3,4,1,1,Chris_P_Bacon,A,"Mittwoch, 16. Juli 2025",16:30 - 20:30
+1,3,Chinatown,,,6,2,4,1,1,Vidibus,A,"Mittwoch, 16. Juli 2025",16:30 - 20:30
+1,4,Warehouse 2 (groß),,,6,1,5,0,1,Chris_P_Bacon,A,"Mittwoch, 16. Juli 2025",16:30 - 20:30
+1,5,Poolday,,,6,1,4,1,1,Chris_P_Bacon,A,"Mittwoch, 16. Juli 2025",16:30 - 20:30
+1,6,Warehouse 1 (klein),,,6,1,4,1,1,Vidibus,A,"Mittwoch, 16. Juli 2025",16:30 - 20:30
+1,7,Metro,,,6,1,4,1,1,Chris_P_Bacon,A,"Mittwoch, 16. Juli 2025",16:30 - 20:30
+1,8,Chinatown,,,5,5,2,3,1,Vidibus,Draw,"Mittwoch, 16. Juli 2025",16:30 - 20:30
+1,9,Warehouse 1 (klein),,,6,4,4,1,1,Vidibus,A,"Mittwoch, 16. Juli 2025",16:30 - 20:30
+1,10,Metro,,,6,2,3,2,1,Chris_P_Bacon,A,"Mittwoch, 16. Juli 2025",16:30 - 20:30
+1,11,Poolday,,,2,0,2,0,0,Vidibus,A,"Mittwoch, 16. Juli 2025",16:30 - 20:30
