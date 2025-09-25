@@ -7,6 +7,8 @@ from datetime import datetime
 from get_players import get_players_from_url
 from player_stats import generate_statistics
 
+
+
 app = Flask(__name__)
 
 CSV_PATH = os.path.join(os.path.dirname(__file__), 'data.csv')
