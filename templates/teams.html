@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>VRFrag · Team‑Generator</title>
+  <title>VRFrag · Team-Generator</title>
   <style>
     :root{--bg:#f4f7fb;--card:#ffffff;--text:#1f2937;--muted:#6b7280;--border:#e5e7eb;--primary:#2563eb;--primary-600:#1d4ed8;--ring:rgba(37,99,235,.25);--danger:#ef4444}
     *{box-sizing:border-box}
@@ -12,6 +12,9 @@
     header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
     h1{font-size:1.4rem;margin:0}
     .crumbs{color:var(--muted);font-size:.9rem}
+
+    .back-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;border:1px solid var(--border);background:#fff;color:var(--primary);text-decoration:none;font-size:.9rem;transition:background .2s}
+    .back-btn:hover{background:#f0f4ff}
 
     .grid{display:grid;grid-template-columns: 1fr 1fr; gap:18px}
     @media (max-width: 880px){.grid{grid-template-columns:1fr}}
@@ -55,7 +58,10 @@
 <body>
   <div class="wrap">
     <header>
-      <h1>Team‑Generator</h1>
+      <div style="display:flex;align-items:center;gap:12px">
+        <a href="/" class="back-btn">← Zurück</a>
+        <h1>Team-Generator</h1>
+      </div>
       <div class="crumbs">VRFrag · Tools</div>
     </header>
 
@@ -78,7 +84,7 @@
           <datalist id="players-suggest"></datalist>
           <div class="inputs">
             <div class="col">
-              <label>Team A (max. 5)</label>
+              <label>Team A (max. 5)</label>
               <input class="player-input" list="players-suggest" placeholder="Spieler A1"/>
               <input class="player-input" list="players-suggest" placeholder="Spieler A2"/>
               <input class="player-input" list="players-suggest" placeholder="Spieler A3"/>
@@ -86,7 +92,7 @@
               <input class="player-input" list="players-suggest" placeholder="Spieler A5"/>
             </div>
             <div class="col">
-              <label>Team B (max. 5)</label>
+              <label>Team B (max. 5)</label>
               <input class="player-input" list="players-suggest" placeholder="Spieler B1"/>
               <input class="player-input" list="players-suggest" placeholder="Spieler B2"/>
               <input class="player-input" list="players-suggest" placeholder="Spieler B3"/>
@@ -130,22 +136,19 @@
         const playersData = await playersRes.json();
         const mapsData = await mapsRes.json();
 
-        // Build player suggestions
         const names = (playersData.players || playersData || []).map(p => p.name || p).filter(Boolean);
         const dl = document.getElementById('players-suggest');
         names.forEach(n=>{ const o=document.createElement('option'); o.value=n; dl.appendChild(o); });
         allPlayers = names;
 
-        // Map select
         const select = document.getElementById('map-select');
         (mapsData.maps || mapsData || []).forEach(m=>{ const o=document.createElement('option'); o.value=m; o.textContent=m; select.appendChild(o); });
-      }catch(e){ /* silent */ }
+      }catch(e){ }
     }
 
     function collectPlayers(){
       const inputs = Array.from(document.querySelectorAll('.player-input'));
       const names = inputs.map(i => (i.value||'').trim()).filter(Boolean);
-      // de-dupe while preserving order
       const seen = new Set();
       const unique = names.filter(n=>{ if(seen.has(n.toLowerCase())) return false; seen.add(n.toLowerCase()); return true; });
       return unique;
@@ -171,7 +174,7 @@
         const data = await res.json();
         displayResults(data);
       }catch(e){
-        results.innerHTML = '<div class="empty">Fehler bei der Team‑Generierung.</div>';
+        results.innerHTML = '<div class="empty">Fehler bei der Team-Generierung.</div>';
       }
     }
 
@@ -193,18 +196,17 @@
       const html = `
         <div class="teams">
           <div class="team" style="border-left:4px solid var(--primary)">
-            <div class="th"><h3>Team A</h3><span class="pill">Ø Score ${(teamA.average_score||0).toFixed(0)}</span></div>
+            <div class="th"><h3>Team A</h3><span class="pill">Ø Score ${(teamA.average_score||0).toFixed(0)}</span></div>
             <ul>${(teamA.players||[]).map(p=>`<li>${p}</li>`).join('')}</ul>
           </div>
           <div class="team" style="border-left:4px solid var(--danger)">
-            <div class="th"><h3>Team B</h3><span class="pill">Ø Score ${(teamB.average_score||0).toFixed(0)}</span></div>
+            <div class="th"><h3>Team B</h3><span class="pill">Ø Score ${(teamB.average_score||0).toFixed(0)}</span></div>
             <ul>${(teamB.players||[]).map(p=>`<li>${p}</li>`).join('')}</ul>
           </div>
         </div>`;
       document.getElementById('results').innerHTML = html;
     }
 
-    // wire up
     document.addEventListener('DOMContentLoaded', ()=>{
       loadData();
       document.querySelectorAll('.player-input').forEach(i=> i.addEventListener('input', updateState));
