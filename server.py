@@ -6,13 +6,35 @@ import base64
 from datetime import datetime
 from get_players import get_players_from_url
 from player_stats import generate_statistics
+from aliases import (
+    suggest_real_name, upsert_alias, load_aliases, _normalize
+)
 
-commiting123 = 5
 
 app = Flask(__name__)
-
+BASE_DIR = os.path.dirname(__file__)
 CSV_PATH = os.path.join(os.path.dirname(__file__), 'data.csv')
-FILES_FOLDER = os.path.join(os.path.dirname(__file__), 'files')
+FILES_FOLDER = os.path.join(BASE_DIR, "files")
+os.makedirs(FILES_FOLDER, exist_ok=True)
+
+PLAYERS_CSV = next((
+    p for p in [
+        os.path.join(FILES_FOLDER, "vrfrag_players.csv"),
+        os.path.join(FILES_FOLDER, "merged.csv_players.csv"),
+    ] if os.path.exists(p)
+), None)
+
+MATCHES_CSV = next((
+    p for p in [
+        os.path.join(FILES_FOLDER, "vrfrag_matches.csv"),
+        os.path.join(FILES_FOLDER, "merged.csv_matches.csv"),
+    ] if os.path.exists(p)
+), None)
+
+def ensure_players_csv():
+    if not PLAYERS_CSV or not os.path.exists(PLAYERS_CSV):
+        return None, jsonify({"success": False, "error": "Spieler-Daten nicht gefunden (vrfrag_players.csv / merged.csv_players.csv)."}), 400
+    return PLAYERS_CSV, None, None
 
 # Stelle sicher, dass der files Ordner existiert
 os.makedirs(FILES_FOLDER, exist_ok=True)
@@ -120,6 +142,14 @@ def run_script():
         capture_output=True, text=True
     )
     return result.stdout or "Script ausgeführt"
+@app.get("/api/name-suggestions")
+def api_name_suggestions():
+    username = (request.args.get("username") or "").strip()
+    if not username:
+        return jsonify({"success": False, "error": "username fehlt"}), 400
+    best, others = suggest_real_name(username)
+    return jsonify({"success": True, "username": username, "best": best, "others": others})
+
 
 @app.route('/api/get-players', methods=['POST'])
 def api_get_players():
@@ -143,6 +173,15 @@ def api_get_players():
             
     except Exception as e:
         return jsonify({'success': False, 'error': f'Server Fehler: {str(e)}'}), 500
+@app.post("/api/aliases")
+def api_aliases_upsert():
+    data = request.get_json(force=True) or {}
+    username = (data.get("username") or "").strip()
+    real_name = (data.get("real_name") or "").strip()
+    if not username or not real_name:
+        return jsonify({"success": False, "error": "username und real_name erforderlich"}), 400
+    upsert_alias(username, real_name, source="manual", confidence=0.95)
+    return jsonify({"success": True})
 
 @app.route('/api/save-to-github', methods=['POST'])
 def api_save_to_github():
@@ -319,39 +358,25 @@ def api_generate_teams():
     except Exception as e:
         return jsonify({'success': False, 'error': f'Team-Generator Fehler: {str(e)}'}), 500
 
-@app.route('/api/get-all-players', methods=['GET'])
-def api_get_all_players():
-    """
-    Gibt alle verfügbaren Spieler aus der Datenbank zurück
-    """
-    try:
-        players_file = os.path.join(FILES_FOLDER, 'vrfrag_players.csv')
-        if not os.path.exists(players_file):
-            return jsonify({'success': False, 'error': 'Spieler-Daten nicht gefunden'}), 400
-        
-        players_df = pd.read_csv(players_file)
-        all_players = sorted(players_df['Player'].unique())
-        
-        # Zusätzliche Statistiken für jeden Spieler
-        players_with_stats = []
-        for player in all_players:
-            player_data = players_df[players_df['Player'] == player]
-            avg_score = player_data['score'].mean()
-            games_played = len(player_data)
-            players_with_stats.append({
-                'name': player,
-                'avg_score': round(avg_score, 1),
-                'games_played': games_played
-            })
-        
-        return jsonify({
-            'success': True,
-            'players': players_with_stats,
-            'total_players': len(all_players)
-        })
-        
-    except Exception as e:
-        return jsonify({'success': False, 'error': str(e)}), 500
+@app.get("/api/get-all-players")
+def get_all_players():
+    path, err_resp, code = ensure_players_csv()
+    if err_resp:
+        return err_resp, code
+
+    df = pd.read_csv(path)
+    if "Player" not in df.columns:
+        return jsonify({"success": False, "error": "Spalte 'Player' fehlt in der CSV."}), 500
+
+    # Aliases zusammenführen
+    aliases = load_aliases()[["norm_username", "real_name"]]
+    df["norm_username"] = df["Player"].astype(str).str.strip().str.lower()
+    out = df.merge(aliases, how="left", on="norm_username")
+    out["display_name"] = out["real_name"].where(out["real_name"].astype(bool), out["Player"])
+
+    names = sorted(out["display_name"].dropna().astype(str).unique().tolist())
+    return jsonify({"players": [{"name": n} for n in names]})
+
 
 @app.route('/api/get-available-maps', methods=['GET'])
 def api_get_available_maps():
