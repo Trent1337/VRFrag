@@ -207,7 +207,9 @@ def api_save_to_github():
         
         # Zu GitHub pushen
         result = save_to_github(filename, content)
-        
+        if result.get("success"):
+            print("Trigger statistics update after event save")
+            generate_statistics()
         return jsonify(result)
         
     except Exception as e:
