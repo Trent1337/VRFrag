@@ -293,31 +293,35 @@ def merge_events(events_folder=EVENTS_FOLDER):
     
     # Bereits verarbeitete Events aus vorhandenen Daten identifizieren
     if not existing_players.empty:
-        processed_events = set(existing_players['EventDate'].unique())
-        print(f"Already processed events: {len(processed_events)}")
+        if 'EventId' in existing_players.columns:
+            processed_events = set(existing_players['EventId'].astype(str).unique())
+        else:
+            processed_events = set()  # Fallback, wenn alte Daten noch keine EventId haben
 
     for fname in files:
         try:
             print(f"\nProcessing {fname}...")
             filepath = os.path.join(events_folder, fname)
+            event_id = os.path.splitext(fname)[0]
             url, mappings = parse_event_file(filepath)
 
             players, matches, date, time_range = fetch_stats_dataframe(url)
             
             if players is not None and matches is not None:
                 # KORREKTUR: Event-Datum aus den geparsten Daten verwenden
-                if date in processed_events:
+                if event_id in processed_events:
                     print(f"✓ Event already processed, skipping: {fname}")
                     continue
-
                 players = normalize_names(players, mappings)
+                players['EventId'] = event_id
                 player_dfs.append(players)
 
                 matches['EventDate'] = date
                 matches['EventTimeRange'] = time_range
+                matches['EventId'] = event_id
                 match_dfs.append(matches)
                 
-                processed_events.add(date)
+                processed_events.add(event_id)
                 successful_files += 1
                 print(f"✓ Successfully processed {fname}")
             else:
