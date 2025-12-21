@@ -580,20 +580,23 @@
                 const playerCard = document.createElement('div');
                 playerCard.className = 'player-card';
                 playerCard.innerHTML = `
-                    <div class="player-avatar">
-                        ${index + 1}
-                    </div>
-                    <div class="player-info">
-                        <div class="player-nickname">${player}</div>
-                    </div>
-                    <div class="player-input">
-                        <input type="text" 
-                               id="input_${index}" 
-                               placeholder="Echten Namen eingeben..." 
-                               oninput="validateInput(this)" />
-                    </div>
+                  <div class="player-avatar">
+                      ${index + 1}
+                  </div>
+                  <div class="player-info">
+                      <div class="player-nickname">${player}</div>
+                  </div>
+                  <div class="player-input">
+                      <input type="text" 
+                             id="input_${index}" 
+                             placeholder="Echten Namen eingeben..." 
+                             oninput="validateInput(this)" />
+                      <div class="name-suggest" id="suggest_${index}" style="margin-top:6px; font-size:0.9rem; color:#666;"></div>
+                      </div>
                 `;
+
                 playersList.appendChild(playerCard);
+                loadNameSuggestion(index, player);
             });
         }
         
@@ -625,7 +628,53 @@
             
             return { gameLink, mappings };
         }
-        
+        function loadNameSuggestion(index, nickname) {
+    fetch(`/api/name-suggestions?username=${encodeURIComponent(nickname)}`)
+        .then(res => res.json())
+        .then(data => {
+            const box = document.getElementById(`suggest_${index}`);
+            if (!box) return;
+
+            if (!data.success || (!data.best && (!data.others || data.others.length === 0))) {
+                box.innerHTML = '';
+                return;
+            }
+
+            const best = data.best || '';
+            const others = data.others || [];
+
+            let html = '';
+            if (best) {
+                html += `Vorschlag: <a href="#" onclick="applySuggestion(${index}, '${escapeQuotes(best)}'); return false;" style="font-weight:600; color:#3498db; text-decoration:none;">${best}</a>`;
+            }
+
+            if (others.length) {
+                html += `<div style="margin-top:6px; display:flex; gap:6px; flex-wrap:wrap;">` +
+                    others.slice(0, 4).map(name =>
+                        `<a href="#" onclick="applySuggestion(${index}, '${escapeQuotes(name)}'); return false;"
+                            style="padding:4px 8px; border:1px solid #e9ecef; border-radius:999px; text-decoration:none; color:#555; background:#fff;">
+                            ${name}
+                         </a>`
+                    ).join('') +
+                    `</div>`;
+            }
+
+            box.innerHTML = html;
+        })
+        .catch(() => {});
+}
+
+function applySuggestion(index, name) {
+    const input = document.getElementById(`input_${index}`);
+    if (!input) return;
+    input.value = name;
+    validateInput(input);
+}
+
+function escapeQuotes(str) {
+    return (str || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+}
+
         function saveToGitHub() {
             const { gameLink, mappings } = collectMappings();
             const filename = document.getElementById('filename').value.trim();
