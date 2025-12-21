@@ -52,21 +52,24 @@ def upsert_alias(username: str, real_name: str, source="manual", confidence=0.9)
     save_aliases(df)
 
 def suggest_real_name(username: str, k: int = 5):
-    """Gibt (beste_treffer, weitere_vorschlaege) zurück."""
+    # Erst aus Events (höchste Priorität)
+    best, others = suggest_from_events(username, k=k)
+    if best:
+        return best, others
+
+    # Fallback: Alias-CSV (bestehende Logik)
     df = load_aliases()
     norm_u = _normalize(username)
-    # 1) 1:1-Treffer?
+
     hit = df[df["norm_username"] == norm_u]
     if not hit.empty:
         rn = hit.iloc[0]["real_name"]
         return rn, []
 
-    # 2) Fuzzy: nahe Usernames => real_name-Kandidaten
     candidates = df["norm_username"].tolist()
     close = get_close_matches(norm_u, candidates, n=k, cutoff=0.72)
     others = df[df["norm_username"].isin(close)]["real_name"].tolist()
 
-    # 3) Falls nichts gefunden: ähnliche Realnames anbieten (falls jemand den Realname ins Userfeld tippt)
     if not others:
         rn_candidates = df["norm_real_name"].tolist()
         close_rn = get_close_matches(norm_u, rn_candidates, n=k, cutoff=0.72)
@@ -94,3 +97,42 @@ def bulk_seed_from_players_csv(players_csv_path: str, username_col="Player", rea
             upsert_alias(username, real_name, source=source, confidence=0.8)
             count += 1
     return count
+
+from collections import Counter
+from pathlib import Path
+
+EVENTS_DIR = Path(__file__).parent / "events"
+
+
+def suggest_from_events(username: str, k: int = 5):
+    """
+    Sucht Nickname→Realname Zuordnungen in events/*.txt
+    Gibt (best, others) zurück
+    """
+    norm_u = _normalize(username)
+    counter = Counter()
+
+    if not EVENTS_DIR.exists():
+        return "", []
+
+    for file in EVENTS_DIR.glob("*.txt"):
+        try:
+            lines = file.read_text(encoding="utf-8").splitlines()
+        except Exception:
+            continue
+
+        for line in lines[1:]:  # erste Zeile = URL
+            if "=" not in line:
+                continue
+            nick, real = line.split("=", 1)
+            if _normalize(nick) == norm_u and real.strip():
+                counter[real.strip()] += 1
+
+    if not counter:
+        return "", []
+
+    most_common = counter.most_common(k)
+    best = most_common[0][0]
+    others = [name for name, _ in most_common[1:]]
+
+    return best, others
