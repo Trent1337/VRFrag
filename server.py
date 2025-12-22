@@ -217,6 +217,22 @@ def api_save_to_github():
         return jsonify({'success': False, 'error': f'Fehler: {str(e)}'}), 500
 
 @app.route('/api/list-events', methods=['GET'])
+def ensure_matches_csv():
+    matches_path = next((
+        p for p in [
+            os.path.join(FILES_FOLDER, "vrfrag_matches.csv"),
+            os.path.join(FILES_FOLDER, "merged.csv_matches.csv"),
+        ] if os.path.exists(p)
+    ), None)
+
+    if not matches_path:
+        return None, jsonify({
+            "success": False,
+            "error": "Match-Datei nicht gefunden (vrfrag_matches.csv oder merged.csv_matches.csv). Bitte zuerst Statistiken generieren."
+        }), 400
+
+    return matches_path, None, None
+
 def api_list_events():
     """
     Liste aller Event-Dateien von GitHub
@@ -340,10 +356,10 @@ def api_generate_teams():
         selected_map = data.get('map', None)
         
         # Lade Spieler-Daten
-        players_file = os.path.join(FILES_FOLDER, 'vrfrag_players.csv')
-        if not os.path.exists(players_file):
-            return jsonify({'success': False, 'error': 'Spieler-Daten nicht gefunden. Bitte zuerst Statistiken generieren.'}), 400
-        
+        players_file, err_resp, code = ensure_players_csv()
+        if err_resp:
+            return err_resp, code
+
         players_df = pd.read_csv(players_file)
         
         # Team-Generator Funktion importieren
@@ -383,25 +399,22 @@ def get_all_players():
 
 @app.route('/api/get-available-maps', methods=['GET'])
 def api_get_available_maps():
-    """
-    Gibt alle verfügbaren Maps aus der Datenbank zurück
-    """
     try:
-        players_file = os.path.join(FILES_FOLDER, 'vrfrag_players.csv')
-        if not os.path.exists(players_file):
-            return jsonify({'success': False, 'error': 'Spieler-Daten nicht gefunden'}), 400
-        
-        players_df = pd.read_csv(players_file)
-        maps = sorted(players_df['maptitle'].dropna().unique())
-        
-        return jsonify({
-            'success': True,
-            'maps': maps,
-            'total_maps': len(maps)
-        })
-        
+        matches_file, err_resp, code = ensure_matches_csv()
+        if err_resp:
+            return err_resp, code
+
+        df = pd.read_csv(matches_file)
+
+        if "maptitle" not in df.columns:
+            return jsonify({"success": False, "error": "Spalte 'maptitle' fehlt in der Match-CSV."}), 500
+
+        maps = sorted(df["maptitle"].dropna().unique().tolist())
+        return jsonify({"success": True, "maps": maps})
+
     except Exception as e:
-        return jsonify({'success': False, 'error': str(e)}), 500
+        return jsonify({"success": False, "error": str(e)}), 500
+
 
 @app.route('/teams')
 def teams_page():
