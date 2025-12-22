@@ -170,44 +170,45 @@ def generate_fair_teams(player_names, player_stats_df, map_name=None, max_iterat
                 'total_games': 0
             }
     
-    best_teams = None
+
+    top_candidates = []  # Liste von (fairness, team_a, team_b, team_a_score, team_b_score)
     best_fairness = float('inf')
     iterations_used = 0
+
+    TOP_K = 25          # wie viele gute Kandidaten wir sammeln
+    EPS = 0.015         # wie nah an best_fairness noch akzeptiert (1.5% vom Gesamtscore)
+
     
     # Mehrere zufällige Kombinationen testen
     for iteration in range(max_iterations):
         iterations_used = iteration + 1
-        
-        # Spieler zufällig mischen
+
         shuffled_players = random.sample(player_names, len(player_names))
         team_a = shuffled_players[:team_size]
         team_b = shuffled_players[team_size:]
-        
-        # Team-Scores berechnen
+
         team_a_score = sum(player_scores.get(player, 0) for player in team_a)
         team_b_score = sum(player_scores.get(player, 0) for player in team_b)
-        
-        # Fairness berechnen (prozentualer Unterschied)
+
         total_score = team_a_score + team_b_score
-        if total_score > 0:
-            fairness = abs(team_a_score - team_b_score) / total_score
-        else:
-            fairness = 1.0
-        
-        # Bessere Kombination gefunden?
+        fairness = abs(team_a_score - team_b_score) / total_score if total_score > 0 else 1.0
+
         if fairness < best_fairness:
             best_fairness = fairness
-            best_teams = (team_a, team_b, team_a_score, team_b_score)
-            
-            # Frühzeitig beenden wenn ausreichend fair
-            if fairness <= target_fairness:
-                break
+
+        if fairness <= target_fairness or fairness <= (best_fairness + EPS):
+            top_candidates.append((fairness, team_a, team_b, team_a_score, team_b_score))
+            top_candidates.sort(key=lambda x: x[0])
+            top_candidates = top_candidates[:TOP_K]
+
     
-    if best_teams is None:
+    if not top_candidates:
         return {"error": "Keine gültige Team-Kombination gefunden"}
-    
-    team_a, team_b, team_a_score, team_b_score = best_teams
-    
+
+# Randomisiert auswählen – aber nur aus sehr guten Kandidaten
+    choice = random.choice(top_candidates)
+    best_fairness, team_a, team_b, team_a_score, team_b_score = choice
+        
     # Detaillierte Team-Statistiken berechnen
     team_a_stats = calculate_team_stats(team_a, player_stats)
     team_b_stats = calculate_team_stats(team_b, player_stats)
