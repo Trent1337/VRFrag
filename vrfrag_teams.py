@@ -176,7 +176,7 @@ def generate_fair_teams(player_names, player_stats_df, map_name=None, max_iterat
     iterations_used = 0
 
     TOP_K = 25          # wie viele gute Kandidaten wir sammeln
-    EPS = 0.015         # wie nah an best_fairness noch akzeptiert (1.5% vom Gesamtscore)
+    EPS = 0.5        # wie nah an best_fairness noch akzeptiert (1.5% vom Gesamtscore)
 
     
     # Mehrere zufällige Kombinationen testen
@@ -205,7 +205,7 @@ def generate_fair_teams(player_names, player_stats_df, map_name=None, max_iterat
     if not top_candidates:
         return {"error": "Keine gültige Team-Kombination gefunden"}
 
-# Randomisiert auswählen – aber nur aus sehr guten Kandidaten
+    # Randomisiert auswählen – aber nur aus sehr guten Kandidaten
     choice = random.choice(top_candidates)
     best_fairness, team_a, team_b, team_a_score, team_b_score = choice
         
