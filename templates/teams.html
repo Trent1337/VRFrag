@@ -82,24 +82,22 @@
           <p class="hint">Gib bis zu 5 Spieler je Team ein. Die Felder sind optional – du kannst auch nur 6, 8 oder 10 Namen nutzen. Autovervollständigung schlägt bestehende Spieler vor.</p>
 
           <datalist id="players-suggest"></datalist>
-          <div class="inputs">
+          <div class="inputs" style="grid-template-columns: 1fr;">
             <div class="col">
-              <label>Team A (max. 5)</label>
-              <input class="player-input" list="players-suggest" placeholder="Spieler A1"/>
-              <input class="player-input" list="players-suggest" placeholder="Spieler A2"/>
-              <input class="player-input" list="players-suggest" placeholder="Spieler A3"/>
-              <input class="player-input" list="players-suggest" placeholder="Spieler A4"/>
-              <input class="player-input" list="players-suggest" placeholder="Spieler A5"/>
-            </div>
-            <div class="col">
-              <label>Team B (max. 5)</label>
-              <input class="player-input" list="players-suggest" placeholder="Spieler B1"/>
-              <input class="player-input" list="players-suggest" placeholder="Spieler B2"/>
-              <input class="player-input" list="players-suggest" placeholder="Spieler B3"/>
-              <input class="player-input" list="players-suggest" placeholder="Spieler B4"/>
-              <input class="player-input" list="players-suggest" placeholder="Spieler B5"/>
+              <label>Spieler (max. 10)</label>
+              <input class="player-input" list="players-suggest" placeholder="Spieler 1"/>
+              <input class="player-input" list="players-suggest" placeholder="Spieler 2"/>
+              <input class="player-input" list="players-suggest" placeholder="Spieler 3"/>
+              <input class="player-input" list="players-suggest" placeholder="Spieler 4"/>
+              <input class="player-input" list="players-suggest" placeholder="Spieler 5"/>
+              <input class="player-input" list="players-suggest" placeholder="Spieler 6"/>
+              <input class="player-input" list="players-suggest" placeholder="Spieler 7"/>
+              <input class="player-input" list="players-suggest" placeholder="Spieler 8"/>
+              <input class="player-input" list="players-suggest" placeholder="Spieler 9"/>
+              <input class="player-input" list="players-suggest" placeholder="Spieler 10"/>
             </div>
           </div>
+  
 
           <div class="actions">
             <button class="btn" id="btn-clear" type="button">Felder leeren</button>
@@ -158,8 +156,9 @@
       const n = collectPlayers().length;
       document.getElementById('sel-count').textContent = `${n} Spieler`;
       const btn = document.getElementById('btn-generate');
-      btn.disabled = (n < 4) || (n % 2 !== 0);
+      btn.disabled = (n < 4) || (n > 10) || (n % 2 !== 0);
     }
+
 
     async function generateTeams(){
       const players = collectPlayers();
