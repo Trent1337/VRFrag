@@ -131,6 +131,9 @@
           fetch('/api/get-all-players'),
           fetch('/api/get-available-maps')
         ]);
+        if(!playersRes.ok) throw new Error("get-all-players: " + (await playersRes.text()));
+        if(!mapsRes.ok) throw new Error("get-available-maps: " + (await mapsRes.text()));
+       
         const playersData = await playersRes.json();
         const mapsData = await mapsRes.json();
 
@@ -141,8 +144,11 @@
 
         const select = document.getElementById('map-select');
         (mapsData.maps || mapsData || []).forEach(m=>{ const o=document.createElement('option'); o.value=m; o.textContent=m; select.appendChild(o); });
-      }catch(e){ }
-    }
+      }catch(e){
+        console.error("loadData failed:", e);   // <-- wichtig
+  }
+}
+    
 
     function collectPlayers(){
       const inputs = Array.from(document.querySelectorAll('.player-input'));
@@ -171,7 +177,9 @@
           body: JSON.stringify({ players, map })
         });
         const data = await res.json();
-        displayResults(data);
+        if (!data.success) throw new Error(data.error || "Unbekannter Fehler");
+        displayResults(data.teams);
+
       }catch(e){
         results.innerHTML = '<div class="empty">Fehler bei der Team-Generierung.</div>';
       }
