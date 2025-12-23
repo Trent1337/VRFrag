@@ -79,7 +79,7 @@ def calculate_team_win_probability_advanced(team_a_players, team_b_players, play
         team_a_data = player_stats_df[player_stats_df['Player'].isin(team_a_players)]
         team_b_data = player_stats_df[player_stats_df['Player'].isin(team_b_players)]
         
-        if map_name and 'maptitle' in player_data.columns:
+        if map_name and 'maptitle' in player_stats_df.columns:
             team_a_data = team_a_data[team_a_data['maptitle'] == map_name]
             team_b_data = team_b_data[team_b_data['maptitle'] == map_name]
         
@@ -147,10 +147,11 @@ def generate_fair_teams(player_names, player_stats_df, map_name=None, max_iterat
         player_data = player_stats_df[player_stats_df['Player'] == player]
         
         if len(player_data) > 0:
-            if map_name and 'maptitle' in player_data.columns:
-                map_data = player_data[player_data['maptitle'] == map_name]
-                if len(map_data) > 0:
-                    player_data = map_data
+            if map_name and 'maptitle' in player_stats_df.columns:
+                map_stats = player_stats_df[player_stats_df['maptitle'] == map_name]
+                if len(map_stats) > 0:
+                    player_stats_df = map_stats
+        
             
             player_scores[player] = player_data['score'].mean()
             player_stats[player] = {
