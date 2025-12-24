@@ -1,561 +1,414 @@
 <!DOCTYPE html>
-
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VRFrag Event Manager</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VRFrag Event Manager</title>
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
+  <style>
+    :root{
+      --bg:#242834;
+      --bg-2:#1f2230;
+      --surface:rgba(255,255,255,.06);
+      --surface-2:rgba(255,255,255,.10);
+      --border:rgba(255,255,255,.12);
+      --text:#f2f5ff;
+      --muted:rgba(242,245,255,.72);
+      --primary:#2f9bff;
+      --primary-2:#3a7cff;
+      --purple:#7c3aed;
+      --gold:#fcd712;
+      --success:#22c55e;
+      --danger:#ef4444;
+      --shadow:0 18px 55px rgba(0,0,0,.45);
+      --radius:18px;
+    }
 
-        .header {
-            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
-            color: white;
-            padding: 40px 30px;
-            text-align: center;
-        }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background: radial-gradient(1200px 500px at 20% -10%, rgba(47,155,255,.25), transparent 55%),
+                  radial-gradient(900px 420px at 85% 10%, rgba(124,58,237,.22), transparent 55%),
+                  linear-gradient(180deg, var(--bg), var(--bg-2));
+      color:var(--text);
+      min-height:100vh;
+      padding:22px;
+    }
 
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            font-weight: 300;
-        }
+    .shell{max-width:1050px;margin:0 auto}
 
-        .header p {
-            opacity: 0.9;
-            font-size: 1.1rem;
-        }
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 16px;
+      border:1px solid var(--border);
+      background:rgba(0,0,0,.25);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom:18px;
+      gap:14px;
+    }
+    .brand{display:flex; align-items:center; gap:12px}
+    .logo{
+      width:44px;height:44px;border-radius:14px;
+      background: linear-gradient(135deg, rgba(47,155,255,.95), rgba(124,58,237,.9));
+      display:grid;place-items:center;
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
+      border:1px solid rgba(255,255,255,.15);
+    }
+    .logo i{color:white}
+    .brand h1{font-size:1.05rem;margin:0;letter-spacing:.2px}
+    .brand p{margin:2px 0 0 0;color:var(--muted);font-size:.9rem}
+    .badge{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:8px 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      color:var(--muted);
+      background:rgba(255,255,255,.05);
+      font-size:.9rem;
+      white-space:nowrap;
+    }
 
-        .content {
-            padding: 40px;
-        }
+    .grid{display:grid; grid-template-columns: 1.05fr .95fr; gap:16px}
+    @media (max-width: 980px){.grid{grid-template-columns:1fr}}
 
-        .input-section {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            border-left: 4px solid #3498db;
-        }
+    .card{
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card-hd{
+      padding:18px 18px 14px 18px;
+      border-bottom:1px solid var(--border);
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+    .card-hd h2{
+      margin:0; font-size:1.0rem; letter-spacing:.2px;
+      display:flex; align-items:center; gap:10px;
+    }
+    .card-hd h2 i{color:rgba(242,245,255,.9)}
+    .card-bd{padding:18px}
 
-        .section-title {
-            font-size: 1.3rem;
-            color: #2c3e50;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+    .help{color:var(--muted); font-size:.92rem; line-height:1.5; margin:0}
 
-        .form-group {
-            margin-bottom: 25px;
-        }
+    label{display:block; font-weight:600; margin:0 0 8px 0; color:rgba(242,245,255,.9)}
+    .field{position:relative}
+    .field i{
+      position:absolute; left:14px; top:50%; transform:translateY(-50%);
+      color:rgba(242,245,255,.55);
+      pointer-events:none;
+    }
+    input[type="url"], input[type="text"]{
+      width:100%;
+      padding:14px 14px 14px 44px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(0,0,0,.25);
+      color:var(--text);
+      outline:none;
+      transition: border-color .2s, box-shadow .2s, background .2s;
+    }
+    input[type="text"]{padding-left:14px}
+    input:focus{
+      border-color: rgba(47,155,255,.55);
+      box-shadow: 0 0 0 4px rgba(47,155,255,.18);
+      background:rgba(0,0,0,.32);
+    }
+    small{color:var(--muted)}
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #2c3e50;
-            font-size: 1rem;
-        }
+    .btn{
+      width:100%;
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:14px 16px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      font-weight:700;
+      cursor:pointer;
+      transition: transform .08s, background .2s, border-color .2s;
+      user-select:none;
+      text-decoration:none;
+    }
+    .btn:hover{background:rgba(255,255,255,.10)}
+    .btn:active{transform: translateY(1px)}
+    .btn:disabled{opacity:.55; cursor:not-allowed; transform:none}
 
-        .input-with-icon {
-            position: relative;
-        }
+    .btn-primary{
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      box-shadow: 0 16px 35px rgba(47,155,255,.18);
+    }
+    .btn-primary:hover{background: linear-gradient(135deg, #46b2ff, var(--primary-2))}
+    .btn-success{
+      border-color: transparent;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      box-shadow: 0 16px 35px rgba(34,197,94,.15);
+      width:auto;
+      padding:12px 18px;
+    }
+    .btn-purple{
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--purple), #5b21b6);
+      box-shadow: 0 16px 35px rgba(124,58,237,.16);
+    }
+    .btn-link{
+      width:auto;
+      padding:12px 16px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(0,0,0,.18);
+    }
 
-        .input-with-icon i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #7f8c8d;
-        }
+    .loading{display:none; text-align:center; padding:16px}
+    .spinner{
+      width:46px;height:46px;border-radius:50%;
+      border:5px solid rgba(255,255,255,.14);
+      border-top-color: var(--primary);
+      animation:spin 1s linear infinite;
+      margin:0 auto 12px;
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
 
-        .input-with-icon input {
-            width: 100%;
-            padding: 15px 15px 15px 45px;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
+    .alert{
+      display:none;
+      padding:14px 14px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      margin:14px 0 0 0;
+      background:rgba(0,0,0,.22);
+      line-height:1.45;
+    }
+    .alert-success{border-color: rgba(34,197,94,.35)}
+    .alert-success i{color: var(--success)}
+    .alert-error{border-color: rgba(239,68,68,.35)}
+    .alert-error i{color: var(--danger)}
+    .github-link{color:var(--text); text-decoration:none}
+    .github-link:hover{text-decoration:underline}
 
-        .input-with-icon input:focus {
-            outline: none;
-            border-color: #3498db;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
-        }
+    .results-section{display:none}
+    .players-grid{display:grid; gap:12px; margin-top:14px}
+    .player-card{
+      display:flex; align-items:center; gap:12px;
+      padding:14px;
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:rgba(0,0,0,.22);
+    }
+    .player-avatar{
+      width:42px;height:42px;border-radius:14px;
+      background: rgba(47,155,255,.12);
+      border:1px solid rgba(47,155,255,.22);
+      display:grid; place-items:center;
+      font-weight:800;
+      color: rgba(242,245,255,.95);
+    }
+    .player-info{flex:1; min-width: 140px}
+    .player-nickname{font-weight:800}
+    .player-input{min-width: 240px; width:100%}
+    .player-input input{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(0,0,0,.25);
+      color:var(--text);
+    }
 
-        .btn {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
+    .save-row{
+      display:flex; justify-content:center; align-items:center;
+      gap:10px; margin-top:14px; padding-top:14px;
+      border-top:1px solid var(--border);
+    }
 
-        .btn-primary {
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-            color: white;
-            width: 100%;
-        }
+    .stack{display:grid; gap:16px}
 
-        .btn-primary:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
-        }
+    .teaser{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:16px 18px;
+      border-radius: var(--radius);
+      border:1px solid rgba(124,58,237,.25);
+      background: radial-gradient(700px 240px at 10% 0%, rgba(124,58,237,.22), transparent 55%),
+                  rgba(0,0,0,.22);
+    }
+    .teaser h3{margin:0; font-size:1rem}
+    .teaser p{margin:6px 0 0 0; color:var(--muted); font-size:.92rem}
 
-        .btn-primary:disabled {
-            background: #bdc3c7;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
-            color: white;
-            padding: 12px 25px;
-        }
-
-        .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(39, 174, 96, 0.3);
-        }
-
-        .btn-purple {
-            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
-            color: white;
-            width: 100%;
-        }
-
-        .btn-purple:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(155, 89, 182, 0.3);
-        }
-        /* Füge dies in deinen CSS-Bereich ein (innerhalb des <style> Tags) */
-
-.section {
-    background: #f8f9fa;
-    padding: 30px;
-    border-radius: 15px;
-    margin-bottom: 30px;
-    border-left: 4px solid #9b59b6; /* Lila Akzent für Team-Generator */
-}
-
-.section h2 {
-    font-size: 1.3rem;
-    color: #2c3e50;
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.section p {
-    color: #666;
-    margin-bottom: 20px;
-    font-size: 1rem;
-}
-
-/* Spezieller Button für Team-Generator */
-.btn-team {
-    background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
-    color: white;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 10px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    text-decoration: none;
-    width: auto;
-}
-
-.btn-team:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(155, 89, 182, 0.3);
-}
-
-        .loading {
-            text-align: center;
-            padding: 30px;
-            display: none;
-        }
-
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #3498db;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .results-section {
-            display: none;
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .filename-input {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-        }
-
-        .filename-input input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            font-size: 1rem;
-        }
-
-        .filename-input small {
-            display: block;
-            margin-top: 8px;
-            color: #7f8c8d;
-            font-size: 0.9rem;
-        }
-
-        .players-grid {
-            display: grid;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .player-card {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 4px solid #3498db;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            transition: transform 0.2s ease;
-        }
-
-        .player-card:hover {
-            transform: translateX(5px);
-        }
-
-        .player-avatar {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .player-info {
-            flex: 1;
-        }
-
-        .player-nickname {
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 5px;
-        }
-
-        .player-input input {
-            width: 100%;
-            padding: 10px 15px;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .player-input input:focus {
-            outline: none;
-            border-color: #3498db;
-        }
-
-        .save-section {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 2px solid #ecf0f1;
-        }
-
-        .alert {
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-            display: none;
-        }
-
-        .alert-success {
-            background: #d5f4e6;
-            color: #155724;
-            border-left: 4px solid #27ae60;
-        }
-
-        .alert-error {
-            background: #f8d7da;
-            color: #721c24;
-            border-left: 4px solid #e74c3c;
-        }
-
-        .alert a {
-            color: #155724;
-            text-decoration: underline;
-        }
-
-        .github-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 10px;
-            color: #155724;
-            text-decoration: none;
-        }
-
-        .github-link:hover {
-            text-decoration: underline;
-        }
-
-        .stats-results {
-            display: none;
-            margin-top: 20px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-        }
-
-        .file-links {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 15px;
-        }
-
-        .file-links a {
-            padding: 8px 15px;
-            background: #3498db;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .file-links a:hover {
-            background: #2980b9;
-        }
-
-        @media (max-width: 768px) {
-            .content {
-                padding: 20px;
-            }
-            
-            .header h1 {
-                font-size: 2rem;
-            }
-            
-            .player-card {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .input-section {
-                padding: 20px;
-            }
-            
-            .file-links {
-                flex-direction: column;
-            }
-        }
-        
-    </style>
+    footer{
+      margin-top:18px;
+      color:rgba(242,245,255,.55);
+      font-size:.9rem;
+      text-align:center;
+    }
+  </style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="header">
-            <h1><i class="fas fa-gamepad"></i> VRFrag Event Manager</h1>
-            <p>Automatische Spielererfassung</p>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"><i class="fa-solid fa-gamepad"></i></div>
+        <div>
+          <h1>VRFrag Event Manager</h1>
+          <p>Spieler abrufen, Namen zuordnen und Statistiken aktualisieren</p>
         </div>
+      </div>
+      <div class="badge"><i class="fa-solid fa-shield-halved"></i> internes Tool</div>
+    </header>
 
-        <div class="content">
-            <!-- Event Erfassung -->
-            <div class="input-section">
-                <div class="section-title">
-                    <i class="fas fa-plus-circle"></i> Neue Event Erfassung
-                </div>
-                <div class="form-group">
-                    <label for="gameLink"><i class="fas fa-link"></i> VRFrag Spiel-Link</label>
-                    <div class="input-with-icon">
-                        <i class="fas fa-globe"></i>
-                        <input type="url" id="gameLink" placeholder="https://www.vrfrag.com/stats?abc123" />
-                    </div>
-                </div>
-                <button id="fetchPlayers" class="btn btn-primary" onclick="fetchPlayers()">
-                    <i class="fas fa-users"></i> Spieler automatisch abrufen
-                </button>
+    <div class="grid">
+      <!-- LEFT: Event + Spieler -->
+      <section class="card">
+        <div class="card-hd">
+          <h2><i class="fa-solid fa-plus-circle"></i> Event erfassen</h2>
+          <a class="btn btn-link" href="/teams"><i class="fa-solid fa-users"></i> Team-Generator</a>
+        </div>
+        <div class="card-bd">
+          <div style="display:grid; gap:12px;">
+            <div>
+              <label for="gameLink">VRFrag Spiel-Link</label>
+              <div class="field">
+                <i class="fa-solid fa-globe"></i>
+                <input type="url" id="gameLink" placeholder="https://www.vrfrag.com/stats?abc123" />
+              </div>
             </div>
 
-            <!-- Ladeanimation -->
+            <button id="fetchPlayers" class="btn btn-primary" onclick="fetchPlayers()">
+              <i class="fa-solid fa-users"></i> Spieler automatisch abrufen
+            </button>
+
             <div id="loading" class="loading">
-                <div class="spinner"></div>
-                <p>Spieler werden von VRFrag abgerufen...</p>
+              <div class="spinner"></div>
+              <div style="color:var(--muted)">Spieler werden von VRFrag abgerufen…</div>
             </div>
 
-            <!-- Fehler/Success Meldungen -->
             <div id="error" class="alert alert-error"></div>
             <div id="success" class="alert alert-success"></div>
 
-            <!-- Ergebnissebereich -->
             <div id="results" class="results-section">
-                <div class="section-title">
-                    <i class="fas fa-list-check"></i> Gefundene Spieler
+              <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-top:4px">
+                <div>
+                  <h2 style="margin:0; font-size:1rem; display:flex; gap:10px; align-items:center">
+                    <i class="fa-solid fa-list-check"></i> Gefundene Spieler
+                  </h2>
+                  <p class="help" style="margin-top:6px">Trage die echten Namen ein. Vorschläge werden angezeigt, wenn verfügbar.</p>
                 </div>
 
-                <!-- Dateinamen Eingabe -->
-                <div class="filename-input">
-                    <label for="filename"><i class="fas fa-file-signature"></i> Dateiname (optional)</label>
-                    <input type="text" id="filename" placeholder="z.B. 2025_05_23_01" />
-                    <small>Leer lassen für automatische Generierung (YYYY_MM_DD_NN.txt)</small>
+                <div style="min-width:260px; width:100%">
+                  <label for="filename">Dateiname (optional)</label>
+                  <input type="text" id="filename" placeholder="z.B. 2025_05_23_01" />
+                  <small>Leer lassen für automatische Generierung (YYYY_MM_DD_NN.txt)</small>
                 </div>
+              </div>
 
-                <!-- Spielerliste -->
-                <div id="playersList" class="players-grid"></div>
+              <div id="playersList" class="players-grid"></div>
 
-                <!-- Speichern Button -->
-                <div class="save-section">
-                    <button id="saveToGitHub" class="btn btn-success" onclick="saveToGitHub()">
-                        <i class="fab fa-github"></i> Speichern
-                    </button>
-                </div>
-            </div>
-
-            <!-- Statistiken Bereich -->
-            <div class="input-section">
-                <div class="section-title">
-                    <i class="fas fa-chart-bar"></i> Statistiken Management
-                </div>
-                <p style="margin-bottom: 20px; color: #666;">
-                    Generiere umfassende Statistiken aus allen gespeicherten Events.
-                </p>
-                <button id="updateStats" class="btn btn-purple" onclick="updateStatistics()">
-                    <i class="fas fa-sync-alt"></i> Statistiken aktualisieren
+              <div class="save-row">
+                <button id="saveToGitHub" class="btn btn-success" onclick="saveToGitHub()">
+                  <i class="fab fa-github"></i> Speichern
                 </button>
-                
-                <div id="statsLoading" class="loading" style="display: none;">
-                    <div class="spinner"></div>
-                    <p>Statistiken werden generiert... Dies kann einige Minuten dauern.</p>
-                </div>
-                
-                <div id="statsResults" class="stats-results">
-                    <h4><i class="fas fa-check-circle" style="color: #27ae60;"></i> Statistiken erfolgreich generiert!</h4>
-                    <div id="statsDetails"></div>
-                    <div id="fileLinks" class="file-links"></div>
-                </div>
+              </div>
             </div>
-<div class="section">
-    <h2><i class="fas fa-users"></i> Fair Team Generator</h2>
-    <p>Generiere faire Teams basierend auf Spieler-Statistiken und historischer Performance</p>
-    <a href="/teams" class="btn-team">
-        <i class="fas fa-rocket"></i> Teams generieren
-    </a>
-</div>
-
+          </div>
         </div>
+      </section>
+
+      <!-- RIGHT: Stats -->
+      <div class="stack">
+        <section class="card">
+          <div class="card-hd">
+            <h2><i class="fa-solid fa-chart-column"></i> Statistiken</h2>
+            <span class="badge"><i class="fa-solid fa-bolt"></i> CSV-Export</span>
+          </div>
+          <div class="card-bd">
+            <p class="help">Generiere und aktualisiere die Statistiken aus allen gespeicherten Events.</p>
+
+            <div style="margin-top:14px;">
+              <button id="updateStats" class="btn btn-purple" onclick="updateStatistics()">
+                <i class="fa-solid fa-rotate"></i> Statistiken aktualisieren
+              </button>
+            </div>
+
+            <div id="statsLoading" class="loading" style="display:none">
+              <div class="spinner"></div>
+              <div style="color:var(--muted)">Statistiken werden generiert…</div>
+            </div>
+
+            <div id="statsResults" class="card" style="display:none; margin-top:14px; background:rgba(0,0,0,.22); box-shadow:none">
+              <div class="card-bd">
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px">
+                  <i class="fa-solid fa-check-circle" style="color:var(--success)"></i>
+                  <strong>Statistiken erfolgreich generiert</strong>
+                </div>
+                <div id="statsDetails"></div>
+                <div id="fileLinks" style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-hd">
+            <h2><i class="fa-solid fa-users"></i> Fair Team Generator</h2>
+          </div>
+          <div class="card-bd">
+            <div class="teaser">
+              <div>
+                <h3>Teams fair aufteilen</h3>
+                <p>Basierend auf historischen Scores & Performance – optional pro Map.</p>
+              </div>
+              <a href="/teams" class="btn btn-link"><i class="fa-solid fa-rocket"></i> Öffnen</a>
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
 
-    <script>
+    <footer>© <span id="y"></span> VRFrag · internes Event-Tool</footer>
+  </div>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+
+  <!-- FUNKTIONEN BLEIBEN: (dein bestehendes JS, nur optisch "neue Hülle") -->
+  <script>
         let currentPlayers = [];
 
         function fetchPlayers() {
             const gameLink = document.getElementById('gameLink').value;
             const button = document.getElementById('fetchPlayers');
             const loading = document.getElementById('loading');
-            const errorDiv = document.getElementById('error');
-            const successDiv = document.getElementById('success');
             const results = document.getElementById('results');
-            
-            // Validierung
-            if (!gameLink) {
-                showError('Bitte geben Sie einen gültigen VRFrag Link ein.');
-                return;
-            }
-            
-            if (!gameLink.includes('vrfrag.com/stats?')) {
-                showError('Bitte geben Sie einen gültigen VRFrag Stats-Link ein.');
-                return;
-            }
-            
-            // UI zurücksetzen
+
+            if (!gameLink) { showError('Bitte geben Sie einen gültigen VRFrag Link ein.'); return; }
+            if (!gameLink.includes('vrfrag.com/stats?')) { showError('Bitte geben Sie einen gültigen VRFrag Stats-Link ein.'); return; }
+
             hideAlerts();
             results.style.display = 'none';
             button.disabled = true;
             loading.style.display = 'block';
             currentPlayers = [];
-            
-            // API Aufruf
+
             fetch('/api/get-players', {
                 method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                 body: JSON.stringify({ game_link: gameLink })
             })
             .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP Error: ${response.status}`);
-                }
+                if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
                 return response.json();
             })
             .then(data => {
                 loading.style.display = 'none';
                 button.disabled = false;
-                
+
                 if (data.success) {
                     currentPlayers = data.players;
                     displayPlayers(data.players);
@@ -571,139 +424,115 @@
                 showError('Fehler beim Abrufen der Daten: ' + error.message);
             });
         }
-        
+
         function displayPlayers(players) {
             const playersList = document.getElementById('playersList');
             playersList.innerHTML = '';
-            
+
             players.forEach((player, index) => {
                 const playerCard = document.createElement('div');
                 playerCard.className = 'player-card';
                 playerCard.innerHTML = `
-                  <div class="player-avatar">
-                      ${index + 1}
-                  </div>
-                  <div class="player-info">
-                      <div class="player-nickname">${player}</div>
-                  </div>
+                  <div class="player-avatar">${index + 1}</div>
+                  <div class="player-info"><div class="player-nickname">${player}</div></div>
                   <div class="player-input">
-                      <input type="text" 
-                             id="input_${index}" 
-                             placeholder="Echten Namen eingeben..." 
+                      <input type="text"
+                             id="input_${index}"
+                             placeholder="Echten Namen eingeben..."
                              oninput="validateInput(this)" />
-                      <div class="name-suggest" id="suggest_${index}" style="margin-top:6px; font-size:0.9rem; color:#666;"></div>
-                      </div>
+                      <div class="name-suggest" id="suggest_${index}" style="margin-top:8px; font-size:0.92rem; color: var(--muted);"></div>
+                  </div>
                 `;
-
                 playersList.appendChild(playerCard);
                 loadNameSuggestion(index, player);
             });
         }
-        
+
         function validateInput(input) {
             if (input.value.trim()) {
-                input.style.borderColor = '#27ae60';
-                input.style.background = '#f8fff9';
+                input.style.borderColor = 'rgba(34,197,94,.55)';
+                input.style.background = 'rgba(34,197,94,.08)';
             } else {
-                input.style.borderColor = '#e9ecef';
-                input.style.background = 'white';
+                input.style.borderColor = 'rgba(255,255,255,.12)';
+                input.style.background = 'rgba(0,0,0,.25)';
             }
         }
-        
+
         function collectMappings() {
             const gameLink = document.getElementById('gameLink').value;
             const mappings = [];
-            
             currentPlayers.forEach((player, index) => {
                 const input = document.getElementById(`input_${index}`);
                 const realName = input.value.trim();
-                
-                if (realName) {
-                    mappings.push({
-                        nickname: player,
-                        realName: realName
-                    });
-                }
+                if (realName) mappings.push({ nickname: player, realName: realName });
             });
-            
             return { gameLink, mappings };
         }
+
         function loadNameSuggestion(index, nickname) {
-    fetch(`/api/name-suggestions?username=${encodeURIComponent(nickname)}`)
-        .then(res => res.json())
-        .then(data => {
-            const box = document.getElementById(`suggest_${index}`);
-            if (!box) return;
+          fetch(`/api/name-suggestions?username=${encodeURIComponent(nickname)}`)
+              .then(res => res.json())
+              .then(data => {
+                  const box = document.getElementById(`suggest_${index}`);
+                  if (!box) return;
 
-            if (!data.success || (!data.best && (!data.others || data.others.length === 0))) {
-                box.innerHTML = '';
-                return;
-            }
+                  if (!data.success || (!data.best && (!data.others || data.others.length === 0))) {
+                      box.innerHTML = '';
+                      return;
+                  }
 
-            const best = data.best || '';
-            const others = data.others || [];
+                  const best = data.best || '';
+                  const others = data.others || [];
 
-            let html = '';
-            if (best) {
-                html += `Vorschlag: <a href="#" onclick="applySuggestion(${index}, '${escapeQuotes(best)}'); return false;" style="font-weight:600; color:#3498db; text-decoration:none;">${best}</a>`;
-            }
+                  let html = '';
+                  if (best) {
+                      html += `Vorschlag: <a href="#" onclick="applySuggestion(${index}, '${escapeQuotes(best)}'); return false;" style="font-weight:700; color: var(--primary); text-decoration:none;">${best}</a>`;
+                  }
 
-            if (others.length) {
-                html += `<div style="margin-top:6px; display:flex; gap:6px; flex-wrap:wrap;">` +
-                    others.slice(0, 4).map(name =>
-                        `<a href="#" onclick="applySuggestion(${index}, '${escapeQuotes(name)}'); return false;"
-                            style="padding:4px 8px; border:1px solid #e9ecef; border-radius:999px; text-decoration:none; color:#555; background:#fff;">
-                            ${name}
-                         </a>`
-                    ).join('') +
-                    `</div>`;
-            }
+                  if (others.length) {
+                      html += `<div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">` +
+                          others.slice(0, 4).map(name =>
+                              `<a href="#" onclick="applySuggestion(${index}, '${escapeQuotes(name)}'); return false;"
+                                  style="padding:6px 10px; border:1px solid rgba(255,255,255,.12); border-radius:999px; text-decoration:none; color:rgba(242,245,255,.85); background:rgba(0,0,0,.18);">
+                                  ${name}
+                               </a>`
+                          ).join('') +
+                          `</div>`;
+                  }
 
-            box.innerHTML = html;
-        })
-        .catch(() => {});
-}
+                  box.innerHTML = html;
+              })
+              .catch(() => {});
+        }
 
-function applySuggestion(index, name) {
-    const input = document.getElementById(`input_${index}`);
-    if (!input) return;
-    input.value = name;
-    validateInput(input);
-}
+        function applySuggestion(index, name) {
+            const input = document.getElementById(`input_${index}`);
+            if (!input) return;
+            input.value = name;
+            validateInput(input);
+        }
 
-function escapeQuotes(str) {
-    return (str || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'");
-}
+        function escapeQuotes(str) {
+            return (str || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+        }
 
         function saveToGitHub() {
             const { gameLink, mappings } = collectMappings();
             const filename = document.getElementById('filename').value.trim();
-            
-            if (mappings.length === 0) {
-                showError('Bitte geben Sie mindestens einen echten Namen ein.');
-                return;
-            }
-            
+
+            if (mappings.length === 0) { showError('Bitte geben Sie mindestens einen echten Namen ein.'); return; }
             if (mappings.length !== currentPlayers.length) {
-                if (!confirm(`Es wurden nur ${mappings.length} von ${currentPlayers.length} Namen ausgefüllt. Trotzdem fortfahren?`)) {
-                    return;
-                }
+                if (!confirm(`Es wurden nur ${mappings.length} von ${currentPlayers.length} Namen ausgefüllt. Trotzdem fortfahren?`)) return;
             }
-            
+
             const saveButton = document.getElementById('saveToGitHub');
             const originalText = saveButton.innerHTML;
             saveButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Speichere...';
             saveButton.disabled = true;
-            
-            const saveData = {
-                game_link: gameLink,
-                mappings: mappings
-            };
-            
-            if (filename) {
-                saveData.filename = filename;
-            }
-            
+
+            const saveData = { game_link: gameLink, mappings: mappings };
+            if (filename) saveData.filename = filename;
+
             fetch('/api/save-to-github', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -713,7 +542,7 @@ function escapeQuotes(str) {
             .then(data => {
                 saveButton.innerHTML = originalText;
                 saveButton.disabled = false;
-                
+
                 if (data.success) {
                     let successHtml = `✅ Datei erfolgreich gespeichert: <strong>${data.filename}</strong>`;
                     if (data.html_url) {
@@ -722,18 +551,16 @@ function escapeQuotes(str) {
                         </a>`;
                     }
                     showSuccess(successHtml);
-                    
-                    // Formular zurücksetzen
+
                     setTimeout(() => {
                         document.getElementById('gameLink').value = '';
                         document.getElementById('filename').value = '';
                         document.getElementById('results').style.display = 'none';
-                        currentPlayers.forEach((player, index) => {
+                        currentPlayers.forEach((_, index) => {
                             const input = document.getElementById(`input_${index}`);
                             if (input) input.value = '';
                         });
-                    }, 3000);
-                    
+                    }, 2500);
                 } else {
                     showError('❌ Fehler: ' + data.error);
                 }
@@ -744,30 +571,24 @@ function escapeQuotes(str) {
                 showError('Netzwerkfehler: ' + error.message);
             });
         }
-        
+
         function updateStatistics() {
             const button = document.getElementById('updateStats');
             const loading = document.getElementById('statsLoading');
             const results = document.getElementById('statsResults');
-            const errorDiv = document.getElementById('error');
-            const successDiv = document.getElementById('success');
-            
-            // UI zurücksetzen
-            errorDiv.style.display = 'none';
-            successDiv.style.display = 'none';
+
+            document.getElementById('error').style.display = 'none';
+            document.getElementById('success').style.display = 'none';
             results.style.display = 'none';
             button.disabled = true;
             loading.style.display = 'block';
-            
-            fetch('/api/update-statistics', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' }
-            })
+
+            fetch('/api/update-statistics', { method: 'POST', headers: { 'Content-Type': 'application/json' } })
             .then(response => response.json())
             .then(data => {
                 loading.style.display = 'none';
                 button.disabled = false;
-                
+
                 if (data.success) {
                     showStatsResults(data);
                 } else {
@@ -780,65 +601,60 @@ function escapeQuotes(str) {
                 showError('Netzwerkfehler: ' + error.message);
             });
         }
-        
+
         function showStatsResults(data) {
             const results = document.getElementById('statsResults');
             const details = document.getElementById('statsDetails');
             const fileLinks = document.getElementById('fileLinks');
-            
+
             details.innerHTML = `
                 <p><strong>📊 Spieler Einträge:</strong> ${data.player_count}</p>
                 <p><strong>🎯 Match Einträge:</strong> ${data.match_count}</p>
                 <p><strong>👥 Einzigartige Spieler:</strong> ${data.unique_players}</p>
                 <p><strong>⏰ Generiert am:</strong> ${new Date().toLocaleString('de-DE')}</p>
             `;
-            
+
             fileLinks.innerHTML = `
-                <a href="/files/${data.players_file}" class="btn">
+                <a href="/files/${data.players_file}" class="btn btn-link" style="text-decoration:none; width:auto">
                     <i class="fas fa-download"></i> Spieler-Statistiken
                 </a>
-                <a href="/files/${data.matches_file}" class="btn">
+                <a href="/files/${data.matches_file}" class="btn btn-link" style="text-decoration:none; width:auto">
                     <i class="fas fa-download"></i> Match-Statistiken
                 </a>
             `;
-            
+
             results.style.display = 'block';
             showSuccess('✅ Statistiken erfolgreich aktualisiert!');
         }
-        
+
         function showError(message) {
             const errorDiv = document.getElementById('error');
             errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
             errorDiv.style.display = 'block';
             document.getElementById('success').style.display = 'none';
         }
-        
+
         function showSuccess(message) {
             const successDiv = document.getElementById('success');
             successDiv.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
             successDiv.style.display = 'block';
             document.getElementById('error').style.display = 'none';
         }
-        
+
         function hideAlerts() {
             document.getElementById('error').style.display = 'none';
             document.getElementById('success').style.display = 'none';
         }
-        
-        // Enter-Taste Unterstützung
+
         document.getElementById('gameLink').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                fetchPlayers();
-            }
+            if (e.key === 'Enter') fetchPlayers();
         });
-        
+
         document.getElementById('filename').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
-                if (document.getElementById('results').style.display === 'block') {
-                    saveToGitHub();
-                }
+                if (document.getElementById('results').style.display === 'block') saveToGitHub();
             }
         });
-    </script>
+  </script>
 </body>
 </html>
