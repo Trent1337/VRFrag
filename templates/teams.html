@@ -4,65 +4,147 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>VRFrag · Team-Generator</title>
+
   <style>
-    :root{--bg:#f4f7fb;--card:#ffffff;--text:#1f2937;--muted:#6b7280;--border:#e5e7eb;--primary:#2563eb;--primary-600:#1d4ed8;--ring:rgba(37,99,235,.25);--danger:#ef4444}
+    :root{
+      --bg:#242834;
+      --bg-2:#1f2230;
+      --border:rgba(255,255,255,.12);
+      --text:#f2f5ff;
+      --muted:rgba(242,245,255,.72);
+      --primary:#2f9bff;
+      --primary-2:#3a7cff;
+      --danger:#ef4444;
+      --success:#22c55e;
+      --shadow:0 18px 55px rgba(0,0,0,.45);
+      --radius:18px;
+      --ring:rgba(47,155,255,.18);
+    }
     *{box-sizing:border-box}
-    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--text)}
-    .wrap{max-width:1100px;margin:0 auto;padding:24px}
-    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-    h1{font-size:1.4rem;margin:0}
-    .crumbs{color:var(--muted);font-size:.9rem}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background: radial-gradient(1200px 500px at 20% -10%, rgba(47,155,255,.25), transparent 55%),
+                  radial-gradient(900px 420px at 85% 10%, rgba(124,58,237,.22), transparent 55%),
+                  linear-gradient(180deg, var(--bg), var(--bg-2));
+      color:var(--text);
+      min-height:100vh;
+      padding:22px;
+    }
+    .wrap{max-width:1100px;margin:0 auto}
+    header{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 16px;
+      border:1px solid var(--border);
+      background:rgba(0,0,0,.25);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom:18px;
+      gap:12px;
+    }
+    .leftHead{display:flex; align-items:center; gap:12px}
+    .back-btn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(0,0,0,.18);
+      color:var(--text);
+      text-decoration:none;
+      font-weight:700;
+    }
+    .back-btn:hover{background:rgba(255,255,255,.08)}
+    h1{font-size:1.05rem;margin:0}
+    .crumbs{color:var(--muted);font-size:.9rem; white-space:nowrap}
 
-    .back-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;border:1px solid var(--border);background:#fff;color:var(--primary);text-decoration:none;font-size:.9rem;transition:background .2s}
-    .back-btn:hover{background:#f0f4ff}
+    .grid{display:grid;grid-template-columns: 1fr 1fr; gap:16px}
+    @media (max-width: 980px){.grid{grid-template-columns:1fr}}
 
-    .grid{display:grid;grid-template-columns: 1fr 1fr; gap:18px}
-    @media (max-width: 880px){.grid{grid-template-columns:1fr}}
+    .card{
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .hd{
+      padding:16px 18px;
+      border-bottom:1px solid var(--border);
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+    .hd h2{margin:0;font-size:1rem;letter-spacing:.2px}
+    .bd{padding:18px}
 
-    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;box-shadow:0 8px 24px rgba(15,23,42,.06);overflow:hidden}
-    .card .hd{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-    .card .hd h2{margin:0;font-size:1rem}
-    .card .bd{padding:16px}
+    label{display:block;font-size:.9rem;color:rgba(242,245,255,.9);margin-bottom:8px;font-weight:700}
+    select,input[type="text"]{
+      width:100%;
+      padding:12px 12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:rgba(0,0,0,.25);
+      color:var(--text);
+      outline:none;
+      transition:box-shadow .2s,border-color .2s, background .2s;
+    }
+    select:focus,input[type="text"]:focus{
+      box-shadow:0 0 0 4px var(--ring);
+      border-color: rgba(47,155,255,.55);
+      background:rgba(0,0,0,.32);
+    }
 
-    label{display:block;font-size:.85rem;color:var(--muted);margin-bottom:6px}
-    select,input[type="text"]{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:#fff;color:var(--text);outline:none;transition:box-shadow .2s,border-color .2s}
-    select:focus,input[type="text"]:focus{box-shadow:0 0 0 4px var(--ring);border-color:var(--primary)}
+    .hint{color:var(--muted);font-size:.92rem;line-height:1.45;margin:0 0 14px 0}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 12px;border:1px solid var(--border);
+      border-radius:999px;color:var(--muted);font-size:.85rem;
+      background:rgba(255,255,255,.05);
+      white-space:nowrap;
+    }
 
-    .inputs{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    .col{display:grid;gap:10px}
-    .hint{color:var(--muted);font-size:.85rem}
-
-    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:#fff;cursor:pointer;transition:background .2s,transform .06s}
-    .btn:hover{background:#fafafa}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:12px 14px;border-radius:14px;border:1px solid var(--border);
+      background:rgba(255,255,255,.06);cursor:pointer;
+      transition:background .2s,transform .06s,border-color .2s;
+      color:var(--text);font-weight:800;
+    }
+    .btn:hover{background:rgba(255,255,255,.10)}
     .btn:active{transform:translateY(1px)}
-    .btn.primary{background:var(--primary);color:#fff;border-color:transparent}
-    .btn.primary:hover{background:var(--primary-600)}
-    .btn:disabled{opacity:.6;cursor:not-allowed}
+    .btn.primary{
+      border-color:transparent;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      box-shadow: 0 16px 35px rgba(47,155,255,.18);
+    }
+    .btn.primary:hover{background: linear-gradient(135deg, #46b2ff, var(--primary-2))}
+    .btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
 
-    .pill{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid var(--border);border-radius:999px;color:var(--muted);font-size:.8rem}
-
-    .teams{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .teams{display:grid;grid-template-columns:1fr 1fr;gap:14px}
     @media (max-width:700px){.teams{grid-template-columns:1fr}}
-    .team{border:1px solid var(--border);border-radius:12px;overflow:hidden}
-    .team .th{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:#f8fafc}
+    .team{border:1px solid var(--border);border-radius:16px;overflow:hidden;background:rgba(0,0,0,.18)}
+    .team .th{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:rgba(0,0,0,.22)}
     .team h3{margin:0;font-size:1rem}
-    .team ul{list-style:none;margin:0;padding:10px 14px;display:grid;gap:8px}
-    .team li{padding:8px 10px;border:1px solid var(--border);border-radius:10px;background:#fff}
-    .empty{display:flex;align-items:center;justify-content:center;min-height:160px;color:var(--muted)}
+    .team ul{list-style:none;margin:0;padding:12px 14px;display:grid;gap:10px}
+    .team li{padding:10px 12px;border:1px solid var(--border);border-radius:14px;background:rgba(0,0,0,.20)}
+    .empty{display:flex;align-items:center;justify-content:center;min-height:180px;color:var(--muted);text-align:center; padding:18px}
 
-    .meter{height:10px;background:#eef2ff;border:1px solid var(--border);border-radius:999px;overflow:hidden}
-    .meter>span{display:block;height:100%;background:linear-gradient(90deg,#2563eb,#10b981)}
+    .meter{height:10px;background:rgba(255,255,255,.08);border:1px solid var(--border);border-radius:999px;overflow:hidden}
+    .meter>span{display:block;height:100%;background:linear-gradient(90deg,var(--primary),var(--success))}
   </style>
 </head>
+
 <body>
   <div class="wrap">
     <header>
-      <div style="display:flex;align-items:center;gap:12px">
+      <div class="leftHead">
         <a href="/" class="back-btn">← Zurück</a>
-        <h1>Team-Generator</h1>
+        <div>
+          <h1>Team-Generator</h1>
+          <div class="crumbs">VRFrag · Tools</div>
+        </div>
       </div>
-      <div class="crumbs">VRFrag · Tools</div>
+      <span class="pill" id="sel-count">0 Spieler</span>
     </header>
 
     <div class="grid">
@@ -70,34 +152,37 @@
       <section class="card">
         <div class="hd">
           <h2>Teilnehmer & Einstellungen</h2>
-          <span class="pill" id="sel-count">0 Spieler</span>
+          <span class="pill">Gerade Anzahl · min. 4</span>
         </div>
+
         <div class="bd">
-          <div style="margin-bottom:12px">
+          <div style="margin-bottom:14px">
             <label for="map-select">Map (optional)</label>
             <select id="map-select">
               <option value="">Alle Maps</option>
             </select>
           </div>
-          <p class="hint">Gib bis zu 5 Spieler je Team ein. Die Felder sind optional – du kannst auch nur 6, 8 oder 10 Namen nutzen. Autovervollständigung schlägt bestehende Spieler vor.</p>
+
+          <p class="hint">
+            Gib bis zu 10 echte Namen ein (max. 5 pro Team). Felder sind optional – du kannst auch 6/8/10 Namen nutzen.
+            Autovervollständigung schlägt bekannte Spieler vor.
+          </p>
 
           <datalist id="players-suggest"></datalist>
-          <div class="inputs" style="grid-template-columns: 1fr;">
-            <div class="col">
-              <label>Spieler (max. 10)</label>
-              <input class="player-input" list="players-suggest" placeholder="Spieler 1"/>
-              <input class="player-input" list="players-suggest" placeholder="Spieler 2"/>
-              <input class="player-input" list="players-suggest" placeholder="Spieler 3"/>
-              <input class="player-input" list="players-suggest" placeholder="Spieler 4"/>
-              <input class="player-input" list="players-suggest" placeholder="Spieler 5"/>
-              <input class="player-input" list="players-suggest" placeholder="Spieler 6"/>
-              <input class="player-input" list="players-suggest" placeholder="Spieler 7"/>
-              <input class="player-input" list="players-suggest" placeholder="Spieler 8"/>
-              <input class="player-input" list="players-suggest" placeholder="Spieler 9"/>
-              <input class="player-input" list="players-suggest" placeholder="Spieler 10"/>
-            </div>
+
+          <div style="display:grid; gap:10px">
+            <label>Spieler (max. 10)</label>
+            <input class="player-input" list="players-suggest" placeholder="Spieler 1"/>
+            <input class="player-input" list="players-suggest" placeholder="Spieler 2"/>
+            <input class="player-input" list="players-suggest" placeholder="Spieler 3"/>
+            <input class="player-input" list="players-suggest" placeholder="Spieler 4"/>
+            <input class="player-input" list="players-suggest" placeholder="Spieler 5"/>
+            <input class="player-input" list="players-suggest" placeholder="Spieler 6"/>
+            <input class="player-input" list="players-suggest" placeholder="Spieler 7"/>
+            <input class="player-input" list="players-suggest" placeholder="Spieler 8"/>
+            <input class="player-input" list="players-suggest" placeholder="Spieler 9"/>
+            <input class="player-input" list="players-suggest" placeholder="Spieler 10"/>
           </div>
-  
 
           <div class="actions">
             <button class="btn" id="btn-clear" type="button">Felder leeren</button>
@@ -131,30 +216,44 @@
           fetch('/api/get-all-players'),
           fetch('/api/get-available-maps')
         ]);
-        if(!playersRes.ok) throw new Error("get-all-players: " + (await playersRes.text()));
-        if(!mapsRes.ok) throw new Error("get-available-maps: " + (await mapsRes.text()));
-       
+
         const playersData = await playersRes.json();
         const mapsData = await mapsRes.json();
 
-        const names = (playersData.players || playersData || []).map(p => p.name || p).filter(Boolean);
+        const names = (playersData.players || playersData || [])
+          .map(p => p.name || p)
+          .filter(Boolean);
+
         const dl = document.getElementById('players-suggest');
-        names.forEach(n=>{ const o=document.createElement('option'); o.value=n; dl.appendChild(o); });
+        dl.innerHTML = '';
+        names.forEach(n=>{
+          const o=document.createElement('option');
+          o.value=n;
+          dl.appendChild(o);
+        });
         allPlayers = names;
 
         const select = document.getElementById('map-select');
-        (mapsData.maps || mapsData || []).forEach(m=>{ const o=document.createElement('option'); o.value=m; o.textContent=m; select.appendChild(o); });
-      }catch(e){
-        console.error("loadData failed:", e);   // <-- wichtig
-  }
-}
-    
+        select.innerHTML = '<option value="">Alle Maps</option>';
+        (mapsData.maps || mapsData || []).forEach(m=>{
+          const o=document.createElement('option');
+          o.value=m; o.textContent=m;
+          select.appendChild(o);
+        });
+      }catch(e){}
+    }
 
     function collectPlayers(){
       const inputs = Array.from(document.querySelectorAll('.player-input'));
       const names = inputs.map(i => (i.value||'').trim()).filter(Boolean);
+
       const seen = new Set();
-      const unique = names.filter(n=>{ if(seen.has(n.toLowerCase())) return false; seen.add(n.toLowerCase()); return true; });
+      const unique = names.filter(n=>{
+        const k=n.toLowerCase();
+        if(seen.has(k)) return false;
+        seen.add(k);
+        return true;
+      });
       return unique;
     }
 
@@ -165,32 +264,39 @@
       btn.disabled = (n < 4) || (n > 10) || (n % 2 !== 0);
     }
 
-
     async function generateTeams(){
       const players = collectPlayers();
       const map = document.getElementById('map-select').value;
       const results = document.getElementById('results');
+
       results.innerHTML = '<div class="empty">Generiere Teams…</div>';
+
       try{
         const res = await fetch('/api/generate-teams', {
-          method:'POST', headers:{'Content-Type':'application/json'},
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
           body: JSON.stringify({ players, map })
         });
         const data = await res.json();
-        if (!data.success) throw new Error(data.error || "Unbekannter Fehler");
-        displayResults(data.teams);
 
+        // Backend liefert {success:true, teams:{...}}:
+        displayResults(data.teams || data);
       }catch(e){
         results.innerHTML = '<div class="empty">Fehler bei der Team-Generierung.</div>';
       }
     }
 
     function displayResults(teams){
-      if(!teams){ document.getElementById('results').innerHTML = '<div class="empty">Keine Daten.</div>'; return; }
+      if(!teams){
+        document.getElementById('results').innerHTML = '<div class="empty">Keine Daten.</div>';
+        return;
+      }
+
       const aP = (teams.win_probability?.team_a ?? 0)*100;
       const bP = (teams.win_probability?.team_b ?? 0)*100;
       const fairness = (teams.fairness ?? 0) * 100;
       const mapUsed = teams.map_used || (document.getElementById('map-select').value || 'Alle Maps');
+
       const teamA = teams.team_a || {players:[], average_score: 0};
       const teamB = teams.team_b || {players:[], average_score: 0};
 
@@ -203,14 +309,22 @@
       const html = `
         <div class="teams">
           <div class="team" style="border-left:4px solid var(--primary)">
-            <div class="th"><h3>Team A</h3><span class="pill">Ø Score ${(teamA.average_score||0).toFixed(0)}</span></div>
+            <div class="th">
+              <h3>Team A</h3>
+              <span class="pill">Ø Score ${(teamA.average_score||0).toFixed(0)}</span>
+            </div>
             <ul>${(teamA.players||[]).map(p=>`<li>${p}</li>`).join('')}</ul>
           </div>
+
           <div class="team" style="border-left:4px solid var(--danger)">
-            <div class="th"><h3>Team B</h3><span class="pill">Ø Score ${(teamB.average_score||0).toFixed(0)}</span></div>
+            <div class="th">
+              <h3>Team B</h3>
+              <span class="pill">Ø Score ${(teamB.average_score||0).toFixed(0)}</span>
+            </div>
             <ul>${(teamB.players||[]).map(p=>`<li>${p}</li>`).join('')}</ul>
           </div>
-        </div>`;
+        </div>
+      `;
       document.getElementById('results').innerHTML = html;
     }
 
