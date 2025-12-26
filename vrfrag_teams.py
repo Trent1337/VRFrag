@@ -131,6 +131,10 @@ def generate_fair_teams(player_names, player_stats_df, map_name=None, max_iterat
     Returns:
         Dictionary mit Team-Zusammenstellung und Wahrscheinlichkeiten
     """
+    
+    print("Input player_names:", player_names)
+    print("CSV unique Player sample:", player_stats_df["Player"].dropna().astype(str).unique()[:5])
+
     if len(player_names) < 4:
         return {"error": "Mindestens 4 Spieler benötigt"}
     
@@ -145,6 +149,7 @@ def generate_fair_teams(player_names, player_stats_df, map_name=None, max_iterat
     
     for player in player_names:
         player_data = player_stats_df[player_stats_df['Player'] == player]
+        print("lookup", player, "rows", len(player_data))
         
         if len(player_data) > 0:
             if map_name and 'maptitle' in player_stats_df.columns:
