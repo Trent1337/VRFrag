@@ -72,6 +72,7 @@
       padding:16px 18px;
       border-bottom:1px solid var(--border);
       display:flex; align-items:center; justify-content:space-between; gap:12px;
+      flex-wrap: wrap;
     }
     .hd h2{margin:0;font-size:1rem;letter-spacing:.2px}
     .bd{padding:18px}
@@ -131,41 +132,34 @@
 
     .meter{height:10px;background:rgba(255,255,255,.08);border:1px solid var(--border);border-radius:999px;overflow:hidden}
     .meter>span{display:block;height:100%;background:linear-gradient(90deg,var(--primary),var(--success))}
-    .notice-box{
-    border:1px solid var(--border);
-    border-left:4px solid var(--danger);
-    background: rgba(239,68,68,.08);
-    color: rgba(242,245,255,.92);
-    border-radius: 14px;
-    padding: 12px 12px;
-    line-height: 1.4;
-    margin-top: 10px;
-  }
-  .notice-box .title{
-    font-weight: 800;
-    margin-bottom: 6px;
-  }
-  .notice-box .muted{
-    color: var(--muted);
-    font-size: .92rem;
-  }
-  .notice-chips{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-top:10px;
-  }
-  .notice-chip{
-    padding:6px 10px;
-    border-radius: 999px;
-    border:1px solid var(--border);
-    background: rgba(0,0,0,.18);
-    color: rgba(242,245,255,.88);
-    font-size: .9rem;
-    white-space: nowrap;
-  }
-  .notice-chip strong{color: var(--text)}
 
+    .notice-box{
+      border:1px solid var(--border);
+      border-left:4px solid var(--danger);
+      background: rgba(239,68,68,.08);
+      color: rgba(242,245,255,.92);
+      border-radius: 14px;
+      padding: 12px 12px;
+      line-height: 1.4;
+      margin-top: 10px;
+      width: 100%;
+    }
+    .notice-box .title{font-weight: 800;margin-bottom: 6px;}
+    .notice-box .muted{color: var(--muted);font-size: .92rem;}
+    .notice-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+    .notice-chip{
+      padding:6px 10px;
+      border-radius: 999px;
+      border:1px solid var(--border);
+      background: rgba(0,0,0,.18);
+      color: rgba(242,245,255,.88);
+      font-size: .9rem;
+      white-space: nowrap;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .notice-chip:hover{background: rgba(255,255,255,.08)}
+    .notice-chip strong{color: var(--text)}
   </style>
 </head>
 
@@ -244,7 +238,50 @@
   </div>
 
   <script>
-    let allPlayers = [];
+    function escapeHtml(s){
+      return String(s ?? '')
+        .replaceAll('&','&amp;')
+        .replaceAll('<','&lt;')
+        .replaceAll('>','&gt;')
+        .replaceAll('"','&quot;')
+        .replaceAll("'","&#039;");
+    }
+
+    function escapeAttr(s){
+      // Für data-Attribute
+      return escapeHtml(s);
+    }
+
+    async function saveAlias(username, realName){
+      try{
+        await fetch('/api/aliases', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({ username, real_name: realName })
+        });
+      }catch(e){}
+    }
+
+    async function applyResolution(inputValue, bestGuess){
+      const inputs = Array.from(document.querySelectorAll('.player-input'));
+      const inLow = String(inputValue || '').trim().toLowerCase();
+      const best = String(bestGuess || '').trim();
+      if (!inLow || !best) return;
+
+      let changed = 0;
+      for (const el of inputs){
+        const cur = String(el.value || '').trim();
+        if (cur.toLowerCase() === inLow){
+          el.value = best;
+          changed++;
+        }
+      }
+      updateState();
+
+      if (changed > 0){
+        await saveAlias(inputValue, bestGuess);
+      }
+    }
 
     async function loadData(){
       try{
@@ -259,14 +296,13 @@
         const dl = document.getElementById('players-suggest');
         dl.innerHTML = '';
 
+        // Erwartet: {players:[{value,label},...]}
         (playersData.players || []).forEach(p => {
-        const o = document.createElement('option');
-        o.value = p.value;            // <- DAS landet im Input (CSV Player)
-        o.label = p.label || p.value; // <- wird in der Liste angezeigt
-        dl.appendChild(o);
-      });
-
-        allPlayers = names;
+          const o = document.createElement('option');
+          o.value = p.value ?? p.name ?? p;     // robust fallback
+          o.label = p.label ?? o.value;
+          dl.appendChild(o);
+        });
 
         const select = document.getElementById('map-select');
         select.innerHTML = '<option value="">Alle Maps</option>';
@@ -275,7 +311,10 @@
           o.value=m; o.textContent=m;
           select.appendChild(o);
         });
-      }catch(e){}
+      }catch(e){
+        // Wenn hier was schiefgeht, sieht man sonst nichts – deshalb wenigstens loggen:
+        console.error("loadData failed:", e);
+      }
     }
 
     function collectPlayers(){
@@ -314,20 +353,19 @@
         });
         const data = await res.json();
         displayResults(data.teams || data, data.unresolved || [], data.resolved_players || []);
-  
       }catch(e){
         results.innerHTML = '<div class="empty">Fehler bei der Team-Generierung.</div>';
       }
     }
 
-     function displayResults(teams, unresolved = [], resolved_players = []){
+    function displayResults(teams, unresolved = [], resolved_players = []){
       if(!teams){
         document.getElementById('results').innerHTML = '<div class="empty">Keine Daten.</div>';
         return;
       }
 
-      const aP = (teams.win_probability?.team_a ?? 0)*100;
-      const bP = (teams.win_probability?.team_b ?? 0)*100;
+      const aP = (teams.win_probability?.team_a ?? 0) * 100;
+      const bP = (teams.win_probability?.team_b ?? 0) * 100;
       const fairness = (teams.fairness ?? 0) * 100;
       const mapUsed = teams.map_used || (document.getElementById('map-select').value || 'Alle Maps');
 
@@ -339,49 +377,51 @@
       const pill = document.getElementById('meta-pill');
       pill.style.display = 'inline-flex';
       pill.textContent = `Gewinnchance A ${aP.toFixed(1)}% · B ${bP.toFixed(1)}% · Fairness ${fairness.toFixed(1)}% · Map ${mapUsed}`;
-       // --- NEU: Hinweise zu Erkennung/Fallback anzeigen ---
-      const notice = document.getElementById('notice');
-        if (notice) {
-          const usedFallback = (teams.used_fallback_for || []);
-          const hasUnresolved = Array.isArray(unresolved) && unresolved.length > 0;
-          const hasFallback = Array.isArray(usedFallback) && usedFallback.length > 0;
 
-          if (!hasUnresolved && !hasFallback) {
-            notice.style.display = 'none';
-            notice.innerHTML = '';
-          } else {
-            let html = `<div class="notice-box">
+      // Hinweise
+      const notice = document.getElementById('notice');
+      if (notice) {
+        const usedFallback = (teams.used_fallback_for || []);
+        const hasUnresolved = Array.isArray(unresolved) && unresolved.length > 0;
+        const hasFallback = Array.isArray(usedFallback) && usedFallback.length > 0;
+
+        if (!hasUnresolved && !hasFallback) {
+          notice.style.display = 'none';
+          notice.innerHTML = '';
+        } else {
+          let nh = `<div class="notice-box">
             <div class="title">Hinweis: Spieler nicht eindeutig erkannt</div>
             <div class="muted">Wenn ein Spieler nicht gefunden wird, nutzt der Generator den globalen Durchschnitt (≈ 14). Prüfe die Schreibweise oder wähle den Namen aus der Vorschlagsliste.</div>
           `;
 
           if (hasUnresolved) {
-            html += `<div style="margin-top:10px; font-weight:700;">Unsichere Zuordnungen:</div>`;
-            html += `<div class="notice-chips">` + unresolved.map(u => {
+            nh += `<div style="margin-top:10px; font-weight:800;">Unsichere Zuordnungen (klicken zum Übernehmen):</div>`;
+            nh += `<div class="notice-chips">` + unresolved.map(u => {
               const inp = u.input ?? '';
               const best = u.best_guess ?? '';
               const conf = (u.confidence ?? 0);
-              return `<button type="button" class="notice-chip"
-                        onclick="applyResolution('${escapeJs(inp)}','${escapeJs(best)}')">
+              return `<button type="button"
+                        class="notice-chip js-resolve"
+                        data-input="${escapeAttr(inp)}"
+                        data-best="${escapeAttr(best)}">
                         <strong>${escapeHtml(inp)}</strong> → ${escapeHtml(best)}
                         <span style="opacity:.75">(${conf})</span>
                       </button>`;
+            }).join('') + `</div>`;
           }
 
           if (hasFallback) {
-            html += `<div style="margin-top:10px; font-weight:700;">Fallback (keine Daten gefunden):</div>`;
-            html += `<div class="notice-chips">` + usedFallback.map(n =>
-              `<span class="notice-chip">${escapeHtml(n)}</span>`
+            nh += `<div style="margin-top:10px; font-weight:800;">Fallback (keine Daten gefunden):</div>`;
+            nh += `<div class="notice-chips">` + usedFallback.map(n =>
+              `<span class="notice-chip" style="cursor:default">${escapeHtml(n)}</span>`
             ).join('') + `</div>`;
           }
 
-          html += `</div>`;
-          notice.innerHTML = html;
+          nh += `</div>`;
+          notice.innerHTML = nh;
           notice.style.display = 'block';
         }
       }
-// --- Ende NEU ---
-
 
       const html = `
         <div class="teams">
@@ -390,7 +430,7 @@
               <h3>Team A</h3>
               <span class="pill">Ø Score ${(teamA.average_score||0).toFixed(0)}</span>
             </div>
-            <ul>${(teamA.players||[]).map(p=>`<li>${p}</li>`).join('')}</ul>
+            <ul>${(teamA.players||[]).map(p=>`<li>${escapeHtml(p)}</li>`).join('')}</ul>
           </div>
 
           <div class="team" style="border-left:4px solid var(--danger)">
@@ -398,12 +438,22 @@
               <h3>Team B</h3>
               <span class="pill">Ø Score ${(teamB.average_score||0).toFixed(0)}</span>
             </div>
-            <ul>${(teamB.players||[]).map(p=>`<li>${p}</li>`).join('')}</ul>
+            <ul>${(teamB.players||[]).map(p=>`<li>${escapeHtml(p)}</li>`).join('')}</ul>
           </div>
         </div>
       `;
       document.getElementById('results').innerHTML = html;
     }
+
+    // Klicks auf "Unsichere Zuordnungen" abfangen (kein inline onclick!)
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.js-resolve');
+      if (!btn) return;
+
+      const inputValue = btn.getAttribute('data-input') || '';
+      const bestGuess  = btn.getAttribute('data-best') || '';
+      applyResolution(inputValue, bestGuess);
+    });
 
     document.addEventListener('DOMContentLoaded', ()=>{
       loadData();
