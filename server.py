@@ -393,8 +393,14 @@ def get_all_players():
     out = df.merge(aliases, how="left", on="norm_username")
     out["display_name"] = out["real_name"].where(out["real_name"].astype(bool), out["Player"])
 
-    names = sorted(out["display_name"].dropna().astype(str).unique().tolist())
-    return jsonify({"players": [{"name": n} for n in names]})
+    rows = out[["Player", "display_name"]].dropna()
+    rows = rows.drop_duplicates()
+
+    players = [{"value": r["Player"], "label": r["display_name"]} for _, r in rows.iterrows()]
+    players = sorted(players, key=lambda x: (x["label"] or x["value"]).lower())
+
+    return jsonify({"players": players})
+
 
 
 @app.route('/api/get-available-maps', methods=['GET'])
