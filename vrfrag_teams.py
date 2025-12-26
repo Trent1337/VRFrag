@@ -185,7 +185,7 @@ def generate_fair_teams(player_names, player_stats_df, map_name=None, max_iterat
     best_fairness = float('inf')
     iterations_used = 0
 
-    TOP_K = 25          # wie viele gute Kandidaten wir sammeln
+    TOP_K = 10          # wie viele gute Kandidaten wir sammeln
     EPS = 0.015          # wie nah an best_fairness noch akzeptiert (1.5% vom Gesamtscore)
 
     
