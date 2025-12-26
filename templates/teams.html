@@ -361,8 +361,11 @@
               const inp = u.input ?? '';
               const best = u.best_guess ?? '';
               const conf = (u.confidence ?? 0);
-              return `<span class="notice-chip"><strong>${escapeHtml(inp)}</strong> → ${escapeHtml(best)} <span style="opacity:.75">(${conf})</span></span>`;
-            }).join('') + `</div>`;
+              return `<button type="button" class="notice-chip"
+                        onclick="applyResolution('${escapeJs(inp)}','${escapeJs(best)}')">
+                        <strong>${escapeHtml(inp)}</strong> → ${escapeHtml(best)}
+                        <span style="opacity:.75">(${conf})</span>
+                      </button>`;
           }
 
           if (hasFallback) {
