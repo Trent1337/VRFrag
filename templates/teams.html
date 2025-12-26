@@ -220,17 +220,16 @@
         const playersData = await playersRes.json();
         const mapsData = await mapsRes.json();
 
-        const names = (playersData.players || playersData || [])
-          .map(p => p.name || p)
-          .filter(Boolean);
-
         const dl = document.getElementById('players-suggest');
         dl.innerHTML = '';
-        names.forEach(n=>{
-          const o=document.createElement('option');
-          o.value=n;
-          dl.appendChild(o);
-        });
+
+        (playersData.players || []).forEach(p => {
+        const o = document.createElement('option');
+        o.value = p.value;            // <- DAS landet im Input (CSV Player)
+        o.label = p.label || p.value; // <- wird in der Liste angezeigt
+        dl.appendChild(o);
+      });
+
         allPlayers = names;
 
         const select = document.getElementById('map-select');
