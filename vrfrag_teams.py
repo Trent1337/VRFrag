@@ -146,6 +146,8 @@ def generate_fair_teams(player_names, player_stats_df, map_name=None, max_iterat
     # Historische Daten der Spieler sammeln
     player_scores = {}
     player_stats = {}
+    used_fallback_for = []
+
     
     for player in player_names:
         player_data = player_stats_df[player_stats_df['Player'] == player]
@@ -168,6 +170,7 @@ def generate_fair_teams(player_names, player_stats_df, map_name=None, max_iterat
         else:
             # Fallback für unbekannte Spieler
             avg_score = player_stats_df['score'].mean()
+            used_fallback_for.append(player)
             player_scores[player] = avg_score
             player_stats[player] = {
                 'avg_score': avg_score,
@@ -175,6 +178,7 @@ def generate_fair_teams(player_names, player_stats_df, map_name=None, max_iterat
                 'avg_deaths': player_stats_df['deaths'].mean(),
                 'total_games': 0
             }
+
     
 
     top_candidates = []  # Liste von (fairness, team_a, team_b, team_a_score, team_b_score)
@@ -245,7 +249,9 @@ def generate_fair_teams(player_names, player_stats_df, map_name=None, max_iterat
         "fairness": round(best_fairness, 3),
         "iterations_used": iterations_used,
         "map_used": map_name if map_name else "Alle Maps",
-        "calculation_method": "ML-basiert" if use_advanced_probability else "Einfache Berechnung"
+        "calculation_method": "ML-basiert" if use_advanced_probability else "Einfache Berechnung",
+        "used_fallback_for": used_fallback_for,
+        "player_avg_scores": {k: round(float(v), 3) for k, v in player_scores.items()}
     }
 
 def calculate_team_stats(team_players, player_stats):
