@@ -3,6 +3,7 @@ import subprocess
 import os
 import requests
 import base64
+import difflib
 import pandas as pd
 from datetime import datetime
 from get_players import get_players_from_url
@@ -39,6 +40,51 @@ def ensure_players_csv():
 
 # Stelle sicher, dass der files Ordner existiert
 os.makedirs(FILES_FOLDER, exist_ok=True)
+def get_player_universe():
+    """Lädt alle eindeutigen kanonischen Player-Namen aus der Players-CSV."""
+    players_file, err_resp, code = ensure_players_csv()
+    if err_resp:
+        return None, err_resp, code
+
+    df = pd.read_csv(players_file)
+
+    if "Player" not in df.columns:
+        return None, jsonify({"success": False, "error": "Spalte 'Player' fehlt in der CSV."}), 500
+
+    all_players = (
+        df["Player"]
+        .dropna()
+        .astype(str)
+        .str.strip()
+        .unique()
+        .tolist()
+    )
+    all_players = sorted([p for p in all_players if p])
+    return all_players, None, None
+
+
+def resolve_player_name(input_name: str, all_players: list[str], cutoff: float = 0.78):
+    """
+    Mappt eine Eingabe auf den wahrscheinlichsten Player-Namen.
+    Rückgabe: (best_match, confidence 0..1)
+    """
+    raw = (input_name or "").strip()
+    if not raw:
+        return raw, 0.0
+
+    # Exakt (case-insensitive)
+    lower_map = {p.lower(): p for p in all_players}
+    if raw.lower() in lower_map:
+        return lower_map[raw.lower()], 1.0
+
+    # Fuzzy match
+    candidates = difflib.get_close_matches(raw, all_players, n=1, cutoff=cutoff)
+    if candidates:
+        best = candidates[0]
+        conf = difflib.SequenceMatcher(a=raw.lower(), b=best.lower()).ratio()
+        return best, conf
+
+    return raw, 0.0
 
 def save_to_github(filename, content):
     """
@@ -354,6 +400,29 @@ def api_generate_teams():
         
         selected_players = data['players']
         selected_map = data.get('map', None)
+        # --- NEU: Spieler-Namen robust auf CSV-Player mappen (auch bei Tippfehlern) ---
+        all_players, err_resp, code = get_player_universe()
+        if err_resp:
+            return err_resp, code
+
+        resolved_players = []
+        unresolved = []
+
+        for name in selected_players:
+            best, conf = resolve_player_name(name, all_players, cutoff=0.78)
+            resolved_players.append(best)
+
+            # Wenn Confidence niedrig ist, merken wir uns das (für Debug/UI)
+            if conf < 0.78:
+                unresolved.append({
+                    "input": name,
+                    "best_guess": best,
+                    "confidence": round(conf, 3)
+                })
+
+        selected_players = resolved_players
+        # --- Ende NEU ---
+
         
         # Lade Spieler-Daten
         players_file, err_resp, code = ensure_players_csv()
@@ -371,8 +440,11 @@ def api_generate_teams():
         
         return jsonify({
             'success': True,
-            'teams': result
+            'teams': result,
+            'resolved_players': selected_players,
+            'unresolved': unresolved
         })
+
         
     except Exception as e:
         return jsonify({'success': False, 'error': f'Team-Generator Fehler: {str(e)}'}), 500
