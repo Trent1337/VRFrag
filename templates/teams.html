@@ -131,6 +131,41 @@
 
     .meter{height:10px;background:rgba(255,255,255,.08);border:1px solid var(--border);border-radius:999px;overflow:hidden}
     .meter>span{display:block;height:100%;background:linear-gradient(90deg,var(--primary),var(--success))}
+    .notice-box{
+    border:1px solid var(--border);
+    border-left:4px solid var(--danger);
+    background: rgba(239,68,68,.08);
+    color: rgba(242,245,255,.92);
+    border-radius: 14px;
+    padding: 12px 12px;
+    line-height: 1.4;
+    margin-top: 10px;
+  }
+  .notice-box .title{
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+  .notice-box .muted{
+    color: var(--muted);
+    font-size: .92rem;
+  }
+  .notice-chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:10px;
+  }
+  .notice-chip{
+    padding:6px 10px;
+    border-radius: 999px;
+    border:1px solid var(--border);
+    background: rgba(0,0,0,.18);
+    color: rgba(242,245,255,.88);
+    font-size: .9rem;
+    white-space: nowrap;
+  }
+  .notice-chip strong{color: var(--text)}
+
   </style>
 </head>
 
@@ -199,6 +234,7 @@
             <div class="meter" style="width:180px"><span id="balance-bar" style="width:50%"></span></div>
           </div>
           <span class="pill" id="meta-pill" style="display:none"></span>
+          <div id="notice" style="display:none; margin-top:10px;"></div>
         </div>
         <div class="bd" id="results">
           <div class="empty">Noch keine Teams generiert.</div>
@@ -277,15 +313,14 @@
           body: JSON.stringify({ players, map })
         });
         const data = await res.json();
-
-        // Backend liefert {success:true, teams:{...}}:
-        displayResults(data.teams || data);
+        displayResults(data.teams || data, data.unresolved || [], data.resolved_players || []);
+  
       }catch(e){
         results.innerHTML = '<div class="empty">Fehler bei der Team-Generierung.</div>';
       }
     }
 
-    function displayResults(teams){
+     function displayResults(teams, unresolved = [], resolved_players = []){
       if(!teams){
         document.getElementById('results').innerHTML = '<div class="empty">Keine Daten.</div>';
         return;
@@ -304,6 +339,46 @@
       const pill = document.getElementById('meta-pill');
       pill.style.display = 'inline-flex';
       pill.textContent = `Gewinnchance A ${aP.toFixed(1)}% · B ${bP.toFixed(1)}% · Fairness ${fairness.toFixed(1)}% · Map ${mapUsed}`;
+       // --- NEU: Hinweise zu Erkennung/Fallback anzeigen ---
+      const notice = document.getElementById('notice');
+        if (notice) {
+          const usedFallback = (teams.used_fallback_for || []);
+          const hasUnresolved = Array.isArray(unresolved) && unresolved.length > 0;
+          const hasFallback = Array.isArray(usedFallback) && usedFallback.length > 0;
+
+          if (!hasUnresolved && !hasFallback) {
+            notice.style.display = 'none';
+            notice.innerHTML = '';
+          } else {
+            let html = `<div class="notice-box">
+            <div class="title">Hinweis: Spieler nicht eindeutig erkannt</div>
+            <div class="muted">Wenn ein Spieler nicht gefunden wird, nutzt der Generator den globalen Durchschnitt (≈ 14). Prüfe die Schreibweise oder wähle den Namen aus der Vorschlagsliste.</div>
+          `;
+
+          if (hasUnresolved) {
+            html += `<div style="margin-top:10px; font-weight:700;">Unsichere Zuordnungen:</div>`;
+            html += `<div class="notice-chips">` + unresolved.map(u => {
+              const inp = u.input ?? '';
+              const best = u.best_guess ?? '';
+              const conf = (u.confidence ?? 0);
+              return `<span class="notice-chip"><strong>${escapeHtml(inp)}</strong> → ${escapeHtml(best)} <span style="opacity:.75">(${conf})</span></span>`;
+            }).join('') + `</div>`;
+          }
+
+          if (hasFallback) {
+            html += `<div style="margin-top:10px; font-weight:700;">Fallback (keine Daten gefunden):</div>`;
+            html += `<div class="notice-chips">` + usedFallback.map(n =>
+              `<span class="notice-chip">${escapeHtml(n)}</span>`
+            ).join('') + `</div>`;
+          }
+
+          html += `</div>`;
+          notice.innerHTML = html;
+          notice.style.display = 'block';
+        }
+      }
+// --- Ende NEU ---
+
 
       const html = `
         <div class="teams">
