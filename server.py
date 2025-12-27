@@ -309,6 +309,10 @@ def index():
 @app.route("/teams")
 def teams_page():
     return render_template("teams.html")
+    
+@app.route("/dashboard")
+def dashboard_page():
+    return render_template("dashboard.html")
 
 
 # ----------------------------
@@ -651,6 +655,227 @@ def api_get_available_maps():
 
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
+
+# ----------------------------
+# Dashboard helpers (PBIX-like)
+# ----------------------------
+GERMAN_MONTHS = {
+    "januar": "01", "februar": "02", "märz": "03", "maerz": "03",
+    "april": "04", "mai": "05", "juni": "06", "juli": "07",
+    "august": "08", "september": "09", "oktober": "10",
+    "november": "11", "dezember": "12",
+}
+
+def _parse_event_date(s: str):
+    """
+    Erwartet Strings wie: 'Freitag, 18. Juli 2025'
+    Gibt datetime.date oder None zurück.
+    """
+    if not s:
+        return None
+    try:
+        txt = str(s).strip()
+        if "," in txt:
+            txt = txt.split(",", 1)[1].strip()  # '18. Juli 2025'
+        parts = txt.replace("  ", " ").split(" ")
+        # ['18.', 'Juli', '2025']
+        if len(parts) < 3:
+            return None
+        day = parts[0].replace(".", "").zfill(2)
+        month_name = parts[1].strip().lower()
+        month = GERMAN_MONTHS.get(month_name)
+        year = parts[2].strip()
+        if not month:
+            return None
+        return pd.to_datetime(f"{year}-{month}-{day}", errors="coerce").date()
+    except Exception:
+        return None
+
+def _load_players_matches_merged():
+    players_path, err, code = ensure_players_csv()
+    if err:
+        return None, None, err, code
+    matches_path, err, code = ensure_matches_csv()
+    if err:
+        return None, None, err, code
+
+    p = pd.read_csv(players_path)
+    m = pd.read_csv(matches_path)
+
+    # merge: matchNr + EventDate + EventTimeRange
+    # (in deinen CSVs sind EventDate und EventTimeRange in beiden Files vorhanden)
+    for col in ["EventDate", "EventTimeRange"]:
+        if col not in p.columns:
+            p[col] = None
+        if col not in m.columns:
+            m[col] = None
+
+    merged = p.merge(
+        m[["matchNr", "EventDate", "EventTimeRange", "maptitle"]],
+        how="left",
+        on=["matchNr", "EventDate", "EventTimeRange"],
+    )
+
+    merged["EventDateParsed"] = merged["EventDate"].apply(_parse_event_date)
+
+    # robust types
+    for c in ["kills", "assists", "deaths", "score"]:
+        if c in merged.columns:
+            merged[c] = pd.to_numeric(merged[c], errors="coerce").fillna(0)
+
+    # KD pro Match (wie PowerBI Durchschnitt KD)
+    merged["kd_match"] = merged.apply(
+        lambda r: (r["kills"] / r["deaths"]) if r.get("deaths", 0) not in (0, None) else float(r.get("kills", 0)),
+        axis=1
+    )
+
+    # MVP count
+    if "isMVP" in merged.columns:
+        merged["isMVP"] = merged["isMVP"].astype(str).str.lower().isin(["true", "1", "yes"])
+    else:
+        merged["isMVP"] = False
+
+    # Winrate
+    if "playerWon" in merged.columns:
+        merged["playerWon"] = merged["playerWon"].astype(str).str.lower().isin(["true", "1", "yes"])
+    else:
+        merged["playerWon"] = False
+
+    # Player column must exist
+    if "Player" not in merged.columns:
+        return None, None, jsonify({"success": False, "error": "Spalte 'Player' fehlt in Players-CSV."}), 500
+
+    return merged, m, None, None
+
+
+# ----------------------------
+# Dashboard API
+# ----------------------------
+@app.get("/api/dashboard/filters")
+def api_dashboard_filters():
+    merged, _m, err, code = _load_players_matches_merged()
+    if err:
+        return err, code
+
+    players = sorted([x for x in merged["Player"].dropna().astype(str).str.strip().unique().tolist() if x])
+    maps = sorted([x for x in merged["maptitle"].dropna().astype(str).str.strip().unique().tolist() if x])
+
+    return jsonify({"success": True, "players": players, "maps": maps})
+
+
+@app.get("/api/dashboard/leaderboard")
+def api_dashboard_leaderboard():
+    """
+    metric:
+      - avg_kills
+      - avg_score
+      - total_kills
+      - mvp_count
+    """
+    merged, _m, err, code = _load_players_matches_merged()
+    if err:
+        return err, code
+
+    metric = (request.args.get("metric") or "").strip()
+    limit = int(request.args.get("limit") or 20)
+
+    g = merged.groupby("Player", dropna=True)
+
+    if metric == "avg_kills":
+        s = g["kills"].mean()
+    elif metric == "avg_score":
+        s = g["score"].mean()
+    elif metric == "total_kills":
+        s = g["kills"].sum()
+    elif metric == "mvp_count":
+        s = g["isMVP"].sum()
+    else:
+        return jsonify({"success": False, "error": "Unbekannte metric"}), 400
+
+    s = s.sort_values(ascending=False).head(limit)
+
+    rows = [{"player": idx, "value": float(val) if pd.notna(val) else 0.0} for idx, val in s.items()]
+    return jsonify({"success": True, "metric": metric, "rows": rows})
+
+
+@app.get("/api/dashboard/player-summary")
+def api_dashboard_player_summary():
+    merged, _m, err, code = _load_players_matches_merged()
+    if err:
+        return err, code
+
+    player = (request.args.get("player") or "").strip()
+    if not player:
+        return jsonify({"success": False, "error": "player fehlt"}), 400
+
+    mapname = (request.args.get("map") or "").strip()
+    df = merged[merged["Player"].astype(str).str.strip() == player].copy()
+    if mapname:
+        df = df[df["maptitle"].astype(str).str.strip() == mapname]
+
+    if df.empty:
+        return jsonify({
+            "avg_kills": 0, "avg_deaths": 0, "avg_assists": 0, "avg_kd": 0, "avg_score": 0,
+            "total_games": 0, "winrate": 0, "mvp_count": 0,
+            "sum_kills": 0, "sum_deaths": 0, "sum_assists": 0
+        })
+
+    # TotalGames = Anzahl unique Matches (matchNr + EventDate + EventTimeRange)
+    df["matchKey"] = df["matchNr"].astype(str) + "|" + df["EventDate"].astype(str) + "|" + df["EventTimeRange"].astype(str)
+    total_games = int(df["matchKey"].nunique())
+
+    out = {
+        "avg_kills": float(df["kills"].mean()),
+        "avg_deaths": float(df["deaths"].mean()),
+        "avg_assists": float(df["assists"].mean()),
+        "avg_kd": float(df["kd_match"].mean()),
+        "avg_score": float(df["score"].mean()),
+        "total_games": total_games,
+        "winrate": float(df["playerWon"].mean() * 100.0),
+        "mvp_count": int(df["isMVP"].sum()),
+        "sum_kills": int(df["kills"].sum()),
+        "sum_deaths": int(df["deaths"].sum()),
+        "sum_assists": int(df["assists"].sum()),
+    }
+    return jsonify(out)
+
+
+@app.get("/api/dashboard/player-series")
+def api_dashboard_player_series():
+    merged, _m, err, code = _load_players_matches_merged()
+    if err:
+        return err, code
+
+    player = (request.args.get("player") or "").strip()
+    metric = (request.args.get("metric") or "").strip()
+    mapname = (request.args.get("map") or "").strip()
+
+    if not player:
+        return jsonify({"success": False, "error": "player fehlt"}), 400
+    if metric not in {"avg_kills", "avg_deaths", "avg_assists", "avg_kd", "avg_score"}:
+        return jsonify({"success": False, "error": "metric ungültig"}), 400
+
+    df = merged[merged["Player"].astype(str).str.strip() == player].copy()
+    if mapname:
+        df = df[df["maptitle"].astype(str).str.strip() == mapname]
+
+    df = df[df["EventDateParsed"].notna()]
+    if df.empty:
+        return jsonify({"labels": [], "values": []})
+
+    metric_col = {
+        "avg_kills": "kills",
+        "avg_deaths": "deaths",
+        "avg_assists": "assists",
+        "avg_kd": "kd_match",
+        "avg_score": "score",
+    }[metric]
+
+    s = df.groupby("EventDateParsed")[metric_col].mean().sort_index()
+    labels = [d.isoformat() for d in s.index.tolist()]
+    values = [float(v) for v in s.values.tolist()]
+    return jsonify({"labels": labels, "values": values})
+
 
 
 if __name__ == "__main__":
