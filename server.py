@@ -16,14 +16,156 @@ from aliases import (
 app = Flask(__name__)
 
 BASE_DIR = os.path.dirname(__file__)
-CSV_PATH = os.path.join(BASE_DIR, 'data.csv')
+CSV_PATH = os.path.join(BASE_DIR, "data.csv")
 
 FILES_FOLDER = os.path.join(BASE_DIR, "files")
 EVENTS_FOLDER = os.path.join(BASE_DIR, "events")
 os.makedirs(FILES_FOLDER, exist_ok=True)
 os.makedirs(EVENTS_FOLDER, exist_ok=True)
 
-# ---- CSV-Dateien (werden nach Stats-Generierung vorhanden sein) ----
+REPO_OWNER = "Trent1337"
+REPO_NAME = "VRFrag"
+REPO_BRANCH = "main"
+
+
+# ----------------------------
+# GitHub Helpers
+# ----------------------------
+def _github_headers(token: str):
+    return {
+        "Authorization": f"Bearer {token}",
+        "Accept": "application/vnd.github.v3+json",
+    }
+
+
+def save_file_to_github(repo_path: str, content: str, commit_message: str):
+    """
+    Speichert/aktualisiert eine Datei in GitHub (beliebiger Pfad),
+    z.B. 'events/x.txt' oder 'files/merged.csv_players.csv'
+    """
+    token = os.environ.get("GITHUB_TOKEN")
+    if not token:
+        return {"success": False, "error": "GITHUB_TOKEN nicht konfiguriert"}
+
+    headers = _github_headers(token)
+    url = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/contents/{repo_path}"
+
+    content_base64 = base64.b64encode(content.encode("utf-8")).decode("utf-8")
+
+    # existierende SHA holen (für Update)
+    existing_sha = None
+    try:
+        r = requests.get(url, headers=headers, params={"ref": REPO_BRANCH}, timeout=20)
+        if r.status_code == 200:
+            existing_sha = r.json().get("sha")
+    except Exception:
+        pass
+
+    data = {
+        "message": commit_message,
+        "content": content_base64,
+        "branch": REPO_BRANCH,
+    }
+    if existing_sha:
+        data["sha"] = existing_sha
+
+    try:
+        r = requests.put(url, headers=headers, json=data, timeout=20)
+        resp = r.json() if r.content else {}
+        if r.status_code in (200, 201):
+            return {
+                "success": True,
+                "repo_path": repo_path,
+                "html_url": resp.get("content", {}).get("html_url", ""),
+            }
+        return {
+            "success": False,
+            "error": f"GitHub API Fehler: {r.status_code} - {resp.get('message', 'Unbekannter Fehler')}",
+        }
+    except Exception as e:
+        return {"success": False, "error": f"Verbindungsfehler: {str(e)}"}
+
+
+def download_file_from_github(repo_path: str, local_path: str):
+    """
+    Lädt eine Datei aus GitHub (contents API, base64 content) in ein lokales File.
+    """
+    token = os.environ.get("GITHUB_TOKEN")
+    if not token:
+        return False, "GITHUB_TOKEN nicht konfiguriert"
+
+    headers = _github_headers(token)
+    url = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/contents/{repo_path}"
+
+    r = requests.get(url, headers=headers, params={"ref": REPO_BRANCH}, timeout=20)
+    if r.status_code != 200:
+        return False, f"GitHub download Fehler: {r.status_code} - {r.text}"
+
+    payload = r.json()
+    content_b64 = payload.get("content", "")
+    if not content_b64:
+        return False, "Keine content payload von GitHub erhalten"
+
+    content = base64.b64decode(content_b64).decode("utf-8", errors="replace")
+    os.makedirs(os.path.dirname(local_path), exist_ok=True)
+    with open(local_path, "w", encoding="utf-8") as f:
+        f.write(content)
+
+    return True, None
+
+
+def push_statistics_csvs_to_github(stats_result: dict):
+    """
+    Pusht die zuletzt generierten CSVs aus ./files nach GitHub unter files/.
+    Erwartet, dass generate_statistics() ein dict mit players_file und matches_file liefert.
+    """
+    pushed = {}
+
+    players_file = stats_result.get("players_file")
+    matches_file = stats_result.get("matches_file")
+
+    # Falls generate_statistics nur Basenames liefert, auf absoluten Pfad mappen:
+    if players_file and not os.path.isabs(players_file):
+        players_file = os.path.join(FILES_FOLDER, os.path.basename(players_file))
+    if matches_file and not os.path.isabs(matches_file):
+        matches_file = os.path.join(FILES_FOLDER, os.path.basename(matches_file))
+
+    if players_file and os.path.exists(players_file):
+        with open(players_file, "r", encoding="utf-8") as f:
+            content = f.read()
+        repo_path = f"files/{os.path.basename(players_file)}"
+        pushed["players_csv"] = save_file_to_github(
+            repo_path=repo_path,
+            content=content,
+            commit_message=f"Update stats: {os.path.basename(players_file)}",
+        )
+
+    if matches_file and os.path.exists(matches_file):
+        with open(matches_file, "r", encoding="utf-8") as f:
+            content = f.read()
+        repo_path = f"files/{os.path.basename(matches_file)}"
+        pushed["matches_csv"] = save_file_to_github(
+            repo_path=repo_path,
+            content=content,
+            commit_message=f"Update stats: {os.path.basename(matches_file)}",
+        )
+
+    return pushed
+
+
+# ----------------------------
+# Local Helpers
+# ----------------------------
+def save_event_locally(filename: str, content: str):
+    local_path = os.path.join(EVENTS_FOLDER, filename)
+    with open(local_path, "w", encoding="utf-8") as f:
+        f.write(content)
+    return local_path
+
+
+# ----------------------------
+# CSV Resolution (local first, fallback to GitHub)
+# ----------------------------
 def get_players_csv_path():
     for p in [
         os.path.join(FILES_FOLDER, "vrfrag_players.csv"),
@@ -32,6 +174,7 @@ def get_players_csv_path():
         if os.path.exists(p):
             return p
     return None
+
 
 def get_matches_csv_path():
     for p in [
@@ -42,26 +185,50 @@ def get_matches_csv_path():
             return p
     return None
 
+
 def ensure_players_csv():
     path = get_players_csv_path()
-    if not path:
-        return None, jsonify({
-            "success": False,
-            "error": "Spieler-Daten nicht gefunden (vrfrag_players.csv / merged.csv_players.csv). Bitte zuerst Statistiken generieren."
-        }), 400
-    return path, None, None
+    if path and os.path.exists(path):
+        return path, None, None
+
+    # Fallback: aus GitHub holen
+    candidates = ["merged.csv_players.csv", "vrfrag_players.csv"]
+    for name in candidates:
+        repo_path = f"files/{name}"
+        local_path = os.path.join(FILES_FOLDER, name)
+        ok, _err = download_file_from_github(repo_path, local_path)
+        if ok and os.path.exists(local_path):
+            return local_path, None, None
+
+    return None, jsonify({
+        "success": False,
+        "error": "Spieler-Daten nicht gefunden (lokal & GitHub). Bitte zuerst Statistiken generieren."
+    }), 400
+
 
 def ensure_matches_csv():
     path = get_matches_csv_path()
-    if not path:
-        return None, jsonify({
-            "success": False,
-            "error": "Match-Datei nicht gefunden (vrfrag_matches.csv / merged.csv_matches.csv). Bitte zuerst Statistiken generieren."
-        }), 400
-    return path, None, None
+    if path and os.path.exists(path):
+        return path, None, None
+
+    # Fallback: aus GitHub holen
+    candidates = ["merged.csv_matches.csv", "vrfrag_matches.csv"]
+    for name in candidates:
+        repo_path = f"files/{name}"
+        local_path = os.path.join(FILES_FOLDER, name)
+        ok, _err = download_file_from_github(repo_path, local_path)
+        if ok and os.path.exists(local_path):
+            return local_path, None, None
+
+    return None, jsonify({
+        "success": False,
+        "error": "Match-Datei nicht gefunden (lokal & GitHub). Bitte zuerst Statistiken generieren."
+    }), 400
 
 
-# ---- Team-Generator: Fuzzy-Mapping ----
+# ----------------------------
+# Team-Generator: Fuzzy-Mapping
+# ----------------------------
 def get_player_universe():
     players_file, err_resp, code = ensure_players_csv()
     if err_resp:
@@ -82,6 +249,7 @@ def get_player_universe():
     all_players = sorted([p for p in all_players if p])
     return all_players, None, None
 
+
 def resolve_player_name(input_name: str, all_players: list[str], cutoff: float = 0.78):
     raw = (input_name or "").strip()
     if not raw:
@@ -100,92 +268,29 @@ def resolve_player_name(input_name: str, all_players: list[str], cutoff: float =
     return raw, 0.0
 
 
-# ---- GitHub Save ----
-def _github_headers(token: str):
-    return {
-        "Authorization": f"Bearer {token}",
-        "Accept": "application/vnd.github.v3+json",
-    }
-
-def save_to_github(filename, content):
-    """
-    Speichert eine Datei direkt im GitHub Repo über die API
-    """
-    token = os.environ.get('GITHUB_TOKEN')
-    if not token:
-        return {"success": False, "error": "GITHUB_TOKEN nicht konfiguriert"}
-
-    repo_owner = "Trent1337"
-    repo_name = "VRFrag"
-    branch = "main"
-
-    content_base64 = base64.b64encode(content.encode('utf-8')).decode('utf-8')
-    headers = _github_headers(token)
-
-    url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/contents/events/{filename}"
-
-    existing_sha = None
-    try:
-        response = requests.get(url, headers=headers, params={"ref": branch}, timeout=20)
-        if response.status_code == 200:
-            existing_sha = response.json().get("sha")
-    except Exception:
-        pass
-
-    data = {
-        "message": f"Add event file: {filename}",
-        "content": content_base64,
-        "branch": branch
-    }
-    if existing_sha:
-        data["sha"] = existing_sha
-
-    try:
-        response = requests.put(url, headers=headers, json=data, timeout=20)
-        response_data = response.json() if response.content else {}
-
-        if response.status_code in [200, 201]:
-            return {
-                "success": True,
-                "filename": filename,
-                "html_url": response_data.get("content", {}).get("html_url", ""),
-                "message": "Datei erfolgreich zu GitHub gepusht"
-            }
-        else:
-            return {
-                "success": False,
-                "error": f"GitHub API Fehler: {response.status_code} - {response_data.get('message', 'Unbekannter Fehler')}"
-            }
-    except Exception as e:
-        return {"success": False, "error": f"Verbindungsfehler: {str(e)}"}
-
-
-def save_event_locally(filename: str, content: str):
-    local_path = os.path.join(EVENTS_FOLDER, filename)
-    with open(local_path, "w", encoding="utf-8") as f:
-        f.write(content)
-    return local_path
-
-
+# ----------------------------
+# Filename Generation
+# ----------------------------
 def generate_filename(custom_name=None):
     """
     Generiert einen Dateinamen im Format YYYY_MM_DD_NN.txt
     """
     if custom_name:
-        return custom_name if custom_name.endswith('.txt') else custom_name + '.txt'
+        return custom_name if custom_name.endswith(".txt") else custom_name + ".txt"
 
     today = datetime.now().strftime("%Y_%m_%d")
-
     next_num = 1
+
+    # Optional: schaut in GitHub wie viele Events es heute schon gibt
     try:
-        token = os.environ.get('GITHUB_TOKEN')
+        token = os.environ.get("GITHUB_TOKEN")
         if token:
             headers = _github_headers(token)
-            url = "https://api.github.com/repos/Trent1337/VRFrag/contents/events"
+            url = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/contents/events"
             response = requests.get(url, headers=headers, timeout=20)
             if response.status_code == 200 and isinstance(response.json(), list):
                 files = response.json()
-                today_files = [f for f in files if f.get('name', '').startswith(today)]
+                today_files = [f for f in files if f.get("name", "").startswith(today)]
                 next_num = len(today_files) + 1
     except Exception:
         next_num = 1
@@ -193,28 +298,36 @@ def generate_filename(custom_name=None):
     return f"{today}_{next_num:02d}.txt"
 
 
-# ---- Pages ----
-@app.route('/')
+# ----------------------------
+# Pages
+# ----------------------------
+@app.route("/")
 def index():
-    return render_template('index.html')
+    return render_template("index.html")
 
-@app.route('/teams')
+
+@app.route("/teams")
 def teams_page():
-    return render_template('teams.html')
+    return render_template("teams.html")
 
 
-# ---- Misc old route ----
-@app.route('/run', methods=['POST'])
+# ----------------------------
+# Misc old route
+# ----------------------------
+@app.route("/run", methods=["POST"])
 def run_script():
-    players = [request.form.get(f'player{i}') for i in range(1, 11)]
+    players = [request.form.get(f"player{i}") for i in range(1, 11)]
     result = subprocess.run(
-        ['python3', 'run_script.py', CSV_PATH] + players,
-        capture_output=True, text=True
+        ["python3", "run_script.py", CSV_PATH] + players,
+        capture_output=True,
+        text=True,
     )
     return result.stdout or "Script ausgeführt"
 
 
-# ---- Aliases / Suggestions ----
+# ----------------------------
+# Aliases / Suggestions
+# ----------------------------
 @app.get("/api/name-suggestions")
 def api_name_suggestions():
     username = (request.args.get("username") or "").strip()
@@ -222,6 +335,7 @@ def api_name_suggestions():
         return jsonify({"success": False, "error": "username fehlt"}), 400
     best, others = suggest_real_name(username)
     return jsonify({"success": True, "username": username, "best": best, "others": others})
+
 
 @app.post("/api/aliases")
 def api_aliases_upsert():
@@ -234,60 +348,69 @@ def api_aliases_upsert():
     return jsonify({"success": True})
 
 
-# ---- VRFrag players from link ----
-@app.route('/api/get-players', methods=['POST'])
+# ----------------------------
+# VRFrag players from link
+# ----------------------------
+@app.route("/api/get-players", methods=["POST"])
 def api_get_players():
     try:
         data = request.get_json()
-        if not data or 'game_link' not in data:
-            return jsonify({'success': False, 'error': 'Kein game_link'}), 400
+        if not data or "game_link" not in data:
+            return jsonify({"success": False, "error": "Kein game_link"}), 400
 
-        game_link = data['game_link']
-        if not game_link.startswith('https://www.vrfrag.com/stats?'):
-            return jsonify({'success': False, 'error': 'Ungültiger Link'}), 400
+        game_link = data["game_link"]
+        if not game_link.startswith("https://www.vrfrag.com/stats?"):
+            return jsonify({"success": False, "error": "Ungültiger Link"}), 400
 
         players = get_players_from_url(game_link)
         if players is not None:
-            return jsonify({'success': True, 'players': players, 'count': len(players)})
-        else:
-            return jsonify({'success': False, 'error': 'Konnte Spielerdaten nicht abrufen'}), 500
+            return jsonify({"success": True, "players": players, "count": len(players)})
+        return jsonify({"success": False, "error": "Konnte Spielerdaten nicht abrufen"}), 500
+
     except Exception as e:
-        return jsonify({'success': False, 'error': f'Server Fehler: {str(e)}'}), 500
+        return jsonify({"success": False, "error": f"Server Fehler: {str(e)}"}), 500
 
 
-# ---- Save event (Option A: GitHub + local + generate stats) ----
-@app.route('/api/save-to-github', methods=['POST'])
+# ----------------------------
+# Save event: GitHub + local + generate stats + push CSVs to GitHub
+# ----------------------------
+@app.route("/api/save-to-github", methods=["POST"])
 def api_save_to_github():
     """
     Speichert Event-Datei in GitHub UND lokal in ./events,
-    damit generate_statistics() auf Render sofort damit arbeiten kann.
+    führt generate_statistics lokal aus und pushed anschließend die CSVs nach GitHub (/files).
     """
     try:
         data = request.get_json()
-        if not data or 'game_link' not in data or 'mappings' not in data:
-            return jsonify({'success': False, 'error': 'Ungültige Daten'}), 400
+        if not data or "game_link" not in data or "mappings" not in data:
+            return jsonify({"success": False, "error": "Ungültige Daten"}), 400
 
-        game_link = data['game_link']
-        mappings = data['mappings']
-        custom_filename = data.get('filename', '')
+        game_link = data["game_link"]
+        mappings = data["mappings"]
+        custom_filename = data.get("filename", "")
 
         # Dateiinhalt generieren
         content_lines = [game_link.strip()]
         for mapping in mappings:
-            nick = (mapping.get('nickname') or "").strip()
-            real = (mapping.get('realName') or mapping.get('real_name') or "").strip()
+            nick = (mapping.get("nickname") or "").strip()
+            real = (mapping.get("realName") or mapping.get("real_name") or "").strip()
             if nick and real:
                 content_lines.append(f"{nick}={real}")
         content = "\n".join(content_lines) + "\n"
 
         filename = generate_filename(custom_filename)
 
-        # 1) Zu GitHub pushen
-        result = save_to_github(filename, content)
+        # 1) Event nach GitHub pushen
+        event_repo_path = f"events/{filename}"
+        result = save_file_to_github(
+            repo_path=event_repo_path,
+            content=content,
+            commit_message=f"Add event file: {filename}",
+        )
         if not result.get("success"):
             return jsonify(result)
 
-        # 2) Lokal speichern (Option A)
+        # 2) Lokal speichern (damit generate_statistics sofort was sieht)
         try:
             local_path = save_event_locally(filename, content)
             result["local_saved"] = True
@@ -296,12 +419,16 @@ def api_save_to_github():
             result["local_saved"] = False
             result["local_error"] = str(e)
 
-        # 3) Statistiken neu generieren (arbeitet auf ./events)
+        # 3) Statistiken neu generieren (arbeitet auf ./events) + CSVs nach GitHub pushen
         try:
             stats = generate_statistics()
-            # generate_statistics liefert bei dir anscheinend ein dict mit success/message/...
-            result["statistics_updated"] = bool(stats.get("success", True))
             result["statistics_result"] = stats
+            result["statistics_updated"] = bool(stats.get("success", True))
+
+            if isinstance(stats, dict) and stats.get("success"):
+                pushed = push_statistics_csvs_to_github(stats)
+                result["pushed_csvs"] = pushed
+
         except Exception as e:
             result["statistics_updated"] = False
             result["statistics_error"] = str(e)
@@ -309,120 +436,132 @@ def api_save_to_github():
         return jsonify(result)
 
     except Exception as e:
-        return jsonify({'success': False, 'error': f'Fehler: {str(e)}'}), 500
+        return jsonify({"success": False, "error": f"Fehler: {str(e)}"}), 500
 
 
-# ---- List events on GitHub ----
-@app.route('/api/list-events', methods=['GET'])
+# ----------------------------
+# List events on GitHub
+# ----------------------------
+@app.route("/api/list-events", methods=["GET"])
 def api_list_events():
     try:
-        token = os.environ.get('GITHUB_TOKEN')
-        headers = {'Accept': 'application/vnd.github.v3+json'}
+        token = os.environ.get("GITHUB_TOKEN")
+        headers = {"Accept": "application/vnd.github.v3+json"}
         if token:
             headers = _github_headers(token)
 
-        url = "https://api.github.com/repos/Trent1337/VRFrag/contents/events"
+        url = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/contents/events"
         response = requests.get(url, headers=headers, timeout=20)
 
         if response.status_code == 200:
             files = response.json()
             event_files = []
             for file in files:
-                if file.get('name', '').endswith('.txt'):
+                if file.get("name", "").endswith(".txt"):
                     event_files.append({
-                        'filename': file.get('name'),
-                        'download_url': file.get('download_url'),
-                        'html_url': file.get('html_url'),
-                        'size': file.get('size', 0)
+                        "filename": file.get("name"),
+                        "download_url": file.get("download_url"),
+                        "html_url": file.get("html_url"),
+                        "size": file.get("size", 0),
                     })
 
             return jsonify({
-                'success': True,
-                'events': sorted(event_files, key=lambda x: x['filename'], reverse=True)
+                "success": True,
+                "events": sorted(event_files, key=lambda x: x["filename"], reverse=True),
             })
-        else:
-            return jsonify({
-                'success': False,
-                'error': f'GitHub Fehler: {response.status_code} - {response.text}'
-            }), 500
+
+        return jsonify({
+            "success": False,
+            "error": f"GitHub Fehler: {response.status_code} - {response.text}",
+        }), 500
 
     except Exception as e:
-        return jsonify({'success': False, 'error': str(e)}), 500
+        return jsonify({"success": False, "error": str(e)}), 500
 
 
-# ---- Update stats manually ----
-@app.route('/api/update-statistics', methods=['POST'])
+# ----------------------------
+# Update stats manually: generate + push CSVs to GitHub
+# ----------------------------
+@app.route("/api/update-statistics", methods=["POST"])
 def api_update_statistics():
     try:
         print("Starting statistics update...")
         result = generate_statistics()
 
-        if result.get('success'):
+        pushed = {}
+        if isinstance(result, dict) and result.get("success"):
+            pushed = push_statistics_csvs_to_github(result)
+
+        if result.get("success"):
             return jsonify({
-                'success': True,
-                'message': result.get('message'),
-                'player_count': result.get('player_count'),
-                'match_count': result.get('match_count'),
-                'unique_players': result.get('unique_players'),
-                'players_file': os.path.basename(result.get('players_file', '')),
-                'matches_file': os.path.basename(result.get('matches_file', ''))
+                "success": True,
+                "message": result.get("message"),
+                "player_count": result.get("player_count"),
+                "match_count": result.get("match_count"),
+                "unique_players": result.get("unique_players"),
+                "players_file": os.path.basename(result.get("players_file", "")),
+                "matches_file": os.path.basename(result.get("matches_file", "")),
+                "pushed_csvs": pushed,
             })
-        else:
-            return jsonify({
-                'success': False,
-                'error': result.get('error', 'Unbekannter Fehler')
-            }), 500
+
+        return jsonify({
+            "success": False,
+            "error": result.get("error", "Unbekannter Fehler"),
+            "pushed_csvs": pushed,
+        }), 500
 
     except Exception as e:
         return jsonify({
-            'success': False,
-            'error': f'Statistics generation failed: {str(e)}'
+            "success": False,
+            "error": f"Statistics generation failed: {str(e)}",
         }), 500
 
 
-# ---- Download/list stats files ----
-@app.route('/files/<filename>')
+# ----------------------------
+# Download/list stats files (local)
+# ----------------------------
+@app.route("/files/<filename>")
 def download_file(filename):
     try:
         return send_from_directory(FILES_FOLDER, filename, as_attachment=True)
     except FileNotFoundError:
-        return jsonify({'success': False, 'error': 'File not found'}), 404
+        return jsonify({"success": False, "error": "File not found"}), 404
 
-@app.route('/api/list-files', methods=['GET'])
+
+@app.route("/api/list-files", methods=["GET"])
 def api_list_files():
     try:
         files = []
         for filename in os.listdir(FILES_FOLDER):
-            if filename.endswith('.csv'):
+            if filename.endswith(".csv"):
                 filepath = os.path.join(FILES_FOLDER, filename)
                 files.append({
-                    'filename': filename,
-                    'size': os.path.getsize(filepath),
-                    'modified': datetime.fromtimestamp(os.path.getmtime(filepath)).isoformat()
+                    "filename": filename,
+                    "size": os.path.getsize(filepath),
+                    "modified": datetime.fromtimestamp(os.path.getmtime(filepath)).isoformat(),
                 })
 
         return jsonify({
-            'success': True,
-            'files': sorted(files, key=lambda x: x['modified'], reverse=True)
+            "success": True,
+            "files": sorted(files, key=lambda x: x["modified"], reverse=True),
         })
 
     except Exception as e:
-        return jsonify({
-            'success': False,
-            'error': f'Error listing files: {str(e)}'
-        }), 500
+        return jsonify({"success": False, "error": f"Error listing files: {str(e)}"}), 500
 
 
-# ---- Team Generator API ----
-@app.route('/api/generate-teams', methods=['POST'])
+# ----------------------------
+# Team Generator API
+# ----------------------------
+@app.route("/api/generate-teams", methods=["POST"])
 def api_generate_teams():
     try:
         data = request.get_json()
-        if not data or 'players' not in data:
-            return jsonify({'success': False, 'error': 'Keine Spieler-Daten'}), 400
+        if not data or "players" not in data:
+            return jsonify({"success": False, "error": "Keine Spieler-Daten"}), 400
 
-        selected_players = data['players']
-        selected_map = data.get('map', None)
+        selected_players = data["players"]
+        selected_map = data.get("map", None)
 
         # A) Fuzzy-Mapping
         all_players, err_resp, code = get_player_universe()
@@ -439,7 +578,7 @@ def api_generate_teams():
                 unresolved.append({
                     "input": name,
                     "best_guess": best,
-                    "confidence": round(conf, 3)
+                    "confidence": round(conf, 3),
                 })
 
         selected_players = resolved_players
@@ -454,21 +593,23 @@ def api_generate_teams():
         from vrfrag_teams import generate_fair_teams
         result = generate_fair_teams(selected_players, players_df, selected_map)
 
-        if isinstance(result, dict) and 'error' in result:
-            return jsonify({'success': False, 'error': result['error']}), 400
+        if isinstance(result, dict) and "error" in result:
+            return jsonify({"success": False, "error": result["error"]}), 400
 
         return jsonify({
-            'success': True,
-            'teams': result,
-            'resolved_players': selected_players,
-            'unresolved': unresolved
+            "success": True,
+            "teams": result,
+            "resolved_players": selected_players,
+            "unresolved": unresolved,
         })
 
     except Exception as e:
-        return jsonify({'success': False, 'error': f'Team-Generator Fehler: {str(e)}'}), 500
+        return jsonify({"success": False, "error": f"Team-Generator Fehler: {str(e)}"}), 500
 
 
-# ---- Get all players for datalist ----
+# ----------------------------
+# Get all players for datalist
+# ----------------------------
 @app.get("/api/get-all-players")
 def get_all_players():
     path, err_resp, code = ensure_players_csv()
@@ -491,7 +632,10 @@ def get_all_players():
     return jsonify({"players": players})
 
 
-@app.route('/api/get-available-maps', methods=['GET'])
+# ----------------------------
+# Maps
+# ----------------------------
+@app.route("/api/get-available-maps", methods=["GET"])
 def api_get_available_maps():
     try:
         matches_file, err_resp, code = ensure_matches_csv()
@@ -509,5 +653,5 @@ def api_get_available_maps():
         return jsonify({"success": False, "error": str(e)}), 500
 
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
