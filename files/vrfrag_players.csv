@@ -1,0 +1,424 @@
+matchNr,nickname,kills,assists,deaths,score,team,isMVP,matchWinner,playerWon,EventDate,EventTimeRange,mvpPlayer,Player,EventId
+1,89ZtbnhÖ_,4,0,8,9,A,False,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,Test1,2025_09_22_01
+1,DaMaxx,4,4,6,15,A,False,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,125,2025_09_22_01
+1,Commodus,6,2,6,17,A,False,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,123124,2025_09_22_01
+1,RamboXXL,8,0,6,19,A,False,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,81235,2025_09_22_01
+1,Calimeroooo,4,0,4,13,B,False,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,Test2,2025_09_22_01
+1,DrSnuggles,6,0,5,16,B,False,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,123,2025_09_22_01
+1,Ganschii,9,0,7,19,B,False,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,5612,2025_09_22_01
+1,Homunkulus,7,4,7,20,B,True,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,7432,2025_09_22_01
+2,89ZtbnhÖ_,2,2,8,8,A,False,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,Test1,2025_09_22_01
+2,DaMaxx,6,1,7,16,A,False,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,125,2025_09_22_01
+2,Ganschii,8,0,8,18,A,False,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,5612,2025_09_22_01
+2,RamboXXL,10,2,6,26,A,False,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,81235,2025_09_22_01
+2,Calimeroooo,2,0,7,7,B,False,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,Test2,2025_09_22_01
+2,Commodus,3,2,7,10,B,False,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,123124,2025_09_22_01
+2,DrSnuggles,7,1,7,18,B,False,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,123,2025_09_22_01
+2,Homunkulus,17,1,6,38,B,True,Draw,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,7432,2025_09_22_01
+3,DrSnuggles,2,1,7,6,A,False,A,True,"Freitag, 23. Mai 2025",18:30 - 20:30,Commodus,123,2025_09_22_01
+3,89ZtbnhÖ_,7,2,6,17,A,False,A,True,"Freitag, 23. Mai 2025",18:30 - 20:30,Commodus,Test1,2025_09_22_01
+3,Ganschii,8,2,7,19,A,False,A,True,"Freitag, 23. Mai 2025",18:30 - 20:30,Commodus,5612,2025_09_22_01
+3,RamboXXL,9,1,3,24,A,False,A,True,"Freitag, 23. Mai 2025",18:30 - 20:30,Commodus,81235,2025_09_22_01
+3,Calimeroooo,1,1,6,5,B,False,A,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Commodus,Test2,2025_09_22_01
+3,Homunkulus,3,1,7,8,B,False,A,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Commodus,7432,2025_09_22_01
+3,DaMaxx,6,2,8,14,B,False,A,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Commodus,125,2025_09_22_01
+3,Commodus,12,0,6,25,B,True,A,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Commodus,123124,2025_09_22_01
+4,RamboXXL,5,1,6,14,A,False,A,True,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,81235,2025_09_22_01
+4,89ZtbnhÖ_,8,0,6,20,A,False,A,True,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,Test1,2025_09_22_01
+4,Commodus,8,0,5,21,A,False,A,True,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,123124,2025_09_22_01
+4,Ganschii,11,1,8,25,A,False,A,True,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,5612,2025_09_22_01
+4,Calimeroooo,0,0,8,2,B,False,A,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,Test2,2025_09_22_01
+4,DaMaxx,2,2,10,6,B,False,A,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,125,2025_09_22_01
+4,DrSnuggles,10,0,8,22,B,False,A,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,123,2025_09_22_01
+4,Homunkulus,12,1,6,29,B,True,A,False,"Freitag, 23. Mai 2025",18:30 - 20:30,Homunkulus,7432,2025_09_22_01
+5,RamboXXL,2,0,2,6,A,False,A,True,"Freitag, 23. Mai 2025",18:30 - 20:30,DrSnuggles,81235,2025_09_22_01
+5,Commodus,2,1,1,8,A,False,A,True,"Freitag, 23. Mai 2025",18:30 - 20:30,DrSnuggles,123124,2025_09_22_01
+5,DaMaxx,4,1,3,10,A,False,A,True,"Freitag, 23. Mai 2025",18:30 - 20:30,DrSnuggles,125,2025_09_22_01
+5,DrSnuggles,6,0,0,16,A,True,A,True,"Freitag, 23. Mai 2025",18:30 - 20:30,DrSnuggles,123,2025_09_22_01
+5,Calimeroooo,0,1,4,0,B,False,A,False,"Freitag, 23. Mai 2025",18:30 - 20:30,DrSnuggles,Test2,2025_09_22_01
+5,89ZtbnhÖ_,1,0,4,2,B,False,A,False,"Freitag, 23. Mai 2025",18:30 - 20:30,DrSnuggles,Test1,2025_09_22_01
+5,Ganschii,3,0,4,5,B,False,A,False,"Freitag, 23. Mai 2025",18:30 - 20:30,DrSnuggles,5612,2025_09_22_01
+5,Homunkulus,2,2,4,6,B,False,A,False,"Freitag, 23. Mai 2025",18:30 - 20:30,DrSnuggles,7432,2025_09_22_01
+1,AndiOstfront,0,2,5,4,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,AndiOstfront,2025_09_24_01
+1,Dr_Doom,3,1,2,12,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Dr_Doom,2025_09_24_01
+1,Hauns,5,3,2,18,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Marlene Göbl,2025_09_24_01
+1,GRIS,11,1,7,23,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Christian Paschenegger,2025_09_24_01
+1,Commodus,12,1,2,30,A,True,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Stephan Göbl,2025_09_24_01
+1,Gekko,1,0,7,2,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Georg Wimmer,2025_09_24_01
+1,KillerKitty,2,0,6,5,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Martina Steinkellner,2025_09_24_01
+1,DrSnuggles,3,1,7,6,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Stefan Neubacher,2025_09_24_01
+1,Woody,5,1,7,11,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Thomas Holzer,2025_09_24_01
+1,Jonas,7,1,6,15,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Jonas Trentmann,2025_09_24_01
+2,Woody,3,1,7,9,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,DrSnuggles,Thomas Holzer,2025_09_24_01
+2,Gekko,5,0,5,14,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,DrSnuggles,Georg Wimmer,2025_09_24_01
+2,Commodus,9,1,4,27,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,DrSnuggles,Stephan Göbl,2025_09_24_01
+2,DrSnuggles,11,1,4,28,A,True,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,DrSnuggles,Stefan Neubacher,2025_09_24_01
+2,KillerKitty,9,2,3,28,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,DrSnuggles,Martina Steinkellner,2025_09_24_01
+2,AndiOstfront,0,1,8,2,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,DrSnuggles,AndiOstfront,2025_09_24_01
+2,GRIS,3,0,9,6,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,DrSnuggles,Christian Paschenegger,2025_09_24_01
+2,Jonas,5,0,7,12,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,DrSnuggles,Jonas Trentmann,2025_09_24_01
+2,Dr_Doom,6,1,7,14,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,DrSnuggles,Dr_Doom,2025_09_24_01
+2,Hauns,8,1,7,20,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,DrSnuggles,Marlene Göbl,2025_09_24_01
+3,Hauns,3,2,6,10,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Marlene Göbl,2025_09_24_01
+3,Dr_Doom,7,1,5,16,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Dr_Doom,2025_09_24_01
+3,DrSnuggles,6,1,5,16,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Stefan Neubacher,2025_09_24_01
+3,Jonas,7,1,6,17,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Jonas Trentmann,2025_09_24_01
+3,KillerKitty,11,0,5,25,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Martina Steinkellner,2025_09_24_01
+3,Gekko,0,0,8,0,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Georg Wimmer,2025_09_24_01
+3,AndiOstfront,1,1,6,6,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,AndiOstfront,2025_09_24_01
+3,Woody,4,4,7,13,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Thomas Holzer,2025_09_24_01
+3,GRIS,8,1,8,16,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Christian Paschenegger,2025_09_24_01
+3,Commodus,13,1,7,28,B,True,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Stephan Göbl,2025_09_24_01
+4,Gekko,1,1,6,6,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,DrSnuggles,Georg Wimmer,2025_09_24_01
+4,GRIS,9,1,7,22,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,DrSnuggles,Christian Paschenegger,2025_09_24_01
+4,Jonas,9,1,7,22,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,DrSnuggles,Jonas Trentmann,2025_09_24_01
+4,Woody,9,0,6,24,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,DrSnuggles,Thomas Holzer,2025_09_24_01
+4,DrSnuggles,12,1,8,31,A,True,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,DrSnuggles,Stefan Neubacher,2025_09_24_01
+4,Dr_Doom,5,1,8,13,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,DrSnuggles,Dr_Doom,2025_09_24_01
+4,AndiOstfront,5,2,8,13,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,DrSnuggles,AndiOstfront,2025_09_24_01
+4,Hauns,5,2,6,16,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,DrSnuggles,Marlene Göbl,2025_09_24_01
+4,Commodus,10,2,9,23,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,DrSnuggles,Stephan Göbl,2025_09_24_01
+4,KillerKitty,9,4,9,27,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,DrSnuggles,Martina Steinkellner,2025_09_24_01
+5,AndiOstfront,3,0,4,8,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,GRIS,AndiOstfront,2025_09_24_01
+5,Gekko,2,0,2,9,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,GRIS,Georg Wimmer,2025_09_24_01
+5,Jonas,5,3,6,17,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,GRIS,Jonas Trentmann,2025_09_24_01
+5,Commodus,10,3,3,28,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,GRIS,Stephan Göbl,2025_09_24_01
+5,GRIS,11,2,5,29,A,True,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,GRIS,Christian Paschenegger,2025_09_24_01
+5,DrSnuggles,0,2,7,3,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,GRIS,Stefan Neubacher,2025_09_24_01
+5,Dr_Doom,4,1,7,8,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,GRIS,Dr_Doom,2025_09_24_01
+5,Hauns,4,2,6,11,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,GRIS,Marlene Göbl,2025_09_24_01
+5,KillerKitty,5,1,7,12,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,GRIS,Martina Steinkellner,2025_09_24_01
+5,Woody,5,2,5,16,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,GRIS,Thomas Holzer,2025_09_24_01
+6,Dr_Doom,3,1,7,9,A,False,Draw,False,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Dr_Doom,2025_09_24_01
+6,GRIS,5,1,8,13,A,False,Draw,False,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Christian Paschenegger,2025_09_24_01
+6,Hauns,7,1,8,16,A,False,Draw,False,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Marlene Göbl,2025_09_24_01
+6,AndiOstfront,8,0,7,18,A,False,Draw,False,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,AndiOstfront,2025_09_24_01
+6,DrSnuggles,10,2,7,23,A,False,Draw,False,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Stefan Neubacher,2025_09_24_01
+6,Gekko,2,0,9,5,B,False,Draw,False,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Georg Wimmer,2025_09_24_01
+6,KillerKitty,6,0,8,14,B,False,Draw,False,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Martina Steinkellner,2025_09_24_01
+6,Jonas,6,0,6,16,B,False,Draw,False,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Jonas Trentmann,2025_09_24_01
+6,Woody,6,3,7,17,B,False,Draw,False,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Thomas Holzer,2025_09_24_01
+6,Commodus,12,1,5,28,B,True,Draw,False,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Stephan Göbl,2025_09_24_01
+7,DrSnuggles,4,5,7,15,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,AndiOstfront,Stefan Neubacher,2025_09_24_01
+7,Jonas,7,1,7,17,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,AndiOstfront,Jonas Trentmann,2025_09_24_01
+7,Dr_Doom,5,2,7,17,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,AndiOstfront,Dr_Doom,2025_09_24_01
+7,GRIS,8,0,6,19,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,AndiOstfront,Christian Paschenegger,2025_09_24_01
+7,AndiOstfront,16,2,6,40,A,True,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,AndiOstfront,AndiOstfront,2025_09_24_01
+7,Gekko,5,0,9,10,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,AndiOstfront,Georg Wimmer,2025_09_24_01
+7,KillerKitty,5,0,8,12,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,AndiOstfront,Martina Steinkellner,2025_09_24_01
+7,Hauns,5,2,8,14,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,AndiOstfront,Marlene Göbl,2025_09_24_01
+7,Woody,5,2,8,14,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,AndiOstfront,Thomas Holzer,2025_09_24_01
+7,Commodus,10,1,8,22,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,AndiOstfront,Stephan Göbl,2025_09_24_01
+8,Gekko,4,1,7,11,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Georg Wimmer,2025_09_24_01
+8,GRIS,6,4,7,19,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Christian Paschenegger,2025_09_24_01
+8,Hauns,7,0,6,20,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Marlene Göbl,2025_09_24_01
+8,KillerKitty,12,2,6,30,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Martina Steinkellner,2025_09_24_01
+8,Commodus,9,3,4,33,A,True,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Stephan Göbl,2025_09_24_01
+8,Jonas,3,2,9,9,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Jonas Trentmann,2025_09_24_01
+8,Dr_Doom,4,0,9,9,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Dr_Doom,2025_09_24_01
+8,AndiOstfront,8,0,6,19,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,AndiOstfront,2025_09_24_01
+8,Woody,7,1,7,20,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Thomas Holzer,2025_09_24_01
+8,DrSnuggles,8,2,9,20,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,Commodus,Stefan Neubacher,2025_09_24_01
+9,Dr_Doom,3,4,5,13,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,DrSnuggles,Dr_Doom,2025_09_24_01
+9,KillerKitty,6,0,5,15,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,DrSnuggles,Martina Steinkellner,2025_09_24_01
+9,Hauns,7,2,4,20,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,DrSnuggles,Marlene Göbl,2025_09_24_01
+9,AndiOstfront,6,4,4,20,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,DrSnuggles,AndiOstfront,2025_09_24_01
+9,DrSnuggles,14,1,4,33,A,True,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,DrSnuggles,Stefan Neubacher,2025_09_24_01
+9,Gekko,3,2,8,8,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,DrSnuggles,Georg Wimmer,2025_09_24_01
+9,Commodus,3,0,6,8,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,DrSnuggles,Stephan Göbl,2025_09_24_01
+9,GRIS,4,1,8,9,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,DrSnuggles,Christian Paschenegger,2025_09_24_01
+9,Woody,4,1,7,9,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,DrSnuggles,Thomas Holzer,2025_09_24_01
+9,Jonas,8,0,8,16,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,DrSnuggles,Jonas Trentmann,2025_09_24_01
+10,Jonas,1,0,3,3,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,GRIS,Jonas Trentmann,2025_09_24_01
+10,Commodus,0,1,2,3,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,GRIS,Stephan Göbl,2025_09_24_01
+10,Hauns,3,0,2,7,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,GRIS,Marlene Göbl,2025_09_24_01
+10,AndiOstfront,5,0,3,11,A,False,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,GRIS,AndiOstfront,2025_09_24_01
+10,GRIS,10,1,2,22,A,True,A,True,"Sonntag, 21. September 2025",14:30 - 18:30,GRIS,Christian Paschenegger,2025_09_24_01
+10,Gekko,0,0,4,0,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,GRIS,Georg Wimmer,2025_09_24_01
+10,Woody,0,0,4,0,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,GRIS,Thomas Holzer,2025_09_24_01
+10,KillerKitty,0,0,4,0,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,GRIS,Martina Steinkellner,2025_09_24_01
+10,Dr_Doom,2,0,4,4,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,GRIS,Dr_Doom,2025_09_24_01
+10,DrSnuggles,8,0,3,17,B,False,A,False,"Sonntag, 21. September 2025",14:30 - 18:30,GRIS,Stefan Neubacher,2025_09_24_01
+1,Specki,0,0,5,3,A,False,Draw,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Stephan,Thomas Johanek,2025_09_25_01
+1,Yasar,3,1,6,8,A,False,Draw,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Stephan,Cayir Yasar,2025_09_25_01
+1,Ralph,4,0,6,10,A,False,Draw,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Stephan,Ralph Langbauer,2025_09_25_01
+1,Vidibus,5,0,2,16,A,False,Draw,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Stephan,David Prenninger,2025_09_25_01
+1,Stephan,6,1,3,25,A,True,Draw,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Stephan,Stephan Göbl,2025_09_25_01
+1,Leo,4,0,6,12,B,False,Draw,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Stephan,Leo Danzer,2025_09_25_01
+1,Nagla,4,3,3,15,B,False,Draw,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Stephan,Christian Nagler,2025_09_25_01
+1,Andi,8,1,5,20,B,False,Draw,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Stephan,Andreas Lindner,2025_09_25_01
+1,Christian,5,0,5,23,B,False,Draw,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Stephan,Christian Lurger,2025_09_25_01
+2,Andi,7,1,8,15,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Andreas Lindner,2025_09_25_01
+2,Specki,6,1,6,16,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Thomas Johanek,2025_09_25_01
+2,Nagla,10,0,4,25,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Christian Nagler,2025_09_25_01
+2,Ralph,13,2,7,29,A,True,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Ralph Langbauer,2025_09_25_01
+2,Stephan,2,0,8,3,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Stephan Göbl,2025_09_25_01
+2,Christian,2,1,8,6,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Christian Lurger,2025_09_25_01
+2,Leo,4,1,7,11,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Leo Danzer,2025_09_25_01
+2,Vidibus,7,0,8,14,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,David Prenninger,2025_09_25_01
+2,Yasar,8,2,8,19,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Cayir Yasar,2025_09_25_01
+3,Nagla,3,1,4,10,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Christian Nagler,2025_09_25_01
+3,Andi,4,1,5,11,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Andreas Lindner,2025_09_25_01
+3,Christian,10,0,3,23,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Christian Lurger,2025_09_25_01
+3,Ralph,13,2,1,33,A,True,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Ralph Langbauer,2025_09_25_01
+3,Vidibus,0,1,6,1,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,David Prenninger,2025_09_25_01
+3,Leo,1,0,7,2,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Leo Danzer,2025_09_25_01
+3,Yasar,2,1,7,5,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Cayir Yasar,2025_09_25_01
+3,Stephan,2,1,6,5,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Stephan Göbl,2025_09_25_01
+3,Specki,6,3,6,16,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Thomas Johanek,2025_09_25_01
+4,Yasar,2,3,4,10,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Specki,Cayir Yasar,2025_09_25_01
+4,Leo,3,2,4,11,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Specki,Leo Danzer,2025_09_25_01
+4,Vidibus,4,1,4,11,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Specki,David Prenninger,2025_09_25_01
+4,Stephan,5,3,2,19,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Specki,Stephan Göbl,2025_09_25_01
+4,Specki,9,0,3,21,A,True,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Specki,Thomas Johanek,2025_09_25_01
+4,Nagla,2,0,6,5,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Specki,Christian Nagler,2025_09_25_01
+4,Christian,3,1,6,8,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Specki,Christian Lurger,2025_09_25_01
+4,Ralph,3,2,6,9,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Specki,Ralph Langbauer,2025_09_25_01
+4,Andi,6,1,6,15,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Specki,Andreas Lindner,2025_09_25_01
+5,Stephan,6,0,6,13,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Andi,Stephan Göbl,2025_09_25_01
+5,Christian,4,0,4,13,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Andi,Christian Lurger,2025_09_25_01
+5,Vidibus,5,1,6,14,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Andi,David Prenninger,2025_09_25_01
+5,Specki,4,4,7,15,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Andi,Thomas Johanek,2025_09_25_01
+5,Yasar,6,2,4,18,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Andi,Cayir Yasar,2025_09_25_01
+5,Leo,2,1,6,8,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Andi,Leo Danzer,2025_09_25_01
+5,Ralph,4,2,8,10,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Andi,Ralph Langbauer,2025_09_25_01
+5,Nagla,8,1,6,20,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Andi,Christian Nagler,2025_09_25_01
+5,Andi,9,0,6,21,B,True,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Andi,Andreas Lindner,2025_09_25_01
+6,Leo,6,1,7,18,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Leo Danzer,2025_09_25_01
+6,Andi,9,4,9,22,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Andreas Lindner,2025_09_25_01
+6,Stephan,11,2,6,28,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Stephan Göbl,2025_09_25_01
+6,Ralph,14,1,5,38,A,True,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Ralph Langbauer,2025_09_25_01
+6,Specki,3,3,9,10,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Thomas Johanek,2025_09_25_01
+6,Christian,4,0,8,10,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Christian Lurger,2025_09_25_01
+6,Yasar,4,3,9,12,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Cayir Yasar,2025_09_25_01
+6,Vidibus,5,1,8,12,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,David Prenninger,2025_09_25_01
+6,Nagla,10,2,7,24,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Christian Nagler,2025_09_25_01
+7,Christian,1,0,5,7,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Vidibus,Christian Lurger,2025_09_25_01
+7,Yasar,6,0,6,14,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Vidibus,Cayir Yasar,2025_09_25_01
+7,Andi,5,3,5,18,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Vidibus,Andreas Lindner,2025_09_25_01
+7,Ralph,6,0,4,20,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Vidibus,Ralph Langbauer,2025_09_25_01
+7,Stephan,7,0,5,20,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Vidibus,Stephan Göbl,2025_09_25_01
+7,Nagla,3,1,5,9,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Vidibus,Christian Nagler,2025_09_25_01
+7,Leo,2,1,8,10,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Vidibus,Leo Danzer,2025_09_25_01
+7,Specki,4,3,6,13,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Vidibus,Thomas Johanek,2025_09_25_01
+7,Vidibus,14,2,7,34,B,True,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Vidibus,David Prenninger,2025_09_25_01
+8,Vidibus,2,1,5,6,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Andi,David Prenninger,2025_09_25_01
+8,Ralph,4,1,5,12,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Andi,Ralph Langbauer,2025_09_25_01
+8,Stephan,4,1,4,12,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Andi,Stephan Göbl,2025_09_25_01
+8,Christian,4,1,5,12,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Andi,Christian Lurger,2025_09_25_01
+8,Andi,12,1,3,36,A,True,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Andi,Andreas Lindner,2025_09_25_01
+8,Yasar,1,1,6,5,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Andi,Cayir Yasar,2025_09_25_01
+8,Specki,2,1,7,6,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Andi,Thomas Johanek,2025_09_25_01
+8,Leo,4,0,6,10,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Andi,Leo Danzer,2025_09_25_01
+8,Nagla,13,2,7,29,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Andi,Christian Nagler,2025_09_25_01
+9,Andi,5,1,3,15,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Andreas Lindner,2025_09_25_01
+9,Specki,7,1,3,19,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Thomas Johanek,2025_09_25_01
+9,Leo,6,3,2,20,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Leo Danzer,2025_09_25_01
+9,Ralph,7,2,3,20,A,True,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Ralph Langbauer,2025_09_25_01
+9,Yasar,0,0,7,0,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Cayir Yasar,2025_09_25_01
+9,Christian,2,0,7,3,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Christian Lurger,2025_09_25_01
+9,Stephan,2,2,7,5,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Stephan Göbl,2025_09_25_01
+9,Nagla,7,0,6,15,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Ralph,Christian Nagler,2025_09_25_01
+10,Specki,3,0,5,7,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Nagla,Thomas Johanek,2025_09_25_01
+10,Leo,4,0,5,10,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Nagla,Leo Danzer,2025_09_25_01
+10,Stephan,6,2,5,15,A,False,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Nagla,Stephan Göbl,2025_09_25_01
+10,Nagla,8,1,3,19,A,True,A,True,"Freitag, 3. Jänner 2025",14:30 - 18:30,Nagla,Christian Nagler,2025_09_25_01
+10,Yasar,0,2,6,2,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Nagla,Cayir Yasar,2025_09_25_01
+10,Andi,4,0,6,8,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Nagla,Andreas Lindner,2025_09_25_01
+10,Christian,4,0,4,10,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Nagla,Christian Lurger,2025_09_25_01
+10,Ralph,8,1,5,18,B,False,A,False,"Freitag, 3. Jänner 2025",14:30 - 18:30,Nagla,Ralph Langbauer,2025_09_25_01
+1,Hafesi,3,0,3,10,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Wildes_Pony,Simon Haberfellner,2025_09_25_02
+1,Dill_Dough,5,0,3,13,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Wildes_Pony,Thomas Johaunek,2025_09_25_02
+1,Rudi,5,2,4,14,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Wildes_Pony,Rudolf Wichtl,2025_09_25_02
+1,Chris_P_Bacon,6,2,5,15,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Wildes_Pony,Chriastian Nagler,2025_09_25_02
+1,Wildes_Pony,7,1,3,21,A,True,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Wildes_Pony,Stephan Göbl,2025_09_25_02
+1,Lurger,2,1,7,4,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Wildes_Pony,Christian Lurger,2025_09_25_02
+1,Deibiddo_bakka,3,2,7,8,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Wildes_Pony,David Prenninger,2025_09_25_02
+1,Lindner,5,0,6,11,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Wildes_Pony,Andreas Lindner,2025_09_25_02
+1,SaufatPoldt,5,2,7,14,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Wildes_Pony,Leo Danzer,2025_09_25_02
+2,SaufatPoldt,5,1,5,14,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Leo Danzer,2025_09_25_02
+2,Dill_Dough,2,1,3,15,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Thomas Johaunek,2025_09_25_02
+2,Deibiddo_bakka,10,0,4,27,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,David Prenninger,2025_09_25_02
+2,Chris_P_Bacon,13,4,5,33,A,True,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Chriastian Nagler,2025_09_25_02
+2,Rudi,2,0,7,3,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Rudolf Wichtl,2025_09_25_02
+2,Lurger,1,0,6,5,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Christian Lurger,2025_09_25_02
+2,Lindner,2,1,8,5,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Andreas Lindner,2025_09_25_02
+2,Wildes_Pony,5,1,5,13,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Stephan Göbl,2025_09_25_02
+2,Hafesi,7,1,6,15,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Simon Haberfellner,2025_09_25_02
+3,Rudi,2,2,7,8,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Lindner,Rudolf Wichtl,2025_09_25_02
+3,SaufatPoldt,5,1,6,14,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Lindner,Leo Danzer,2025_09_25_02
+3,Wildes_Pony,7,1,6,18,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Lindner,Stephan Göbl,2025_09_25_02
+3,Deibiddo_bakka,7,3,6,18,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Lindner,David Prenninger,2025_09_25_02
+3,Hafesi,9,2,6,23,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Lindner,Simon Haberfellner,2025_09_25_02
+3,Lurger,3,0,7,8,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Lindner,Christian Lurger,2025_09_25_02
+3,Dill_Dough,5,3,9,13,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Lindner,Thomas Johaunek,2025_09_25_02
+3,Chris_P_Bacon,10,2,8,22,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Lindner,Chriastian Nagler,2025_09_25_02
+3,Lindner,11,2,7,26,B,True,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Lindner,Andreas Lindner,2025_09_25_02
+4,Wildes_Pony,0,2,6,6,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Deibiddo_bakka,Stephan Göbl,2025_09_25_02
+4,Rudi,6,4,6,20,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Deibiddo_bakka,Rudolf Wichtl,2025_09_25_02
+4,SaufatPoldt,8,1,5,22,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Deibiddo_bakka,Leo Danzer,2025_09_25_02
+4,Chris_P_Bacon,7,2,4,22,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Deibiddo_bakka,Chriastian Nagler,2025_09_25_02
+4,Deibiddo_bakka,11,1,6,26,A,True,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Deibiddo_bakka,David Prenninger,2025_09_25_02
+4,Lindner,5,2,9,13,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Deibiddo_bakka,Andreas Lindner,2025_09_25_02
+4,Dill_Dough,5,0,7,13,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Deibiddo_bakka,Thomas Johaunek,2025_09_25_02
+4,Hafesi,7,2,9,17,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Deibiddo_bakka,Simon Haberfellner,2025_09_25_02
+4,Lurger,9,0,7,21,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Deibiddo_bakka,Christian Lurger,2025_09_25_02
+5,Lurger,1,1,6,8,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Christian Lurger,2025_09_25_02
+5,Wildes_Pony,4,0,5,12,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Stephan Göbl,2025_09_25_02
+5,Deibiddo_bakka,7,3,8,17,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,David Prenninger,2025_09_25_02
+5,Dill_Dough,6,1,5,21,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Thomas Johaunek,2025_09_25_02
+5,Lindner,9,2,6,25,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Andreas Lindner,2025_09_25_02
+5,SaufatPoldt,4,1,7,11,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Leo Danzer,2025_09_25_02
+5,Rudi,5,0,8,15,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Rudolf Wichtl,2025_09_25_02
+5,Hafesi,9,0,7,19,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Simon Haberfellner,2025_09_25_02
+5,Chris_P_Bacon,11,4,5,31,B,True,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Chriastian Nagler,2025_09_25_02
+1,Hauns,3,1,8,8,A,False,A,True,"Dienstag, 15. April 2025",16:30 - 18:30,Jenny_Talia,Marlene Göbl,2025_09_25_03
+1,Herbart,1,1,4,8,A,False,A,True,"Dienstag, 15. April 2025",16:30 - 18:30,Jenny_Talia,Lisa Mayer,2025_09_25_03
+1,Skankhunt42,2,2,7,8,A,False,A,True,"Dienstag, 15. April 2025",16:30 - 18:30,Jenny_Talia,Andreas Hörner,2025_09_25_03
+1,Consuela,8,1,5,21,A,False,A,True,"Dienstag, 15. April 2025",16:30 - 18:30,Jenny_Talia,Alexander Mayer,2025_09_25_03
+1,Jenny_Talia,10,1,6,30,A,True,A,True,"Dienstag, 15. April 2025",16:30 - 18:30,Jenny_Talia,Thomas Johanek,2025_09_25_03
+1,Dixie_Normous,3,0,7,5,B,False,A,False,"Dienstag, 15. April 2025",16:30 - 18:30,Jenny_Talia,Stephan Göbl,2025_09_25_03
+1,Tom_Riddle,3,2,5,10,B,False,A,False,"Dienstag, 15. April 2025",16:30 - 18:30,Jenny_Talia,Mathias Mitterbaur,2025_09_25_03
+1,Rudi,6,0,6,13,B,False,A,False,"Dienstag, 15. April 2025",16:30 - 18:30,Jenny_Talia,Rudolf Wichtl,2025_09_25_03
+1,McLovin,9,0,6,20,B,False,A,False,"Dienstag, 15. April 2025",16:30 - 18:30,Jenny_Talia,Manuel Mayer,2025_09_25_03
+1,Chris,9,2,4,23,B,False,A,False,"Dienstag, 15. April 2025",16:30 - 18:30,Jenny_Talia,Christian Lurger,2025_09_25_03
+2,Jenny_Talia,3,2,6,9,A,False,A,True,"Dienstag, 15. April 2025",16:30 - 18:30,Dixie_Normous,Thomas Johanek,2025_09_25_03
+2,Chris,4,0,4,11,A,False,A,True,"Dienstag, 15. April 2025",16:30 - 18:30,Dixie_Normous,Christian Lurger,2025_09_25_03
+2,Tom_Riddle,4,1,4,12,A,False,A,True,"Dienstag, 15. April 2025",16:30 - 18:30,Dixie_Normous,Mathias Mitterbaur,2025_09_25_03
+2,Rudi,6,0,5,14,A,False,A,True,"Dienstag, 15. April 2025",16:30 - 18:30,Dixie_Normous,Rudolf Wichtl,2025_09_25_03
+2,Dixie_Normous,9,3,2,25,A,True,A,True,"Dienstag, 15. April 2025",16:30 - 18:30,Dixie_Normous,Stephan Göbl,2025_09_25_03
+2,Skankhunt42,1,2,5,5,B,False,A,False,"Dienstag, 15. April 2025",16:30 - 18:30,Dixie_Normous,Andreas Hörner,2025_09_25_03
+2,Hauns,4,0,6,7,B,False,A,False,"Dienstag, 15. April 2025",16:30 - 18:30,Dixie_Normous,Marlene Göbl,2025_09_25_03
+2,Consuela,4,2,6,10,B,False,A,False,"Dienstag, 15. April 2025",16:30 - 18:30,Dixie_Normous,Alexander Mayer,2025_09_25_03
+2,Herbart,5,0,5,11,B,False,A,False,"Dienstag, 15. April 2025",16:30 - 18:30,Dixie_Normous,Lisa Mayer,2025_09_25_03
+2,McLovin,6,0,6,15,B,False,A,False,"Dienstag, 15. April 2025",16:30 - 18:30,Dixie_Normous,Manuel Mayer,2025_09_25_03
+3,Herbart,0,3,2,8,A,False,A,True,"Dienstag, 15. April 2025",16:30 - 18:30,Consuela,Lisa Mayer,2025_09_25_03
+3,McLovin,7,0,3,18,A,False,A,True,"Dienstag, 15. April 2025",16:30 - 18:30,Consuela,Manuel Mayer,2025_09_25_03
+3,Jenny_Talia,7,0,3,18,A,False,A,True,"Dienstag, 15. April 2025",16:30 - 18:30,Consuela,Thomas Johanek,2025_09_25_03
+3,Dixie_Normous,8,1,3,21,A,False,A,True,"Dienstag, 15. April 2025",16:30 - 18:30,Consuela,Stephan Göbl,2025_09_25_03
+3,Consuela,10,5,2,30,A,True,A,True,"Dienstag, 15. April 2025",16:30 - 18:30,Consuela,Alexander Mayer,2025_09_25_03
+3,Chris,1,1,6,4,B,False,A,False,"Dienstag, 15. April 2025",16:30 - 18:30,Consuela,Christian Lurger,2025_09_25_03
+3,Tom_Riddle,2,0,7,4,B,False,A,False,"Dienstag, 15. April 2025",16:30 - 18:30,Consuela,Mathias Mitterbaur,2025_09_25_03
+3,Skankhunt42,2,0,7,4,B,False,A,False,"Dienstag, 15. April 2025",16:30 - 18:30,Consuela,Andreas Hörner,2025_09_25_03
+3,Hauns,3,0,6,7,B,False,A,False,"Dienstag, 15. April 2025",16:30 - 18:30,Consuela,Marlene Göbl,2025_09_25_03
+3,Rudi,5,0,6,11,B,False,A,False,"Dienstag, 15. April 2025",16:30 - 18:30,Consuela,Rudolf Wichtl,2025_09_25_03
+4,Tom_Riddle,1,4,8,10,A,False,A,True,"Dienstag, 15. April 2025",16:30 - 18:30,Jenny_Talia,Mathias Mitterbaur,2025_09_25_03
+4,Chris,3,1,4,11,A,False,A,True,"Dienstag, 15. April 2025",16:30 - 18:30,Jenny_Talia,Christian Lurger,2025_09_25_03
+4,Rudi,9,0,5,24,A,False,A,True,"Dienstag, 15. April 2025",16:30 - 18:30,Jenny_Talia,Rudolf Wichtl,2025_09_25_03
+4,McLovin,10,1,7,24,A,False,A,True,"Dienstag, 15. April 2025",16:30 - 18:30,Jenny_Talia,Manuel Mayer,2025_09_25_03
+4,Jenny_Talia,11,1,8,26,A,True,A,True,"Dienstag, 15. April 2025",16:30 - 18:30,Jenny_Talia,Thomas Johanek,2025_09_25_03
+4,Skankhunt42,2,2,8,8,B,False,A,False,"Dienstag, 15. April 2025",16:30 - 18:30,Jenny_Talia,Andreas Hörner,2025_09_25_03
+4,Consuela,5,2,8,14,B,False,A,False,"Dienstag, 15. April 2025",16:30 - 18:30,Jenny_Talia,Alexander Mayer,2025_09_25_03
+4,Hauns,7,0,6,15,B,False,A,False,"Dienstag, 15. April 2025",16:30 - 18:30,Jenny_Talia,Marlene Göbl,2025_09_25_03
+4,Dixie_Normous,7,3,7,22,B,False,A,False,"Dienstag, 15. April 2025",16:30 - 18:30,Jenny_Talia,Stephan Göbl,2025_09_25_03
+4,Herbart,7,3,8,23,B,False,A,False,"Dienstag, 15. April 2025",16:30 - 18:30,Jenny_Talia,Lisa Mayer,2025_09_25_03
+5,Dixie_Normous,1,0,3,5,A,False,A,True,"Dienstag, 15. April 2025",16:30 - 18:30,Jenny_Talia,Stephan Göbl,2025_09_25_03
+5,Chris,6,1,2,16,A,False,A,True,"Dienstag, 15. April 2025",16:30 - 18:30,Jenny_Talia,Christian Lurger,2025_09_25_03
+5,McLovin,6,2,3,16,A,False,A,True,"Dienstag, 15. April 2025",16:30 - 18:30,Jenny_Talia,Manuel Mayer,2025_09_25_03
+5,Hauns,6,1,0,19,A,False,A,True,"Dienstag, 15. April 2025",16:30 - 18:30,Jenny_Talia,Marlene Göbl,2025_09_25_03
+5,Jenny_Talia,9,3,3,24,A,True,A,True,"Dienstag, 15. April 2025",16:30 - 18:30,Jenny_Talia,Thomas Johanek,2025_09_25_03
+5,Herbart,0,0,6,-1,B,False,A,False,"Dienstag, 15. April 2025",16:30 - 18:30,Jenny_Talia,Lisa Mayer,2025_09_25_03
+5,Tom_Riddle,0,0,6,0,B,False,A,False,"Dienstag, 15. April 2025",16:30 - 18:30,Jenny_Talia,Mathias Mitterbaur,2025_09_25_03
+5,Rudi,0,1,5,1,B,False,A,False,"Dienstag, 15. April 2025",16:30 - 18:30,Jenny_Talia,Rudolf Wichtl,2025_09_25_03
+5,Skankhunt42,3,0,6,6,B,False,A,False,"Dienstag, 15. April 2025",16:30 - 18:30,Jenny_Talia,Andreas Hörner,2025_09_25_03
+5,Consuela,6,0,6,12,B,False,A,False,"Dienstag, 15. April 2025",16:30 - 18:30,Jenny_Talia,Alexander Mayer,2025_09_25_03
+6,Hauns,0,0,0,2,A,False,A,True,"Dienstag, 15. April 2025",16:30 - 18:30,Chris,Marlene Göbl,2025_09_25_03
+6,Jenny_Talia,2,1,1,6,A,False,A,True,"Dienstag, 15. April 2025",16:30 - 18:30,Chris,Thomas Johanek,2025_09_25_03
+6,Dixie_Normous,2,0,0,6,A,False,A,True,"Dienstag, 15. April 2025",16:30 - 18:30,Chris,Stephan Göbl,2025_09_25_03
+6,Chris,3,1,1,8,A,True,A,True,"Dienstag, 15. April 2025",16:30 - 18:30,Chris,Christian Lurger,2025_09_25_03
+6,McLovin,3,0,0,8,A,False,A,True,"Dienstag, 15. April 2025",16:30 - 18:30,Chris,Manuel Mayer,2025_09_25_03
+6,Herbart,0,0,2,0,B,False,A,False,"Dienstag, 15. April 2025",16:30 - 18:30,Chris,Lisa Mayer,2025_09_25_03
+6,Consuela,0,0,2,0,B,False,A,False,"Dienstag, 15. April 2025",16:30 - 18:30,Chris,Alexander Mayer,2025_09_25_03
+6,Tom_Riddle,0,0,2,0,B,False,A,False,"Dienstag, 15. April 2025",16:30 - 18:30,Chris,Mathias Mitterbaur,2025_09_25_03
+6,Rudi,1,0,2,2,B,False,A,False,"Dienstag, 15. April 2025",16:30 - 18:30,Chris,Rudolf Wichtl,2025_09_25_03
+6,Skankhunt42,1,0,2,2,B,False,A,False,"Dienstag, 15. April 2025",16:30 - 18:30,Chris,Andreas Hörner,2025_09_25_03
+1,Hafesi,3,0,3,10,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Wildes_Pony,Simon Haberfellner,2025_12_26_01
+1,Dill_Dough,5,0,3,13,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Wildes_Pony,Thomas Johaunek,2025_12_26_01
+1,Rudi,5,2,4,14,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Wildes_Pony,Rudolf Wichtl,2025_12_26_01
+1,Chris_P_Bacon,6,2,5,15,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Wildes_Pony,Chriastian Nagler,2025_12_26_01
+1,Wildes_Pony,7,1,3,21,A,True,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Wildes_Pony,Stephan Göbl,2025_12_26_01
+1,Lurger,2,1,7,4,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Wildes_Pony,Christian Lurger,2025_12_26_01
+1,Deibiddo_bakka,3,2,7,8,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Wildes_Pony,David Prenninger,2025_12_26_01
+1,Lindner,5,0,6,11,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Wildes_Pony,Andreas Lindner,2025_12_26_01
+1,SaufatPoldt,5,2,7,14,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Wildes_Pony,Leo Danzer,2025_12_26_01
+2,SaufatPoldt,5,1,5,14,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Leo Danzer,2025_12_26_01
+2,Dill_Dough,2,1,3,15,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Thomas Johaunek,2025_12_26_01
+2,Deibiddo_bakka,10,0,4,27,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,David Prenninger,2025_12_26_01
+2,Chris_P_Bacon,13,4,5,33,A,True,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Chriastian Nagler,2025_12_26_01
+2,Rudi,2,0,7,3,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Rudolf Wichtl,2025_12_26_01
+2,Lurger,1,0,6,5,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Christian Lurger,2025_12_26_01
+2,Lindner,2,1,8,5,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Andreas Lindner,2025_12_26_01
+2,Wildes_Pony,5,1,5,13,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Stephan Göbl,2025_12_26_01
+2,Hafesi,7,1,6,15,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Simon Haberfellner,2025_12_26_01
+3,Rudi,2,2,7,8,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Lindner,Rudolf Wichtl,2025_12_26_01
+3,SaufatPoldt,5,1,6,14,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Lindner,Leo Danzer,2025_12_26_01
+3,Wildes_Pony,7,1,6,18,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Lindner,Stephan Göbl,2025_12_26_01
+3,Deibiddo_bakka,7,3,6,18,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Lindner,David Prenninger,2025_12_26_01
+3,Hafesi,9,2,6,23,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Lindner,Simon Haberfellner,2025_12_26_01
+3,Lurger,3,0,7,8,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Lindner,Christian Lurger,2025_12_26_01
+3,Dill_Dough,5,3,9,13,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Lindner,Thomas Johaunek,2025_12_26_01
+3,Chris_P_Bacon,10,2,8,22,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Lindner,Chriastian Nagler,2025_12_26_01
+3,Lindner,11,2,7,26,B,True,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Lindner,Andreas Lindner,2025_12_26_01
+4,Wildes_Pony,0,2,6,6,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Deibiddo_bakka,Stephan Göbl,2025_12_26_01
+4,Rudi,6,4,6,20,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Deibiddo_bakka,Rudolf Wichtl,2025_12_26_01
+4,SaufatPoldt,8,1,5,22,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Deibiddo_bakka,Leo Danzer,2025_12_26_01
+4,Chris_P_Bacon,7,2,4,22,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Deibiddo_bakka,Chriastian Nagler,2025_12_26_01
+4,Deibiddo_bakka,11,1,6,26,A,True,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Deibiddo_bakka,David Prenninger,2025_12_26_01
+4,Lindner,5,2,9,13,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Deibiddo_bakka,Andreas Lindner,2025_12_26_01
+4,Dill_Dough,5,0,7,13,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Deibiddo_bakka,Thomas Johaunek,2025_12_26_01
+4,Hafesi,7,2,9,17,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Deibiddo_bakka,Simon Haberfellner,2025_12_26_01
+4,Lurger,9,0,7,21,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Deibiddo_bakka,Christian Lurger,2025_12_26_01
+5,Lurger,1,1,6,8,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Christian Lurger,2025_12_26_01
+5,Wildes_Pony,4,0,5,12,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Stephan Göbl,2025_12_26_01
+5,Deibiddo_bakka,7,3,8,17,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,David Prenninger,2025_12_26_01
+5,Dill_Dough,6,1,5,21,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Thomas Johaunek,2025_12_26_01
+5,Lindner,9,2,6,25,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Andreas Lindner,2025_12_26_01
+5,SaufatPoldt,4,1,7,11,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Leo Danzer,2025_12_26_01
+5,Rudi,5,0,8,15,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Rudolf Wichtl,2025_12_26_01
+5,Hafesi,9,0,7,19,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Simon Haberfellner,2025_12_26_01
+5,Chris_P_Bacon,11,4,5,31,B,True,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Chriastian Nagler,2025_12_26_01
+1,Hafesi,3,0,3,10,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Wildes_Pony,Simon Haberfellner,2025_12_26_02
+1,Dill_Dough,5,0,3,13,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Wildes_Pony,Thomas Johaunek,2025_12_26_02
+1,Rudi,5,2,4,14,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Wildes_Pony,Rudolf Wichtl,2025_12_26_02
+1,Chris_P_Bacon,6,2,5,15,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Wildes_Pony,Chriastian Nagler,2025_12_26_02
+1,Wildes_Pony,7,1,3,21,A,True,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Wildes_Pony,Stephan Göbl,2025_12_26_02
+1,Lurger,2,1,7,4,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Wildes_Pony,Christian Lurger,2025_12_26_02
+1,Deibiddo_bakka,3,2,7,8,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Wildes_Pony,David Prenninger,2025_12_26_02
+1,Lindner,5,0,6,11,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Wildes_Pony,Andreas Lindner,2025_12_26_02
+1,SaufatPoldt,5,2,7,14,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Wildes_Pony,Leo Danzer,2025_12_26_02
+2,SaufatPoldt,5,1,5,14,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Leo Danzer,2025_12_26_02
+2,Dill_Dough,2,1,3,15,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Thomas Johaunek,2025_12_26_02
+2,Deibiddo_bakka,10,0,4,27,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,David Prenninger,2025_12_26_02
+2,Chris_P_Bacon,13,4,5,33,A,True,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Chriastian Nagler,2025_12_26_02
+2,Rudi,2,0,7,3,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Rudolf Wichtl,2025_12_26_02
+2,Lurger,1,0,6,5,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Christian Lurger,2025_12_26_02
+2,Lindner,2,1,8,5,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Andreas Lindner,2025_12_26_02
+2,Wildes_Pony,5,1,5,13,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Stephan Göbl,2025_12_26_02
+2,Hafesi,7,1,6,15,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Simon Haberfellner,2025_12_26_02
+3,Rudi,2,2,7,8,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Lindner,Rudolf Wichtl,2025_12_26_02
+3,SaufatPoldt,5,1,6,14,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Lindner,Leo Danzer,2025_12_26_02
+3,Wildes_Pony,7,1,6,18,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Lindner,Stephan Göbl,2025_12_26_02
+3,Deibiddo_bakka,7,3,6,18,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Lindner,David Prenninger,2025_12_26_02
+3,Hafesi,9,2,6,23,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Lindner,Simon Haberfellner,2025_12_26_02
+3,Lurger,3,0,7,8,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Lindner,Christian Lurger,2025_12_26_02
+3,Dill_Dough,5,3,9,13,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Lindner,Thomas Johaunek,2025_12_26_02
+3,Chris_P_Bacon,10,2,8,22,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Lindner,Chriastian Nagler,2025_12_26_02
+3,Lindner,11,2,7,26,B,True,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Lindner,Andreas Lindner,2025_12_26_02
+4,Wildes_Pony,0,2,6,6,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Deibiddo_bakka,Stephan Göbl,2025_12_26_02
+4,Rudi,6,4,6,20,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Deibiddo_bakka,Rudolf Wichtl,2025_12_26_02
+4,SaufatPoldt,8,1,5,22,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Deibiddo_bakka,Leo Danzer,2025_12_26_02
+4,Chris_P_Bacon,7,2,4,22,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Deibiddo_bakka,Chriastian Nagler,2025_12_26_02
+4,Deibiddo_bakka,11,1,6,26,A,True,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Deibiddo_bakka,David Prenninger,2025_12_26_02
+4,Lindner,5,2,9,13,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Deibiddo_bakka,Andreas Lindner,2025_12_26_02
+4,Dill_Dough,5,0,7,13,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Deibiddo_bakka,Thomas Johaunek,2025_12_26_02
+4,Hafesi,7,2,9,17,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Deibiddo_bakka,Simon Haberfellner,2025_12_26_02
+4,Lurger,9,0,7,21,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Deibiddo_bakka,Christian Lurger,2025_12_26_02
+5,Lurger,1,1,6,8,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Christian Lurger,2025_12_26_02
+5,Wildes_Pony,4,0,5,12,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Stephan Göbl,2025_12_26_02
+5,Deibiddo_bakka,7,3,8,17,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,David Prenninger,2025_12_26_02
+5,Dill_Dough,6,1,5,21,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Thomas Johaunek,2025_12_26_02
+5,Lindner,9,2,6,25,A,False,A,True,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Andreas Lindner,2025_12_26_02
+5,SaufatPoldt,4,1,7,11,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Leo Danzer,2025_12_26_02
+5,Rudi,5,0,8,15,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Rudolf Wichtl,2025_12_26_02
+5,Hafesi,9,0,7,19,B,False,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Simon Haberfellner,2025_12_26_02
+5,Chris_P_Bacon,11,4,5,31,B,True,A,False,"Dienstag, 8. April 2025",16:30 - 18:30,Chris_P_Bacon,Chriastian Nagler,2025_12_26_02
