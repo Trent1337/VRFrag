@@ -1,11 +1,21 @@
 import pandas as pd
 import numpy as np
 import random
-import os
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
 import warnings
 warnings.filterwarnings('ignore')
+
+_MODEL_CACHE = {}
+
+def _filter_by_map(df: pd.DataFrame, map_name: str | None) -> pd.DataFrame:
+    if not map_name or "maptitle" not in df.columns:
+        return df
+    out = df[df["maptitle"].astype(str) == str(map_name)].copy()
+    return out if not out.empty else df
+
+def _to_num(s: pd.Series, default: float = 0.0) -> pd.Series:
+    return pd.to_numeric(s, errors="coerce").fillna(default)
 
 def calculate_team_win_probability_simple(team_a_players, team_b_players, player_stats_df, map_name=None):
     """
@@ -15,10 +25,9 @@ def calculate_team_win_probability_simple(team_a_players, team_b_players, player
         return 0.5  # 50/50 bei unbekannten Spielern
     
     # Historische Performance der Spieler filtern
-    if map_name and 'maptitle' in player_data.columns:
-        map_stats = player_stats_df[player_stats_df['maptitle'] == map_name]
-        if len(map_stats) > 0:
-            player_stats_df = map_stats
+    player_stats_df = _filter_by_map(player_stats_df, map_name)
+    if "score" not in player_stats_df.columns or "Player" not in player_stats_df.columns:
+        return 0.5
     
     # Durchschnittliche Scores berechnen
     team_a_avg_score = player_stats_df[player_stats_df['Player'].isin(team_a_players)]['score'].mean()
@@ -39,77 +48,123 @@ def calculate_team_win_probability_simple(team_a_players, team_b_players, player
     
     return round(team_a_win_prob, 3)
 
+def _train_team_diff_model(player_stats_df: pd.DataFrame, map_name=None):
+    """
+    Trainiert ein Modell auf Match-level Team-Differenzen:
+    Features: (avg_score_A - avg_score_B), (kd_A - kd_B)
+    Label: 1 wenn Team A gewinnt, 0 wenn Team B gewinnt
+    """
+    df = _filter_by_map(player_stats_df, map_name)
+
+    required = {"matchNr", "team", "matchWinner", "score", "kills", "deaths", "EventDate", "EventTimeRange"}
+    if not required.issubset(set(df.columns)):
+        return None, None
+
+    tmp = df[list(required)].copy()
+    tmp["score"] = _to_num(tmp["score"], 0.0)
+    tmp["kills"] = _to_num(tmp["kills"], 0.0)
+    tmp["deaths"] = _to_num(tmp["deaths"], 0.0)
+
+    tmp = tmp[tmp["matchWinner"].isin(["A", "B"])].copy()
+    if tmp.empty:
+        return None, None
+
+    tmp["matchKey"] = (
+        tmp["matchNr"].astype(str)
+        + "|"
+        + tmp["EventDate"].astype(str)
+        + "|"
+        + tmp["EventTimeRange"].astype(str)
+    )
+
+    winners = tmp.groupby("matchKey", dropna=True)["matchWinner"].first()
+
+    agg = (
+        tmp.groupby(["matchKey", "team"], dropna=True)
+        .agg(score_mean=("score", "mean"), kills_sum=("kills", "sum"), deaths_sum=("deaths", "sum"))
+        .reset_index()
+    )
+    if agg.empty:
+        return None, None
+
+    agg["kd"] = agg["kills_sum"] / agg["deaths_sum"].replace(0, np.nan)
+    agg["kd"] = agg["kd"].fillna(agg["kills_sum"])
+
+    a = agg[agg["team"] == "A"].set_index("matchKey")
+    b = agg[agg["team"] == "B"].set_index("matchKey")
+    common = a.join(b, how="inner", lsuffix="_A", rsuffix="_B")
+    if common.empty:
+        return None, None
+
+    y = winners.reindex(common.index)
+    mask = y.isin(["A", "B"])
+    common = common[mask]
+    y = y[mask].map({"A": 1, "B": 0}).astype(int)
+    if len(common) < 20:
+        return None, None
+
+    X = np.column_stack([
+        (common["score_mean_A"] - common["score_mean_B"]).to_numpy(),
+        (common["kd_A"] - common["kd_B"]).to_numpy(),
+    ])
+
+    scaler = StandardScaler()
+    Xs = scaler.fit_transform(X)
+
+    model = LogisticRegression(random_state=42, max_iter=200)
+    model.fit(Xs, y.to_numpy())
+
+    return model, scaler
+
+def _get_cached_model(player_stats_df: pd.DataFrame, map_name=None):
+    df = _filter_by_map(player_stats_df, map_name)
+
+    # very cheap "signature" to avoid re-training every request
+    try:
+        max_match = int(_to_num(df.get("matchNr", pd.Series([], dtype=object)), 0).max() or 0)
+    except Exception:
+        max_match = 0
+    event_n = int(df["EventId"].nunique()) if "EventId" in df.columns else 0
+    sig = (str(map_name or ""), int(df.shape[0]), max_match, event_n)
+
+    hit = _MODEL_CACHE.get(sig)
+    if hit:
+        return hit
+
+    model, scaler = _train_team_diff_model(df, map_name=None)  # df already map-filtered
+    _MODEL_CACHE[sig] = (model, scaler)
+    return model, scaler
+
 def calculate_team_win_probability_advanced(team_a_players, team_b_players, player_stats_df, map_name=None):
     """
     Erweiterte Gewinnwahrscheinlichkeit mit scikit-learn Machine Learning
     """
     try:
-        # Daten für ML vorbereiten
-        features = []
-        labels = []
-        
-        # Historische Matches für Training verwenden
-        for _, match in player_stats_df.iterrows():
-            if pd.isna(match['playerWon']):
-                continue
-                
-            # Features: Score und Kills/Deaths Ratio
-            score = match['score']
-            kills = match.get('kills', 0)
-            deaths = match.get('deaths', 1)  # Vermeide Division durch 0
-            kd_ratio = kills / deaths if deaths > 0 else kills
-            
-            features.append([score, kd_ratio])
-            labels.append(1 if match['playerWon'] else 0)
-        
-        if len(features) < 10:  # Zu wenige Daten für ML
+        df = _filter_by_map(player_stats_df, map_name)
+        if "Player" not in df.columns or "score" not in df.columns:
             return calculate_team_win_probability_simple(team_a_players, team_b_players, player_stats_df, map_name)
-        
-        # ML-Modell trainieren
-        X = np.array(features)
-        y = np.array(labels)
-        
-        scaler = StandardScaler()
-        X_scaled = scaler.fit_transform(X)
-        
-        model = LogisticRegression(random_state=42)
-        model.fit(X_scaled, y)
-        
-        # Team-Scores und KD-Ratios berechnen
-        team_a_data = player_stats_df[player_stats_df['Player'].isin(team_a_players)]
-        team_b_data = player_stats_df[player_stats_df['Player'].isin(team_b_players)]
-        
-        if map_name and 'maptitle' in player_stats_df.columns:
-            team_a_data = team_a_data[team_a_data['maptitle'] == map_name]
-            team_b_data = team_b_data[team_b_data['maptitle'] == map_name]
-        
-        team_a_avg_score = team_a_data['score'].mean()
-        team_b_avg_score = team_b_data['score'].mean()
-        
-        # KD-Ratio berechnen
-        team_a_kills = team_a_data['kills'].sum()
-        team_a_deaths = team_a_data['deaths'].sum()
-        team_a_kd = team_a_kills / team_a_deaths if team_a_deaths > 0 else team_a_kills
-        
-        team_b_kills = team_b_data['kills'].sum()
-        team_b_deaths = team_b_data['deaths'].sum()
-        team_b_kd = team_b_kills / team_b_deaths if team_b_deaths > 0 else team_b_kills
-        
-        if pd.isna(team_a_avg_score) or pd.isna(team_b_avg_score):
-            return 0.5
-        
-        # Team-Unterschiede als Feature verwenden
-        score_diff = abs(team_a_avg_score - team_b_avg_score)
-        kd_diff = abs(team_a_kd - team_b_kd)
-        
-        # Wahrscheinlichkeit vorhersagen
-        prediction = model.predict_proba(scaler.transform([[score_diff, kd_diff]]))[0]
-        
-        # Anpassen basierend auf welches Team besser ist
-        if team_a_avg_score > team_b_avg_score:
-            return round(prediction[1], 3)  # Team A Gewinnwahrscheinlichkeit
-        else:
-            return round(prediction[0], 3)  # Team B Gewinnwahrscheinlichkeit
+
+        model, scaler = _get_cached_model(df, map_name=None)  # df already map-filtered
+        if model is None or scaler is None:
+            return calculate_team_win_probability_simple(team_a_players, team_b_players, df, map_name=None)
+
+        team_a_data = df[df["Player"].isin(team_a_players)]
+        team_b_data = df[df["Player"].isin(team_b_players)]
+
+        team_a_score = float(_to_num(team_a_data.get("score", pd.Series([], dtype=object)), 0.0).mean() or 0.0)
+        team_b_score = float(_to_num(team_b_data.get("score", pd.Series([], dtype=object)), 0.0).mean() or 0.0)
+
+        team_a_kills = float(_to_num(team_a_data.get("kills", pd.Series([], dtype=object)), 0.0).sum() or 0.0)
+        team_a_deaths = float(_to_num(team_a_data.get("deaths", pd.Series([], dtype=object)), 0.0).sum() or 0.0)
+        team_a_kd = (team_a_kills / team_a_deaths) if team_a_deaths > 0 else team_a_kills
+
+        team_b_kills = float(_to_num(team_b_data.get("kills", pd.Series([], dtype=object)), 0.0).sum() or 0.0)
+        team_b_deaths = float(_to_num(team_b_data.get("deaths", pd.Series([], dtype=object)), 0.0).sum() or 0.0)
+        team_b_kd = (team_b_kills / team_b_deaths) if team_b_deaths > 0 else team_b_kills
+
+        x = np.array([[team_a_score - team_b_score, team_a_kd - team_b_kd]])
+        p = model.predict_proba(scaler.transform(x))[0][1]  # P(team A wins)
+        return round(float(p), 3)
             
     except Exception as e:
         print(f"ML Fehler, verwende einfache Berechnung: {e}")
@@ -132,9 +187,6 @@ def generate_fair_teams(player_names, player_stats_df, map_name=None, max_iterat
         Dictionary mit Team-Zusammenstellung und Wahrscheinlichkeiten
     """
     
-    print("Input player_names:", player_names)
-    print("CSV unique Player sample:", player_stats_df["Player"].dropna().astype(str).unique()[:5])
-
     if len(player_names) < 4:
         return {"error": "Mindestens 4 Spieler benötigt"}
     
@@ -144,41 +196,51 @@ def generate_fair_teams(player_names, player_stats_df, map_name=None, max_iterat
     team_size = len(player_names) // 2
     
     # Historische Daten der Spieler sammeln
+    df_use = _filter_by_map(player_stats_df, map_name)
+    if "Player" not in df_use.columns or "score" not in df_use.columns:
+        return {"error": "Players-CSV hat nicht die erwarteten Spalten (mind. Player, score)."}
+
+    df_use = df_use.copy()
+    for c in ["score", "kills", "deaths"]:
+        if c in df_use.columns:
+            df_use[c] = _to_num(df_use[c], 0.0)
+
+    grouped = (
+        df_use.groupby("Player", dropna=True)
+        .agg(
+            avg_score=("score", "mean"),
+            avg_kills=("kills", "mean"),
+            avg_deaths=("deaths", "mean"),
+            total_games=("score", "size"),
+        )
+    )
+    overall_avg_score = float(df_use["score"].mean() or 0.0)
+    overall_avg_kills = float(df_use["kills"].mean() if "kills" in df_use.columns else 0.0)
+    overall_avg_deaths = float(df_use["deaths"].mean() if "deaths" in df_use.columns else 0.0)
+
     player_scores = {}
     player_stats = {}
     used_fallback_for = []
 
-    
     for player in player_names:
-        player_data = player_stats_df[player_stats_df['Player'] == player]
-        print("lookup", player, "rows", len(player_data))
-        
-        if len(player_data) > 0:
-            if map_name and 'maptitle' in player_stats_df.columns:
-                map_stats = player_stats_df[player_stats_df['maptitle'] == map_name]
-                if len(map_stats) > 0:
-                    player_stats_df = map_stats
-        
-            
-            player_scores[player] = player_data['score'].mean()
+        if player in grouped.index:
+            row = grouped.loc[player]
+            player_scores[player] = float(row["avg_score"])
             player_stats[player] = {
-                'avg_score': player_data['score'].mean(),
-                'avg_kills': player_data['kills'].mean(),
-                'avg_deaths': player_data['deaths'].mean(),
-                'total_games': len(player_data)
+                "avg_score": float(row["avg_score"]),
+                "avg_kills": float(row["avg_kills"]) if "avg_kills" in row else overall_avg_kills,
+                "avg_deaths": float(row["avg_deaths"]) if "avg_deaths" in row else overall_avg_deaths,
+                "total_games": int(row["total_games"]),
             }
         else:
-            # Fallback für unbekannte Spieler
-            avg_score = player_stats_df['score'].mean()
             used_fallback_for.append(player)
-            player_scores[player] = avg_score
+            player_scores[player] = overall_avg_score
             player_stats[player] = {
-                'avg_score': avg_score,
-                'avg_kills': player_stats_df['kills'].mean(),
-                'avg_deaths': player_stats_df['deaths'].mean(),
-                'total_games': 0
+                "avg_score": overall_avg_score,
+                "avg_kills": overall_avg_kills,
+                "avg_deaths": overall_avg_deaths,
+                "total_games": 0,
             }
-
     
 
     top_candidates = []  # Liste von (fairness, team_a, team_b, team_a_score, team_b_score)
@@ -225,9 +287,9 @@ def generate_fair_teams(player_names, player_stats_df, map_name=None, max_iterat
     
     # Gewinnwahrscheinlichkeit berechnen
     if use_advanced_probability:
-        win_probability = calculate_team_win_probability_advanced(team_a, team_b, player_stats_df, map_name)
+        win_probability = calculate_team_win_probability_advanced(team_a, team_b, df_use, map_name=None)
     else:
-        win_probability = calculate_team_win_probability_simple(team_a, team_b, player_stats_df, map_name)
+        win_probability = calculate_team_win_probability_simple(team_a, team_b, df_use, map_name=None)
     
     return {
         "team_a": {
@@ -265,8 +327,9 @@ def calculate_team_stats(team_players, player_stats):
     for player in team_players:
         stats = player_stats.get(player, {})
         total_games += stats.get('total_games', 0)
-        total_kills += stats.get('avg_kills', 0) * stats.get('total_games', 1)
-        total_deaths += stats.get('avg_deaths', 0) * stats.get('total_games', 1)
+        g = stats.get("total_games", 0) or 0
+        total_kills += stats.get('avg_kills', 0) * g
+        total_deaths += stats.get('avg_deaths', 0) * g
     
     avg_kills = total_kills / max(total_games, 1)
     avg_deaths = total_deaths / max(total_games, 1)

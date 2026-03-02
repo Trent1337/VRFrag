@@ -1,6 +1,7 @@
 from flask import Flask, request, send_from_directory, jsonify, render_template
 import subprocess
 import os
+import sys
 import requests
 import base64
 import difflib
@@ -27,6 +28,26 @@ os.makedirs(EVENTS_FOLDER, exist_ok=True)
 REPO_OWNER = "Trent1337"
 REPO_NAME = "VRFrag"
 REPO_BRANCH = "main"
+
+_CSV_CACHE: dict[str, dict] = {}
+
+def _read_csv_cached(path: str) -> pd.DataFrame:
+    """
+    Small in-process cache to avoid re-reading large CSVs for dashboard endpoints.
+    Cache invalidates automatically when file mtime changes.
+    """
+    try:
+        mtime = os.path.getmtime(path)
+    except OSError:
+        return pd.DataFrame()
+
+    hit = _CSV_CACHE.get(path)
+    if hit and hit.get("mtime") == mtime and isinstance(hit.get("df"), pd.DataFrame):
+        return hit["df"]
+
+    df = pd.read_csv(path)
+    _CSV_CACHE[path] = {"mtime": mtime, "df": df}
+    return df
 
 
 # ----------------------------
@@ -235,7 +256,7 @@ def get_player_universe():
     if err_resp:
         return None, err_resp, code
 
-    df = pd.read_csv(players_file)
+    df = _read_csv_cached(players_file)
     if "Player" not in df.columns:
         return None, jsonify({"success": False, "error": "Spalte 'Player' fehlt in der CSV."}), 500
 
@@ -321,13 +342,36 @@ def dashboard_page():
 # ----------------------------
 @app.route("/run", methods=["POST"])
 def run_script():
-    players = [request.form.get(f"player{i}") for i in range(1, 11)]
-    result = subprocess.run(
-        ["python3", "run_script.py", CSV_PATH] + players,
-        capture_output=True,
-        text=True,
-    )
-    return result.stdout or "Script ausgeführt"
+    """
+    Legacy route (kept for backward compatibility).
+    Executes `run_script.py` if present, using the current Python interpreter.
+    """
+    script_path = os.path.join(BASE_DIR, "run_script.py")
+    if not os.path.exists(script_path):
+        return jsonify({
+            "success": False,
+            "error": "Legacy route: run_script.py not found in project root.",
+        }), 404
+
+    players = [(request.form.get(f"player{i}") or "").strip() for i in range(1, 11)]
+
+    try:
+        result = subprocess.run(
+            [sys.executable, script_path, CSV_PATH] + players,
+            capture_output=True,
+            text=True,
+            timeout=120,
+        )
+        out = (result.stdout or "").strip()
+        err = (result.stderr or "").strip()
+        return jsonify({
+            "success": result.returncode == 0,
+            "returncode": result.returncode,
+            "stdout": out,
+            "stderr": err,
+        }), (200 if result.returncode == 0 else 500)
+    except subprocess.TimeoutExpired:
+        return jsonify({"success": False, "error": "Script timed out"}), 504
 
 
 # ----------------------------
@@ -413,7 +457,7 @@ def api_save_to_github():
             commit_message=f"Add event file: {filename}",
         )
         if not result.get("success"):
-            return jsonify(result)
+            return jsonify(result), 500
 
         # 2) Lokal speichern (damit generate_statistics sofort was sieht)
         try:
@@ -593,7 +637,7 @@ def api_generate_teams():
         if err_resp:
             return err_resp, code
 
-        players_df = pd.read_csv(players_file)
+        players_df = _read_csv_cached(players_file)
 
         from vrfrag_teams import generate_fair_teams
         result = generate_fair_teams(selected_players, players_df, selected_map)
@@ -621,7 +665,7 @@ def get_all_players():
     if err_resp:
         return err_resp, code
 
-    df = pd.read_csv(path)
+    df = _read_csv_cached(path).copy()
     if "Player" not in df.columns:
         return jsonify({"success": False, "error": "Spalte 'Player' fehlt in der CSV."}), 500
 
@@ -647,7 +691,7 @@ def api_get_available_maps():
         if err_resp:
             return err_resp, code
 
-        df = pd.read_csv(matches_file)
+        df = _read_csv_cached(matches_file)
         if "maptitle" not in df.columns:
             return jsonify({"success": False, "error": "Spalte 'maptitle' fehlt in der Match-CSV."}), 500
 
@@ -700,8 +744,8 @@ def _load_players_matches_merged():
     if err:
         return None, None, err, code
 
-    p = pd.read_csv(players_path)
-    m = pd.read_csv(matches_path)
+    p = _read_csv_cached(players_path).copy()
+    m = _read_csv_cached(matches_path).copy()
 
     # merge: matchNr + EventDate + EventTimeRange
     # (in deinen CSVs sind EventDate und EventTimeRange in beiden Files vorhanden)

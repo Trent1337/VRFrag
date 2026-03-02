@@ -1,242 +1,89 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>VRFrag · Team-Generator</title>
+{% extends "base.html" %}
 
-  <style>
-    :root{
-      --bg:#242834;
-      --bg-2:#1f2230;
-      --border:rgba(255,255,255,.12);
-      --text:#f2f5ff;
-      --muted:rgba(242,245,255,.72);
-      --primary:#2f9bff;
-      --primary-2:#3a7cff;
-      --danger:#ef4444;
-      --success:#22c55e;
-      --shadow:0 18px 55px rgba(0,0,0,.45);
-      --radius:18px;
-      --ring:rgba(47,155,255,.18);
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      background: radial-gradient(1200px 500px at 20% -10%, rgba(47,155,255,.25), transparent 55%),
-                  radial-gradient(900px 420px at 85% 10%, rgba(124,58,237,.22), transparent 55%),
-                  linear-gradient(180deg, var(--bg), var(--bg-2));
-      color:var(--text);
-      min-height:100vh;
-      padding:22px;
-    }
-    .wrap{max-width:1100px;margin:0 auto}
-    header{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 16px;
-      border:1px solid var(--border);
-      background:rgba(0,0,0,.25);
-      backdrop-filter: blur(10px);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      margin-bottom:18px;
-      gap:12px;
-    }
-    .leftHead{display:flex; align-items:center; gap:12px}
-    .back-btn{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid var(--border);
-      background:rgba(0,0,0,.18);
-      color:var(--text);
-      text-decoration:none;
-      font-weight:700;
-    }
-    .back-btn:hover{background:rgba(255,255,255,.08)}
-    h1{font-size:1.05rem;margin:0}
-    .crumbs{color:var(--muted);font-size:.9rem; white-space:nowrap}
+{% block title %}VRFrag · Team-Generator{% endblock %}
 
-    .grid{display:grid;grid-template-columns: 1fr 1fr; gap:16px}
-    @media (max-width: 980px){.grid{grid-template-columns:1fr}}
-
-    .card{
-      border:1px solid var(--border);
-      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .hd{
-      padding:16px 18px;
-      border-bottom:1px solid var(--border);
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      flex-wrap: wrap;
-    }
-    .hd h2{margin:0;font-size:1rem;letter-spacing:.2px}
-    .bd{padding:18px}
-
-    label{display:block;font-size:.9rem;color:rgba(242,245,255,.9);margin-bottom:8px;font-weight:700}
-    select,input[type="text"]{
-      width:100%;
-      padding:12px 12px;
-      border:1px solid var(--border);
-      border-radius:14px;
-      background:rgba(0,0,0,.25);
-      color:var(--text);
-      outline:none;
-      transition:box-shadow .2s,border-color .2s, background .2s;
-    }
-    select:focus,input[type="text"]:focus{
-      box-shadow:0 0 0 4px var(--ring);
-      border-color: rgba(47,155,255,.55);
-      background:rgba(0,0,0,.32);
-    }
-
-    .hint{color:var(--muted);font-size:.92rem;line-height:1.45;margin:0 0 14px 0}
-    .pill{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:8px 12px;border:1px solid var(--border);
-      border-radius:999px;color:var(--muted);font-size:.85rem;
-      background:rgba(255,255,255,.05);
-      white-space:nowrap;
-    }
-
-    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:10px;
-      padding:12px 14px;border-radius:14px;border:1px solid var(--border);
-      background:rgba(255,255,255,.06);cursor:pointer;
-      transition:background .2s,transform .06s,border-color .2s;
-      color:var(--text);font-weight:800;
-    }
-    .btn:hover{background:rgba(255,255,255,.10)}
-    .btn:active{transform:translateY(1px)}
-    .btn.primary{
-      border-color:transparent;
-      background: linear-gradient(135deg, var(--primary), var(--primary-2));
-      box-shadow: 0 16px 35px rgba(47,155,255,.18);
-    }
-    .btn.primary:hover{background: linear-gradient(135deg, #46b2ff, var(--primary-2))}
-    .btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
-
-    .teams{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    @media (max-width:700px){.teams{grid-template-columns:1fr}}
-    .team{border:1px solid var(--border);border-radius:16px;overflow:hidden;background:rgba(0,0,0,.18)}
-    .team .th{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:rgba(0,0,0,.22)}
-    .team h3{margin:0;font-size:1rem}
-    .team ul{list-style:none;margin:0;padding:12px 14px;display:grid;gap:10px}
-    .team li{padding:10px 12px;border:1px solid var(--border);border-radius:14px;background:rgba(0,0,0,.20)}
-    .empty{display:flex;align-items:center;justify-content:center;min-height:180px;color:var(--muted);text-align:center; padding:18px}
-
-    .meter{height:10px;background:rgba(255,255,255,.08);border:1px solid var(--border);border-radius:999px;overflow:hidden}
-    .meter>span{display:block;height:100%;background:linear-gradient(90deg,var(--primary),var(--success))}
-
-    .notice-box{
-      border:1px solid var(--border);
-      border-left:4px solid var(--danger);
-      background: rgba(239,68,68,.08);
-      color: rgba(242,245,255,.92);
-      border-radius: 14px;
-      padding: 12px 12px;
-      line-height: 1.4;
-      margin-top: 10px;
-      width: 100%;
-    }
-    .notice-box .title{font-weight: 800;margin-bottom: 6px;}
-    .notice-box .muted{color: var(--muted);font-size: .92rem;}
-    .notice-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
-    .notice-chip{
-      padding:6px 10px;
-      border-radius: 999px;
-      border:1px solid var(--border);
-      background: rgba(0,0,0,.18);
-      color: rgba(242,245,255,.88);
-      font-size: .9rem;
-      white-space: nowrap;
-      cursor: pointer;
-      font-weight: 700;
-    }
-    .notice-chip:hover{background: rgba(255,255,255,.08)}
-    .notice-chip strong{color: var(--text)}
-  </style>
-</head>
-
-<body>
-  <div class="wrap">
-    <header>
-      <div class="leftHead">
-        <a href="/" class="back-btn">← Zurück</a>
-        <div>
-          <h1>Team-Generator</h1>
-          <div class="crumbs">VRFrag · Tools</div>
-        </div>
-      </div>
+{% block content %}
+  <div class="page-head">
+    <div>
+      <h1>Team-Generator</h1>
+      <p>Wähle Spieler (2–10, gerade Anzahl). Optional kannst du eine Map filtern, um map-spezifische Werte zu nutzen.</p>
+    </div>
+    <div class="meta">
       <span class="pill" id="sel-count">0 Spieler</span>
-    </header>
-
-    <div class="grid">
-      <!-- Eingaben -->
-      <section class="card">
-        <div class="hd">
-          <h2>Teilnehmer & Einstellungen</h2>
-          <span class="pill">Gerade Anzahl · min. 4</span>
-        </div>
-
-        <div class="bd">
-          <div style="margin-bottom:14px">
-            <label for="map-select">Map (optional)</label>
-            <select id="map-select">
-              <option value="">Alle Maps</option>
-            </select>
-          </div>
-
-          <p class="hint">
-            Gib bis zu 10 echte Namen ein (max. 5 pro Team). Felder sind optional – du kannst auch 6/8/10 Namen nutzen.
-            Bitte auf Tippfehler achten
-          </p>
-
-          <datalist id="players-suggest"></datalist>
-
-          <div style="display:grid; gap:10px">
-            <label>Spieler (max. 10)</label>
-            <input class="player-input" list="players-suggest" placeholder="Spieler 1"/>
-            <input class="player-input" list="players-suggest" placeholder="Spieler 2"/>
-            <input class="player-input" list="players-suggest" placeholder="Spieler 3"/>
-            <input class="player-input" list="players-suggest" placeholder="Spieler 4"/>
-            <input class="player-input" list="players-suggest" placeholder="Spieler 5"/>
-            <input class="player-input" list="players-suggest" placeholder="Spieler 6"/>
-            <input class="player-input" list="players-suggest" placeholder="Spieler 7"/>
-            <input class="player-input" list="players-suggest" placeholder="Spieler 8"/>
-            <input class="player-input" list="players-suggest" placeholder="Spieler 9"/>
-            <input class="player-input" list="players-suggest" placeholder="Spieler 10"/>
-          </div>
-
-          <div class="actions">
-            <button class="btn" id="btn-clear" type="button">Felder leeren</button>
-            <button class="btn primary" id="btn-generate" type="button" disabled>Teams generieren</button>
-          </div>
-        </div>
-      </section>
-
-      <!-- Ergebnis -->
-      <section class="card">
-        <div class="hd">
-          <div style="display:flex;align-items:center;gap:12px">
-            <h2 style="margin:0">Ergebnis</h2>
-            <div class="meter" style="width:180px"><span id="balance-bar" style="width:50%"></span></div>
-          </div>
-          <span class="pill" id="meta-pill" style="display:none"></span>
-          <div id="notice" style="display:none; margin-top:10px;"></div>
-        </div>
-        <div class="bd" id="results">
-          <div class="empty">Noch keine Teams generiert.</div>
-        </div>
-      </section>
+      <span class="pill">min. 4 · max. 10</span>
     </div>
   </div>
 
+  <div class="grid-2">
+    <!-- Eingaben -->
+    <section class="card">
+      <div class="card-hd">
+        <h2>Teilnehmer & Einstellungen</h2>
+        <span class="pill">Gerade Anzahl</span>
+      </div>
+
+      <div class="card-bd">
+        <div class="field" style="margin-bottom:12px">
+          <label for="map-select">Map (optional)</label>
+          <select id="map-select">
+            <option value="">Alle Maps</option>
+          </select>
+        </div>
+
+        <p class="muted" style="margin:0 0 12px 0">
+          Tipp: Nutze die Vorschlagsliste, um Tippfehler zu vermeiden. Doppelte Namen werden ignoriert.
+        </p>
+
+        <datalist id="players-suggest"></datalist>
+
+        <div class="stack">
+          <div>
+            <label>Spieler (max. 10)</label>
+            <div class="stack" style="gap:10px">
+              <input class="player-input" list="players-suggest" placeholder="Spieler 1"/>
+              <input class="player-input" list="players-suggest" placeholder="Spieler 2"/>
+              <input class="player-input" list="players-suggest" placeholder="Spieler 3"/>
+              <input class="player-input" list="players-suggest" placeholder="Spieler 4"/>
+              <input class="player-input" list="players-suggest" placeholder="Spieler 5"/>
+              <input class="player-input" list="players-suggest" placeholder="Spieler 6"/>
+              <input class="player-input" list="players-suggest" placeholder="Spieler 7"/>
+              <input class="player-input" list="players-suggest" placeholder="Spieler 8"/>
+              <input class="player-input" list="players-suggest" placeholder="Spieler 9"/>
+              <input class="player-input" list="players-suggest" placeholder="Spieler 10"/>
+            </div>
+          </div>
+
+          <div class="btn-row" style="margin-top:4px">
+            <button class="btn btn-ghost" id="btn-clear" type="button">Felder leeren</button>
+            <button class="btn btn-primary" id="btn-generate" type="button" disabled>Teams generieren</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ergebnis -->
+    <section class="card">
+      <div class="card-hd" style="align-items:flex-start; flex-wrap:wrap">
+        <div>
+          <h2 style="margin:0">Ergebnis</h2>
+          <p class="muted" style="margin:6px 0 0 0">Balance-Bar zeigt die Gewinnwahrscheinlichkeit von Team A.</p>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-end; min-width: 260px;">
+          <div style="width: 220px; height: 10px; border-radius: 999px; overflow:hidden; border:1px solid color-mix(in srgb, var(--border) 65%, transparent); background: color-mix(in srgb, var(--panel) 60%, transparent);">
+            <div id="balance-bar" style="height:100%; width:50%; background: linear-gradient(90deg, var(--primary), var(--success));"></div>
+          </div>
+          <span class="pill" id="meta-pill" style="display:none"></span>
+        </div>
+        <div id="notice" style="display:none; width: 100%;"></div>
+      </div>
+      <div class="card-bd" id="results">
+        <div class="muted" style="text-align:center; padding: 24px 0;">Noch keine Teams generiert.</div>
+      </div>
+    </section>
+  </div>
+{% endblock %}
+
+{% block scripts %}
   <script>
     function escapeHtml(s){
       return String(s ?? '')
@@ -424,21 +271,39 @@
       }
 
       const html = `
-        <div class="teams">
-          <div class="team" style="border-left:4px solid var(--primary)">
-            <div class="th">
-              <h3>Team A</h3>
+        <div class="grid-2">
+          <div class="card-sub" style="border-left:4px solid var(--primary)">
+            <div class="card-hd">
+              <h2>Team A</h2>
               <span class="pill">Ø Score ${(teamA.average_score||0).toFixed(0)}</span>
             </div>
-            <ul>${(teamA.players||[]).map(p=>`<li>${escapeHtml(p)}</li>`).join('')}</ul>
+            <div class="card-bd">
+              <div class="list">
+                ${(teamA.players||[]).map((p,i)=>`
+                  <div class="list-item">
+                    <div class="index">${i+1}</div>
+                    <div class="grow"><strong>${escapeHtml(p)}</strong></div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
           </div>
 
-          <div class="team" style="border-left:4px solid var(--danger)">
-            <div class="th">
-              <h3>Team B</h3>
+          <div class="card-sub" style="border-left:4px solid var(--danger)">
+            <div class="card-hd">
+              <h2>Team B</h2>
               <span class="pill">Ø Score ${(teamB.average_score||0).toFixed(0)}</span>
             </div>
-            <ul>${(teamB.players||[]).map(p=>`<li>${escapeHtml(p)}</li>`).join('')}</ul>
+            <div class="card-bd">
+              <div class="list">
+                ${(teamB.players||[]).map((p,i)=>`
+                  <div class="list-item">
+                    <div class="index">${i+1}</div>
+                    <div class="grow"><strong>${escapeHtml(p)}</strong></div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
           </div>
         </div>
       `;
@@ -466,5 +331,4 @@
       updateState();
     });
   </script>
-</body>
-</html>
+{% endblock %}
