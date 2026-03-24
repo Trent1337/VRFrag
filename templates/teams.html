@@ -19,10 +19,10 @@
   </div>
 </div>
 
-<div class="grid-2" style="align-items: start;">
+<div class="grid-2 teams-layout">
 
   <!-- LEFT: Input -->
-  <div style="display: flex; flex-direction: column; gap: 20px;">
+  <div class="teams-left-col">
 
     <div class="card card-glow">
       <div class="card-header">
@@ -35,7 +35,7 @@
       </div>
       <div class="card-body">
 
-        <div class="field" style="margin-bottom: 20px;">
+        <div class="field teams-map-field">
           <label for="map-select">Map (optional)</label>
           <select id="map-select">
             <option value="">Alle Maps</option>
@@ -45,23 +45,23 @@
 
         <datalist id="players-suggest"></datalist>
 
-        <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;" id="player-inputs">
+        <div class="player-inputs" id="player-inputs">
           <label>Spieler eingeben</label>
-          <input class="player-input" list="players-suggest" placeholder="Spieler 1" oninput="updateState()" />
-          <input class="player-input" list="players-suggest" placeholder="Spieler 2" oninput="updateState()" />
-          <input class="player-input" list="players-suggest" placeholder="Spieler 3" oninput="updateState()" />
-          <input class="player-input" list="players-suggest" placeholder="Spieler 4" oninput="updateState()" />
-          <input class="player-input" list="players-suggest" placeholder="Spieler 5" oninput="updateState()" />
-          <input class="player-input" list="players-suggest" placeholder="Spieler 6" oninput="updateState()" />
-          <input class="player-input" list="players-suggest" placeholder="Spieler 7" oninput="updateState()" />
-          <input class="player-input" list="players-suggest" placeholder="Spieler 8" oninput="updateState()" />
-          <input class="player-input" list="players-suggest" placeholder="Spieler 9" oninput="updateState()" />
-          <input class="player-input" list="players-suggest" placeholder="Spieler 10" oninput="updateState()" />
+          <input type="text" class="player-input" list="players-suggest" placeholder="Spieler 1" oninput="updateState()" />
+          <input type="text" class="player-input" list="players-suggest" placeholder="Spieler 2" oninput="updateState()" />
+          <input type="text" class="player-input" list="players-suggest" placeholder="Spieler 3" oninput="updateState()" />
+          <input type="text" class="player-input" list="players-suggest" placeholder="Spieler 4" oninput="updateState()" />
+          <input type="text" class="player-input" list="players-suggest" placeholder="Spieler 5" oninput="updateState()" />
+          <input type="text" class="player-input" list="players-suggest" placeholder="Spieler 6" oninput="updateState()" />
+          <input type="text" class="player-input" list="players-suggest" placeholder="Spieler 7" oninput="updateState()" />
+          <input type="text" class="player-input" list="players-suggest" placeholder="Spieler 8" oninput="updateState()" />
+          <input type="text" class="player-input" list="players-suggest" placeholder="Spieler 9" oninput="updateState()" />
+          <input type="text" class="player-input" list="players-suggest" placeholder="Spieler 10" oninput="updateState()" />
         </div>
 
         <div class="btn-row">
           <button class="btn btn-ghost" onclick="clearInputs()">Leeren</button>
-          <button class="btn btn-primary" id="btn-generate" disabled onclick="generateTeams()" style="flex: 1;">
+          <button class="btn btn-primary btn-generate-main" id="btn-generate" disabled onclick="generateTeams()">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
               <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
             </svg>

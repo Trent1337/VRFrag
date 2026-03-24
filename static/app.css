@@ -799,6 +799,56 @@ small { font-size: .78rem; color: var(--text-3); line-height: 1.5; }
   min-width: 220px;
 }
 
+/* ─── TEAMS PAGE INPUT POLISH ────────────────────────────────── */
+.teams-layout {
+  align-items: start;
+}
+
+.teams-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.teams-map-field {
+  margin-bottom: 20px;
+}
+
+.player-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.player-input {
+  background: linear-gradient(180deg, rgba(20,24,36,.95), rgba(17,21,32,.95));
+  border: 1px solid rgba(99,132,255,.2);
+  border-radius: 10px;
+  color: var(--text);
+  padding: 11px 13px;
+  font-size: .9rem;
+  transition: border-color .15s, box-shadow .15s, background .15s;
+}
+
+.player-input:hover {
+  border-color: rgba(99,132,255,.35);
+  background: linear-gradient(180deg, rgba(24,29,44,.96), rgba(18,23,36,.96));
+}
+
+.player-input:focus {
+  border-color: rgba(99,132,255,.65);
+  box-shadow: 0 0 0 3px rgba(99,132,255,.16), 0 0 24px rgba(99,132,255,.12);
+}
+
+.player-input::placeholder {
+  color: #95a0be;
+}
+
+.btn-generate-main {
+  flex: 1;
+}
+
 /* ─── SECTION SEPARATOR ──────────────────────────────────────── */
 .section-gap { margin-top: 24px; }
 
