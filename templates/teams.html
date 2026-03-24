@@ -220,13 +220,13 @@
     const teamB = teams.team_b || { players: [], average_score: 0 };
 
     document.getElementById('results-body').innerHTML = `
-      <div class="grid-2" style="gap:16px;">
-        <div>
-          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
-            <span style="font-family:var(--font-display); font-size:1rem; font-weight:700; color:var(--accent);">TEAM A</span>
-            <span class="badge badge-accent">Ø Score ${(teamA.average_score||0).toFixed(0)}</span>
+      <div class="teams-results-grid">
+        <div class="team-panel team-panel-a">
+          <div class="team-panel-head">
+            <span class="team-panel-title">TEAM A</span>
+            <span class="badge badge-accent team-score-badge">Ø Score ${(teamA.average_score||0).toFixed(0)}</span>
           </div>
-          <div style="font-family:var(--font-mono); font-size:.78rem; color:var(--text-3); margin-bottom:8px;">GEWINNCHANCE: ${aP.toFixed(1)}%</div>
+          <div class="team-winrate">GEWINNCHANCE: ${aP.toFixed(1)}%</div>
           <div class="player-list">
             ${(teamA.players||[]).map((p,i) => `
               <div class="player-item">
@@ -236,16 +236,16 @@
             `).join('')}
           </div>
         </div>
-        <div>
-          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
-            <span style="font-family:var(--font-display); font-size:1rem; font-weight:700; color:var(--red);">TEAM B</span>
-            <span class="badge badge-default" style="border-color:rgba(255,77,106,.3); color:#ff9aaa; background:rgba(255,77,106,.1);">Ø Score ${(teamB.average_score||0).toFixed(0)}</span>
+        <div class="team-panel team-panel-b">
+          <div class="team-panel-head">
+            <span class="team-panel-title">TEAM B</span>
+            <span class="badge team-score-badge team-score-badge-b">Ø Score ${(teamB.average_score||0).toFixed(0)}</span>
           </div>
-          <div style="font-family:var(--font-mono); font-size:.78rem; color:var(--text-3); margin-bottom:8px;">GEWINNCHANCE: ${bP.toFixed(1)}%</div>
+          <div class="team-winrate">GEWINNCHANCE: ${bP.toFixed(1)}%</div>
           <div class="player-list">
             ${(teamB.players||[]).map((p,i) => `
-              <div class="player-item" style="border-color:rgba(255,77,106,.08);">
-                <div class="player-num" style="background:rgba(255,77,106,.15); border-color:rgba(255,77,106,.2); color:var(--red);">${i+1}</div>
+              <div class="player-item player-item-b">
+                <div class="player-num player-num-b">${i+1}</div>
                 <div class="player-name">${esc(p)}</div>
               </div>
             `).join('')}
