@@ -3,418 +3,408 @@
 {% block title %}VRFrag · Dashboard{% endblock %}
 
 {% block head %}
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    .tabs{display:flex; gap:10px; flex-wrap:wrap; margin: 4px 0 14px 0;}
-    .tab{
-      border:1px solid color-mix(in srgb, var(--border) 80%, transparent);
-      background: color-mix(in srgb, var(--panel) 60%, transparent);
-      color: var(--text);
-      padding:10px 14px;
-      border-radius: 999px;
-      font-weight: 900;
-      cursor:pointer;
-    }
-    .tab.active{
-      border-color: transparent;
-      background: linear-gradient(135deg, var(--primary), var(--primary-2));
-      color: #fff;
-      box-shadow: 0 18px 45px rgba(37,99,235,.18);
-    }
-    .hidden{display:none !important;}
-    .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-    @media(max-width: 980px){ .kpis{grid-template-columns:repeat(2,1fr)} }
-    @media(max-width: 520px){ .kpis{grid-template-columns:1fr} }
-    .kpi{
-      border:1px solid color-mix(in srgb, var(--border) 75%, transparent);
-      border-radius: 14px;
-      background: color-mix(in srgb, var(--panel) 70%, transparent);
-      padding:12px 12px;
-    }
-    .kpi .label{color:var(--muted);font-size:.9rem;font-weight:800}
-    .kpi .value{font-size:1.55rem;font-weight:950;margin-top:6px}
-    .top3{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:12px;}
-    @media(max-width: 700px){ .top3{grid-template-columns:1fr} }
-    .pod{
-      border:1px solid color-mix(in srgb, var(--border) 75%, transparent);
-      border-radius: 14px;
-      background: color-mix(in srgb, var(--panel) 70%, transparent);
-      padding:12px 12px;
-      position:relative;
-      overflow:hidden;
-    }
-    .pod .pos{
-      position:absolute; top:10px; right:10px;
-      border:1px solid color-mix(in srgb, var(--border) 75%, transparent);
-      background: color-mix(in srgb, var(--panel) 55%, transparent);
-      border-radius: 999px;
-      padding:6px 10px;
-      font-weight:950;
-      color: color-mix(in srgb, var(--text) 92%, transparent);
-    }
-    .pod .name{font-weight:950;font-size:1.02rem}
-    .pod .metric{margin-top:6px;color:var(--muted);font-weight:850}
-    .pod.gold{border-left:4px solid #f59e0b}
-    .pod.silver{border-left:4px solid rgba(148,163,184,.9)}
-    .pod.bronze{border-left:4px solid rgba(217,119,6,.75)}
-    .charts{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-    @media(max-width: 980px){ .charts{grid-template-columns:1fr} }
-    .chartBox{border:1px solid color-mix(in srgb, var(--border) 75%, transparent);border-radius:14px;background: color-mix(in srgb, var(--panel) 70%, transparent);padding:12px}
-    .chartTitle{font-weight:950;margin:0 0 8px 0;color: color-mix(in srgb, var(--text) 92%, transparent)}
-  </style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 {% endblock %}
 
 {% block content %}
-  <div class="page-head">
-    <div>
-      <h1>Dashboard</h1>
-      <p>Leaderboard, Spieler-KPIs und Zeitreihen — basierend auf deinen generierten CSVs.</p>
-    </div>
-    <div class="meta">
-      <span class="pill" id="data-pill">Daten: lädt…</span>
-    </div>
+<div class="page-head">
+  <div class="page-head-left">
+    <div class="page-eyebrow">Dashboard</div>
+    <h1>Statistiken</h1>
+    <p>Leaderboard, Spieler-KPIs und Zeitreihen — basierend auf allen gespeicherten Events.</p>
   </div>
-
-  <div class="tabs">
-    <button class="tab active" data-tab="tab-leaderboard">Leaderboard</button>
-    <button class="tab" data-tab="tab-player">Player Stats</button>
-    <button class="tab" data-tab="tab-auswertung">Auswertung</button>
+  <div class="page-head-meta">
+    <span class="badge badge-default" id="data-pill">Lädt…</span>
   </div>
+</div>
 
-  <!-- LEADERBOARD -->
-  <section id="tab-leaderboard">
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-hd">
-          <h2>Avg. Kills</h2>
-          <span class="pill">Top-Liste</span>
-        </div>
-        <div class="card-bd">
-          <div class="top3" id="top3-avgkills"></div>
-          <div class="muted" style="margin-bottom:10px;font-weight:900">Gesamtrangliste</div>
-          <div style="overflow:auto">
-            <table>
-              <thead><tr><th style="width:42px">#</th><th>Spieler</th><th style="text-align:right">Avg. Kills</th></tr></thead>
-              <tbody id="tbl-avgkills"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+<!-- Tabs -->
+<div class="tabs">
+  <button class="tab-btn active" data-tab="tab-leaderboard">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/>
+      <line x1="6" y1="20" x2="6" y2="14"/>
+    </svg>
+    Leaderboard
+  </button>
+  <button class="tab-btn" data-tab="tab-player">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0112 0v2"/>
+    </svg>
+    Spieler Stats
+  </button>
+  <button class="tab-btn" data-tab="tab-auswertung">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M12 6v6l4 2"/>
+    </svg>
+    Auswertung
+  </button>
+</div>
 
-      <div class="card">
-        <div class="card-hd">
-          <h2>Score</h2>
-          <span class="pill">Top-Liste</span>
-        </div>
-        <div class="card-bd">
-          <div class="top3" id="top3-score"></div>
-          <div class="muted" style="margin-bottom:10px;font-weight:900">Gesamtrangliste</div>
-          <div style="overflow:auto">
-            <table>
-              <thead><tr><th style="width:42px">#</th><th>Spieler</th><th style="text-align:right">Score</th></tr></thead>
-              <tbody id="tbl-score"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+<!-- ── LEADERBOARD TAB ─────────────────────────────────── -->
+<section id="tab-leaderboard">
+  <div class="grid-2">
 
-      <div class="card">
-        <div class="card-hd">
-          <h2>Total Kills</h2>
-          <span class="pill">Top-Liste</span>
-        </div>
-        <div class="card-bd">
-          <div class="top3" id="top3-totalkills"></div>
-          <div class="muted" style="margin-bottom:10px;font-weight:900">Gesamtrangliste</div>
-          <div style="overflow:auto">
-            <table>
-              <thead><tr><th style="width:42px">#</th><th>Spieler</th><th style="text-align:right">Total Kills</th></tr></thead>
-              <tbody id="tbl-totalkills"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-hd">
-          <h2>MVP</h2>
-          <span class="pill">Top-Liste</span>
-        </div>
-        <div class="card-bd">
-          <div class="top3" id="top3-mvp"></div>
-          <div class="muted" style="margin-bottom:10px;font-weight:900">Gesamtrangliste</div>
-          <div style="overflow:auto">
-            <table>
-              <thead><tr><th style="width:42px">#</th><th>Spieler</th><th style="text-align:right">MVP</th></tr></thead>
-              <tbody id="tbl-mvp"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PLAYER STATS -->
-  <section id="tab-player" class="hidden">
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-hd">
-          <h2>Filter</h2>
-          <span class="pill">Slicer</span>
-        </div>
-        <div class="card-bd">
-          <div class="stack">
-            <div class="field">
-              <label for="sel-player">Spieler</label>
-              <select id="sel-player"></select>
-            </div>
-            <div class="field">
-              <label for="sel-map">Map</label>
-              <select id="sel-map">
-                <option value="">Alle Maps</option>
-              </select>
-            </div>
-            <small>Spieler wählen → KPIs und Charts aktualisieren automatisch.</small>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-hd">
-          <h2>KPIs</h2>
-          <span class="pill" id="player-kpi-pill">lädt…</span>
-        </div>
-        <div class="card-bd">
-          <div class="kpis" id="kpi-grid"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card" style="margin-top:16px">
-      <div class="card-hd">
-        <h2>Verlauf (Datum)</h2>
-        <span class="pill">Zeitreihen</span>
-      </div>
-      <div class="card-bd">
-        <div class="charts">
-          <div class="chartBox">
-            <p class="chartTitle">Avg Kills</p>
-            <canvas id="ch-kills"></canvas>
-          </div>
-          <div class="chartBox">
-            <p class="chartTitle">Durchschnitt deaths</p>
-            <canvas id="ch-deaths"></canvas>
-          </div>
-          <div class="chartBox">
-            <p class="chartTitle">Durchschnitt assists</p>
-            <canvas id="ch-assists"></canvas>
-          </div>
-          <div class="chartBox">
-            <p class="chartTitle">Durchschnitt KD</p>
-            <canvas id="ch-kd"></canvas>
-          </div>
-          <div class="chartBox">
-            <p class="chartTitle">Durchschnitt score</p>
-            <canvas id="ch-score"></canvas>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- AUSWERTUNG -->
-  <section id="tab-auswertung" class="hidden">
     <div class="card">
-      <div class="card-hd">
-        <h2>Auswertung</h2>
-        <span class="pill">WIP</span>
+      <div class="card-header">
+        <div class="card-title">
+          <div class="card-title-icon">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          Avg. Kills
+        </div>
+        <span class="badge badge-accent">Top 20</span>
       </div>
-      <div class="card-bd">
-        <p style="margin:0; font-weight:950; font-size:1.02rem">Work in Progress…</p>
-        <p class="muted" style="margin-top:10px; line-height:1.5">
-          Hier kannst du später z.B. Matchups, Map-Picks oder Team-Balance-Analysen ergänzen.
-        </p>
+      <div class="card-body">
+        <div class="podium" id="top3-avgkills"></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>#</th><th>Spieler</th><th class="text-right">Avg. Kills</th></tr></thead>
+            <tbody id="tbl-avgkills"></tbody>
+          </table>
+        </div>
       </div>
     </div>
-  </section>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="card-title-icon">
+            <svg viewBox="0 0 24 24" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+          </div>
+          Score
+        </div>
+        <span class="badge badge-accent">Top 20</span>
+      </div>
+      <div class="card-body">
+        <div class="podium" id="top3-score"></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>#</th><th>Spieler</th><th class="text-right">Score</th></tr></thead>
+            <tbody id="tbl-score"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="card-title-icon">
+            <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/></svg>
+          </div>
+          Total Kills
+        </div>
+        <span class="badge badge-accent">Top 20</span>
+      </div>
+      <div class="card-body">
+        <div class="podium" id="top3-totalkills"></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>#</th><th>Spieler</th><th class="text-right">Total Kills</th></tr></thead>
+            <tbody id="tbl-totalkills"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="card-title-icon">
+            <svg viewBox="0 0 24 24" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          MVP
+        </div>
+        <span class="badge badge-accent">Top 20</span>
+      </div>
+      <div class="card-body">
+        <div class="podium" id="top3-mvp"></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>#</th><th>Spieler</th><th class="text-right">MVP</th></tr></thead>
+            <tbody id="tbl-mvp"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── PLAYER STATS TAB ───────────────────────────────── -->
+<section id="tab-player" class="hidden">
+
+  <div class="grid-2" style="margin-bottom: 20px;">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="card-title-icon">
+            <svg viewBox="0 0 24 24" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+          </div>
+          Filter
+        </div>
+      </div>
+      <div class="card-body">
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <div class="field">
+            <label for="sel-player">Spieler</label>
+            <select id="sel-player"></select>
+          </div>
+          <div class="field">
+            <label for="sel-map">Map</label>
+            <select id="sel-map">
+              <option value="">Alle Maps</option>
+            </select>
+          </div>
+          <small>Filter aktualisieren KPIs und Charts automatisch.</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="card-title-icon">
+            <svg viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="2" width="9" height="9"/><rect x="13" y="2" width="9" height="9"/><rect x="13" y="13" width="9" height="9"/><rect x="2" y="13" width="9" height="9"/></svg>
+          </div>
+          KPIs
+        </div>
+        <span class="badge badge-default" id="player-kpi-pill">—</span>
+      </div>
+      <div class="card-body">
+        <div class="kpi-grid" id="kpi-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">
+        <div class="card-title-icon">
+          <svg viewBox="0 0 24 24" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        Verlauf
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="charts-grid">
+        <div class="chart-box"><div class="chart-label">Avg. Kills</div><canvas id="ch-kills"></canvas></div>
+        <div class="chart-box"><div class="chart-label">Avg. Deaths</div><canvas id="ch-deaths"></canvas></div>
+        <div class="chart-box"><div class="chart-label">Avg. Assists</div><canvas id="ch-assists"></canvas></div>
+        <div class="chart-box"><div class="chart-label">Avg. KD</div><canvas id="ch-kd"></canvas></div>
+        <div class="chart-box"><div class="chart-label">Avg. Score</div><canvas id="ch-score"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ── AUSWERTUNG TAB ─────────────────────────────────── -->
+<section id="tab-auswertung" class="hidden">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">
+        <div class="card-title-icon">
+          <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        Auswertung
+      </div>
+      <span class="badge badge-default">Work in Progress</span>
+    </div>
+    <div class="card-body">
+      <p style="color: var(--text-3); font-size:.9rem; line-height:1.6;">
+        Hier folgen später erweiterte Analysen: Matchup-Statistiken, Map-Pick-Rates, Team-Balance-Historien und mehr.
+      </p>
+    </div>
+  </div>
+</section>
 {% endblock %}
 
 {% block scripts %}
-  <script>
-    const tabs = Array.from(document.querySelectorAll('.tab'));
-    const sections = {
-      "tab-leaderboard": document.getElementById('tab-leaderboard'),
-      "tab-player": document.getElementById('tab-player'),
-      "tab-auswertung": document.getElementById('tab-auswertung'),
-    };
+<script>
+  // Tab switching
+  const tabBtns = Array.from(document.querySelectorAll('.tab-btn'));
+  const tabSections = {
+    'tab-leaderboard': document.getElementById('tab-leaderboard'),
+    'tab-player': document.getElementById('tab-player'),
+    'tab-auswertung': document.getElementById('tab-auswertung'),
+  };
 
-    tabs.forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        tabs.forEach(b=>b.classList.remove('active'));
-        btn.classList.add('active');
-        Object.keys(sections).forEach(k => sections[k].classList.add('hidden'));
-        sections[btn.dataset.tab].classList.remove('hidden');
-      });
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      Object.values(tabSections).forEach(s => s.classList.add('hidden'));
+      tabSections[btn.dataset.tab].classList.remove('hidden');
     });
+  });
 
-    function fmt(n, digits=1){
-      if(n === null || n === undefined || Number.isNaN(n)) return "–";
-      return Number(n).toFixed(digits);
-    }
+  // Formatting
+  function fmt(n, d = 1) {
+    if (n === null || n === undefined || Number.isNaN(+n)) return '—';
+    return (+n).toFixed(d);
+  }
 
-    function renderTop3(el, rows, valueKey, suffix=""){
-      const pod = (r, idx) => {
-        const cls = idx===0 ? "gold" : idx===1 ? "silver" : "bronze";
-        return `
-          <div class="pod ${cls}">
-            <div class="pos">#${idx+1}</div>
-            <div class="name">${r.player}</div>
-            <div class="metric">${fmt(r[valueKey], 2)}${suffix}</div>
-          </div>
-        `;
-      };
-      el.innerHTML = rows.slice(0,3).map(pod).join("");
-    }
+  // Podium
+  const MEDALS = ['🥇', '🥈', '🥉'];
+  const RANKS = ['rank-1', 'rank-2', 'rank-3'];
 
-    function renderTable(bodyEl, rows, valueKey, digits=2){
-      bodyEl.innerHTML = rows.map((r,i)=>`
-        <tr>
-          <td style="width:42px; font-weight:950; color: var(--muted)">${i+1}</td>
-          <td>${r.player}</td>
-          <td style="text-align:right;font-weight:900">${fmt(r[valueKey], digits)}</td>
-        </tr>
-      `).join("");
-    }
+  function renderPodium(el, rows, key) {
+    el.innerHTML = rows.slice(0, 3).map((r, i) => `
+      <div class="podium-card ${RANKS[i]}">
+        <span class="podium-medal">${MEDALS[i]}</span>
+        <div class="podium-rank">${i + 1}</div>
+        <div class="podium-name">${r.player}</div>
+        <div class="podium-value">${fmt(r[key], 1)}</div>
+      </div>
+    `).join('');
+  }
 
-    async function loadLeaderboards(){
-      const metrics = [
-        {metric:"avg_kills", top3:"top3-avgkills", tbl:"tbl-avgkills", key:"value"},
-        {metric:"avg_score", top3:"top3-score", tbl:"tbl-score", key:"value"},
-        {metric:"total_kills", top3:"top3-totalkills", tbl:"tbl-totalkills", key:"value"},
-        {metric:"mvp_count", top3:"top3-mvp", tbl:"tbl-mvp", key:"value"},
-      ];
+  function renderTable(tbody, rows, key, digits = 2) {
+    tbody.innerHTML = rows.map((r, i) => `
+      <tr>
+        <td class="td-rank">${i + 1}</td>
+        <td class="td-name">${r.player}</td>
+        <td class="td-value">${fmt(r[key], digits)}</td>
+      </tr>
+    `).join('');
+  }
 
-      for(const m of metrics){
-        const res = await fetch(`/api/dashboard/leaderboard?metric=${encodeURIComponent(m.metric)}&limit=20`);
-        const data = await res.json();
-        const rows = data.rows || [];
-        renderTop3(document.getElementById(m.top3), rows, m.key);
-        renderTable(document.getElementById(m.tbl), rows, m.key, 2);
-      }
-    }
-
-    let charts = {};
-    function setLineChart(id, labels, values){
-      const ctx = document.getElementById(id);
-      if(!ctx) return;
-
-      if(charts[id]) charts[id].destroy();
-
-      charts[id] = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels,
-          datasets: [{
-            label: '',
-            data: values,
-            tension: 0.25,
-            pointRadius: 2,
-            borderWidth: 2,
-          }]
-        },
-        options: {
-          responsive:true,
-          plugins: { legend: { display:false }},
-          scales: {
-            x: { ticks: { color: "rgba(255,255,255,.75)" }, grid: { color: "rgba(255,255,255,.08)" }},
-            y: { ticks: { color: "rgba(255,255,255,.75)" }, grid: { color: "rgba(255,255,255,.08)" }},
-          }
-        }
-      });
-    }
-
-    function renderKpis(summary){
-      const items = [
-        {label:"Durchschnitt kills", value: fmt(summary.avg_kills,2)},
-        {label:"Durchschnitt deaths", value: fmt(summary.avg_deaths,2)},
-        {label:"Durchschnitt assists", value: fmt(summary.avg_assists,2)},
-        {label:"Durchschnitt KD", value: fmt(summary.avg_kd,2)},
-        {label:"Durchschnitt score", value: fmt(summary.avg_score,2)},
-        {label:"TotalGames", value: fmt(summary.total_games,0)},
-        {label:"Winrate", value: fmt(summary.winrate,1) + "%"},
-        {label:"CountMVP", value: fmt(summary.mvp_count,0)},
-        {label:"Summe kills", value: fmt(summary.sum_kills,0)},
-        {label:"Summe deaths", value: fmt(summary.sum_deaths,0)},
-        {label:"Summe assists", value: fmt(summary.sum_assists,0)},
-      ];
-
-      const grid = document.getElementById('kpi-grid');
-      grid.innerHTML = items.map(it=>`
-        <div class="kpi">
-          <div class="label">${it.label}</div>
-          <div class="value">${it.value}</div>
-        </div>
-      `).join("");
-    }
-
-    async function refreshPlayerStats(){
-      const player = document.getElementById('sel-player').value;
-      const map = document.getElementById('sel-map').value;
-
-      const pill = document.getElementById('player-kpi-pill');
-      pill.textContent = "lädt…";
-
-      const q = new URLSearchParams({ player, map });
-
-      const resSum = await fetch(`/api/dashboard/player-summary?${q.toString()}`);
-      const sum = await resSum.json();
-      renderKpis(sum);
-
-      pill.textContent = map ? `Map: ${map}` : "Alle Maps";
-
-      // 5 Timeseries wie im PBIX
-      const metrics = [
-        {metric:"avg_kills", chart:"ch-kills"},
-        {metric:"avg_deaths", chart:"ch-deaths"},
-        {metric:"avg_assists", chart:"ch-assists"},
-        {metric:"avg_kd", chart:"ch-kd"},
-        {metric:"avg_score", chart:"ch-score"},
-      ];
-
-      for(const m of metrics){
-        const res = await fetch(`/api/dashboard/player-series?${q.toString()}&metric=${encodeURIComponent(m.metric)}`);
-        const data = await res.json();
-        setLineChart(m.chart, data.labels || [], data.values || []);
-      }
-    }
-
-    async function loadFilters(){
-      const res = await fetch('/api/dashboard/filters');
+  async function loadLeaderboards() {
+    const metrics = [
+      { metric: 'avg_kills',  top3: 'top3-avgkills',   tbl: 'tbl-avgkills' },
+      { metric: 'avg_score',  top3: 'top3-score',      tbl: 'tbl-score' },
+      { metric: 'total_kills',top3: 'top3-totalkills',  tbl: 'tbl-totalkills' },
+      { metric: 'mvp_count',  top3: 'top3-mvp',        tbl: 'tbl-mvp' },
+    ];
+    for (const m of metrics) {
+      const res = await fetch(`/api/dashboard/leaderboard?metric=${encodeURIComponent(m.metric)}&limit=20`);
       const data = await res.json();
-
-      const players = data.players || [];
-      const maps = data.maps || [];
-
-      const selP = document.getElementById('sel-player');
-      selP.innerHTML = players.map(p=>`<option value="${p}">${p}</option>`).join("");
-
-      const selM = document.getElementById('sel-map');
-      selM.innerHTML = `<option value="">Alle Maps</option>` + maps.map(m=>`<option value="${m}">${m}</option>`).join("");
-
-      if(players.length){
-        document.getElementById('sel-player').value = players[0];
-      }
-
-      document.getElementById('data-pill').textContent = `Spieler: ${players.length} · Maps: ${maps.length}`;
+      const rows = data.rows || [];
+      renderPodium(document.getElementById(m.top3), rows, 'value');
+      renderTable(document.getElementById(m.tbl), rows, 'value', 2);
     }
+  }
 
-    document.addEventListener('DOMContentLoaded', async ()=>{
-      await loadFilters();
-      await loadLeaderboards();
-      await refreshPlayerStats();
+  // Charts
+  const charts = {};
+  Chart.defaults.color = '#5a6480';
+  Chart.defaults.font.family = "'JetBrains Mono', monospace";
+  Chart.defaults.font.size = 10;
 
-      document.getElementById('sel-player').addEventListener('change', refreshPlayerStats);
-      document.getElementById('sel-map').addEventListener('change', refreshPlayerStats);
+  function setChart(id, labels, values) {
+    const ctx = document.getElementById(id);
+    if (!ctx) return;
+    if (charts[id]) charts[id].destroy();
+    charts[id] = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [{
+          data: values,
+          tension: 0.35,
+          pointRadius: 3,
+          pointHoverRadius: 5,
+          borderWidth: 2,
+          borderColor: '#6384ff',
+          pointBackgroundColor: '#6384ff',
+          fill: true,
+          backgroundColor: 'rgba(99,132,255,.08)',
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false }, tooltip: {
+          backgroundColor: '#141824',
+          borderColor: 'rgba(99,132,255,.3)',
+          borderWidth: 1,
+          titleColor: '#8994b0',
+          bodyColor: '#e8ecf4',
+          padding: 10,
+        }},
+        scales: {
+          x: { ticks: { maxRotation: 30 }, grid: { color: 'rgba(99,132,255,.05)' }, border: { display: false } },
+          y: { ticks: { }, grid: { color: 'rgba(99,132,255,.05)' }, border: { display: false } }
+        }
+      }
     });
-  </script>
+  }
+
+  function renderKpis(s) {
+    const items = [
+      { label: 'Avg. Kills',   value: fmt(s.avg_kills, 2) },
+      { label: 'Avg. Deaths',  value: fmt(s.avg_deaths, 2) },
+      { label: 'Avg. Assists', value: fmt(s.avg_assists, 2) },
+      { label: 'Avg. KD',      value: fmt(s.avg_kd, 2) },
+      { label: 'Avg. Score',   value: fmt(s.avg_score, 2) },
+      { label: 'Spiele',       value: fmt(s.total_games, 0) },
+      { label: 'Winrate',      value: fmt(s.winrate, 1) + '%' },
+      { label: 'MVP',          value: fmt(s.mvp_count, 0) },
+      { label: 'Total Kills',  value: fmt(s.sum_kills, 0) },
+      { label: 'Total Deaths', value: fmt(s.sum_deaths, 0) },
+      { label: 'Total Assists',value: fmt(s.sum_assists, 0) },
+    ];
+    document.getElementById('kpi-grid').innerHTML = items.map(it => `
+      <div class="kpi-card">
+        <div class="kpi-label">${it.label}</div>
+        <div class="kpi-value">${it.value}</div>
+      </div>
+    `).join('');
+  }
+
+  async function refreshPlayer() {
+    const player = document.getElementById('sel-player').value;
+    const map = document.getElementById('sel-map').value;
+    document.getElementById('player-kpi-pill').textContent = 'lädt…';
+
+    const q = new URLSearchParams({ player, map });
+
+    const sumRes = await fetch(`/api/dashboard/player-summary?${q}`);
+    const sum = await sumRes.json();
+    renderKpis(sum);
+    document.getElementById('player-kpi-pill').textContent = map || 'Alle Maps';
+
+    const metrics = [
+      { metric: 'avg_kills',   chart: 'ch-kills' },
+      { metric: 'avg_deaths',  chart: 'ch-deaths' },
+      { metric: 'avg_assists', chart: 'ch-assists' },
+      { metric: 'avg_kd',      chart: 'ch-kd' },
+      { metric: 'avg_score',   chart: 'ch-score' },
+    ];
+    for (const m of metrics) {
+      const res = await fetch(`/api/dashboard/player-series?${q}&metric=${encodeURIComponent(m.metric)}`);
+      const data = await res.json();
+      setChart(m.chart, data.labels || [], data.values || []);
+    }
+  }
+
+  async function loadFilters() {
+    const res = await fetch('/api/dashboard/filters');
+    const data = await res.json();
+
+    const players = data.players || [];
+    const maps = data.maps || [];
+
+    const selP = document.getElementById('sel-player');
+    selP.innerHTML = players.map(p => `<option value="${p}">${p}</option>`).join('');
+
+    const selM = document.getElementById('sel-map');
+    selM.innerHTML = `<option value="">Alle Maps</option>` +
+      maps.map(m => `<option value="${m}">${m}</option>`).join('');
+
+    document.getElementById('data-pill').textContent = `${players.length} Spieler · ${maps.length} Maps`;
+    if (players.length) selP.value = players[0];
+  }
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    await loadFilters();
+    await loadLeaderboards();
+    await refreshPlayer();
+
+    document.getElementById('sel-player').addEventListener('change', refreshPlayer);
+    document.getElementById('sel-map').addEventListener('change', refreshPlayer);
+  });
+</script>
 {% endblock %}
